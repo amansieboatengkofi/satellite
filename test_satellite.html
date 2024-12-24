@@ -1,0 +1,5488 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_aead335e87758e26db5e65b1f63bcd94 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_aead335e87758e26db5e65b1f63bcd94" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_aead335e87758e26db5e65b1f63bcd94 = L.map(
+                "map_aead335e87758e26db5e65b1f63bcd94",
+                {
+                    center: [7.0, -1.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a52b951a160d76999bc9cdf367c0a86b = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a52b951a160d76999bc9cdf367c0a86b.addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+                var lat_lng_popup_42bae5ac3fe8da960f3a556cf965b488 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_42bae5ac3fe8da960f3a556cf965b488
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_aead335e87758e26db5e65b1f63bcd94);
+                    }
+                map_aead335e87758e26db5e65b1f63bcd94.on('click', latLngPop);
+            
+    
+            var tile_layer_3e80f053f468cb4fb4c1c4d83c5db116 = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/ee-amansieboatengkofi/maps/8651ea5aa6a4df27ffb5b7938a1cb187-3588a97e955612837c13d6a163129718/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_3e80f053f468cb4fb4c1c4d83c5db116.addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var marker_70e84ab337f5e2bc7a986797dc6c3f8e = L.marker(
+                [6.0773723881703505, 0.2891227764248607],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_34c725d6d70c60e54cd777953b6ac848 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_70e84ab337f5e2bc7a986797dc6c3f8e.setIcon(icon_34c725d6d70c60e54cd777953b6ac848);
+        
+    
+        var popup_d2e5a866a9beaa1c7e69d36dfafa30e8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_aa562376f75fd7b44ec75170d0627273 = $(`<div id="html_aa562376f75fd7b44ec75170d0627273" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_d2e5a866a9beaa1c7e69d36dfafa30e8.setContent(html_aa562376f75fd7b44ec75170d0627273);
+            
+        
+
+        marker_70e84ab337f5e2bc7a986797dc6c3f8e.bindPopup(popup_d2e5a866a9beaa1c7e69d36dfafa30e8)
+        ;
+
+        
+    
+    
+            var marker_4e69b324c6659fb74d9bb2d658c2c015 = L.marker(
+                [6.063762915504489, 0.29307536075774765],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_6f358e6a6b9bbf9418da9e5cc569509f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4e69b324c6659fb74d9bb2d658c2c015.setIcon(icon_6f358e6a6b9bbf9418da9e5cc569509f);
+        
+    
+        var popup_5ce2d327224388baaa2f5996c13fb389 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9487e329d0dc06ec99a51c46703de134 = $(`<div id="html_9487e329d0dc06ec99a51c46703de134" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_5ce2d327224388baaa2f5996c13fb389.setContent(html_9487e329d0dc06ec99a51c46703de134);
+            
+        
+
+        marker_4e69b324c6659fb74d9bb2d658c2c015.bindPopup(popup_5ce2d327224388baaa2f5996c13fb389)
+        ;
+
+        
+    
+    
+            var marker_c2df5f01f6e799b0037759b31df6b094 = L.marker(
+                [6.0632239261007586, 0.2933448570644147],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_53bc30ca1c95013baa0b85454b8f9280 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c2df5f01f6e799b0037759b31df6b094.setIcon(icon_53bc30ca1c95013baa0b85454b8f9280);
+        
+    
+        var popup_62d285fdf5b599ac0f254cd43aaad1e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0bca8c6b52f8178b0e97f7fcc23f5c99 = $(`<div id="html_0bca8c6b52f8178b0e97f7fcc23f5c99" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_62d285fdf5b599ac0f254cd43aaad1e6.setContent(html_0bca8c6b52f8178b0e97f7fcc23f5c99);
+            
+        
+
+        marker_c2df5f01f6e799b0037759b31df6b094.bindPopup(popup_62d285fdf5b599ac0f254cd43aaad1e6)
+        ;
+
+        
+    
+    
+            var marker_29dea591ff573753de5ee1dea047eb72 = L.marker(
+                [6.058103528718818, 0.30358565048725383],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_8108cc588ae97efe896d640fa57afe38 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_29dea591ff573753de5ee1dea047eb72.setIcon(icon_8108cc588ae97efe896d640fa57afe38);
+        
+    
+        var popup_e0932efdb6cc130d582590241749bc54 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4c781ce66dfd46338d826fc8240b13b8 = $(`<div id="html_4c781ce66dfd46338d826fc8240b13b8" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_e0932efdb6cc130d582590241749bc54.setContent(html_4c781ce66dfd46338d826fc8240b13b8);
+            
+        
+
+        marker_29dea591ff573753de5ee1dea047eb72.bindPopup(popup_e0932efdb6cc130d582590241749bc54)
+        ;
+
+        
+    
+    
+            var marker_a1421ef765aa1534b4c26f03238401c2 = L.marker(
+                [6.058103528126674, 0.3041246401046556],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_82919f8519d8c1855428d52e6844798f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a1421ef765aa1534b4c26f03238401c2.setIcon(icon_82919f8519d8c1855428d52e6844798f);
+        
+    
+        var popup_3715a974a5ea5e8e8d77e60f23b0590d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a424320380b77a75d524338ed3aeec92 = $(`<div id="html_a424320380b77a75d524338ed3aeec92" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_3715a974a5ea5e8e8d77e60f23b0590d.setContent(html_a424320380b77a75d524338ed3aeec92);
+            
+        
+
+        marker_a1421ef765aa1534b4c26f03238401c2.bindPopup(popup_3715a974a5ea5e8e8d77e60f23b0590d)
+        ;
+
+        
+    
+    
+            var marker_f698a8d45d49553bcb90351a90e0c019 = L.marker(
+                [6.057834034922812, 0.30493312298822856],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_4e1fdca9fc874559c5b54bd85d8417f7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f698a8d45d49553bcb90351a90e0c019.setIcon(icon_4e1fdca9fc874559c5b54bd85d8417f7);
+        
+    
+        var popup_b16cafe89c8d978bdc20f881bca87903 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_eb4bd33464a0313d9a35595d16116670 = $(`<div id="html_eb4bd33464a0313d9a35595d16116670" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_b16cafe89c8d978bdc20f881bca87903.setContent(html_eb4bd33464a0313d9a35595d16116670);
+            
+        
+
+        marker_f698a8d45d49553bcb90351a90e0c019.bindPopup(popup_b16cafe89c8d978bdc20f881bca87903)
+        ;
+
+        
+    
+    
+            var marker_d2eda7edacae4a382389caaedbe66f06 = L.marker(
+                [6.057384878621436, 0.30722382760090167],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_627643c2c3db4c01df651e9a5bff354b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d2eda7edacae4a382389caaedbe66f06.setIcon(icon_627643c2c3db4c01df651e9a5bff354b);
+        
+    
+        var popup_efcc4bf3c60e0f12970947b0028653ad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a91267e2adef48a32199111a43a50816 = $(`<div id="html_a91267e2adef48a32199111a43a50816" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_efcc4bf3c60e0f12970947b0028653ad.setContent(html_a91267e2adef48a32199111a43a50816);
+            
+        
+
+        marker_d2eda7edacae4a382389caaedbe66f06.bindPopup(popup_efcc4bf3c60e0f12970947b0028653ad)
+        ;
+
+        
+    
+    
+            var marker_8d3891d321c4e1435f44ffb1159a1cd6 = L.marker(
+                [6.057295046006153, 0.3092450370364656],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_09da49639245226a23ad1761ad86685b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8d3891d321c4e1435f44ffb1159a1cd6.setIcon(icon_09da49639245226a23ad1761ad86685b);
+        
+    
+        var popup_795f7f25b092142b5758cc0f84a3e638 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_82741c5ec2987fef88d601df71705156 = $(`<div id="html_82741c5ec2987fef88d601df71705156" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_795f7f25b092142b5758cc0f84a3e638.setContent(html_82741c5ec2987fef88d601df71705156);
+            
+        
+
+        marker_8d3891d321c4e1435f44ffb1159a1cd6.bindPopup(popup_795f7f25b092142b5758cc0f84a3e638)
+        ;
+
+        
+    
+    
+            var marker_112f89a801e070d052922bf4c4555f28 = L.marker(
+                [6.057295046253565, 0.30978402545191863],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_6b0c56a466f31b6d4dea11fcc0306fe1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_112f89a801e070d052922bf4c4555f28.setIcon(icon_6b0c56a466f31b6d4dea11fcc0306fe1);
+        
+    
+        var popup_19439d3be1afe7d16be1a2ffa5d92150 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6784132e32dae972b2a63ea87c70d5a2 = $(`<div id="html_6784132e32dae972b2a63ea87c70d5a2" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_19439d3be1afe7d16be1a2ffa5d92150.setContent(html_6784132e32dae972b2a63ea87c70d5a2);
+            
+        
+
+        marker_112f89a801e070d052922bf4c4555f28.bindPopup(popup_19439d3be1afe7d16be1a2ffa5d92150)
+        ;
+
+        
+    
+    
+            var marker_16278b37838db9b649bffe016dc532be = L.marker(
+                [6.057295045688172, 0.3103230152544328],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_717c5a03b5e07c9cc5235ca7721e50da = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_16278b37838db9b649bffe016dc532be.setIcon(icon_717c5a03b5e07c9cc5235ca7721e50da);
+        
+    
+        var popup_262f40250d5372f71b08fd92bedfbbb2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c5af55af1a937d953aaa586a87f9af91 = $(`<div id="html_c5af55af1a937d953aaa586a87f9af91" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_262f40250d5372f71b08fd92bedfbbb2.setContent(html_c5af55af1a937d953aaa586a87f9af91);
+            
+        
+
+        marker_16278b37838db9b649bffe016dc532be.bindPopup(popup_262f40250d5372f71b08fd92bedfbbb2)
+        ;
+
+        
+    
+    
+            var marker_059c49b6b0ecab5b00c879747dc0463f = L.marker(
+                [6.0570255491280856, 0.311266245460192],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_15e8d88246fc17c7155feee79f0b6cc7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_059c49b6b0ecab5b00c879747dc0463f.setIcon(icon_15e8d88246fc17c7155feee79f0b6cc7);
+        
+    
+        var popup_929ce30b069da5a171db7f9e0eeb42ce = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_10b3a261014dbb4263def03696646304 = $(`<div id="html_10b3a261014dbb4263def03696646304" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_929ce30b069da5a171db7f9e0eeb42ce.setContent(html_10b3a261014dbb4263def03696646304);
+            
+        
+
+        marker_059c49b6b0ecab5b00c879747dc0463f.bindPopup(popup_929ce30b069da5a171db7f9e0eeb42ce)
+        ;
+
+        
+    
+    
+            var marker_371dba2d1097dd773e75c5f50757fd31 = L.marker(
+                [6.057025549903617, 0.31247897155475557],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_77231bcf92ac6109ccc7ef36e20f37ea = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_371dba2d1097dd773e75c5f50757fd31.setIcon(icon_77231bcf92ac6109ccc7ef36e20f37ea);
+        
+    
+        var popup_189db6404bca4955b1b7af44883261c9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_40d7607e2db35bb88ad175231a61cc71 = $(`<div id="html_40d7607e2db35bb88ad175231a61cc71" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_189db6404bca4955b1b7af44883261c9.setContent(html_40d7607e2db35bb88ad175231a61cc71);
+            
+        
+
+        marker_371dba2d1097dd773e75c5f50757fd31.bindPopup(popup_189db6404bca4955b1b7af44883261c9)
+        ;
+
+        
+    
+    
+            var marker_f9ec3a4b36ebcb53bc182f4aa9e2e238 = L.marker(
+                [6.0570255504464185, 0.31328745561661725],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_4981dc2cf6f5e2cc1ea21015cea51d82 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f9ec3a4b36ebcb53bc182f4aa9e2e238.setIcon(icon_4981dc2cf6f5e2cc1ea21015cea51d82);
+        
+    
+        var popup_68c479199f321106042253852b1038e5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5b9f83aa95072544fbeef5fe5b00f14e = $(`<div id="html_5b9f83aa95072544fbeef5fe5b00f14e" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_68c479199f321106042253852b1038e5.setContent(html_5b9f83aa95072544fbeef5fe5b00f14e);
+            
+        
+
+        marker_f9ec3a4b36ebcb53bc182f4aa9e2e238.bindPopup(popup_68c479199f321106042253852b1038e5)
+        ;
+
+        
+    
+    
+            var marker_71dfbfe543239451f133bdbd1e796e3e = L.marker(
+                [6.057025550075012, 0.3151739176938123],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_b0bdbbe99a4ceea66b4a5c2e6b3d0ae0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_71dfbfe543239451f133bdbd1e796e3e.setIcon(icon_b0bdbbe99a4ceea66b4a5c2e6b3d0ae0);
+        
+    
+        var popup_10154d4ff0c3d9f2fa2757e280e6ef9c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_abadf6f9afa6ea668c80491e41955347 = $(`<div id="html_abadf6f9afa6ea668c80491e41955347" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_10154d4ff0c3d9f2fa2757e280e6ef9c.setContent(html_abadf6f9afa6ea668c80491e41955347);
+            
+        
+
+        marker_71dfbfe543239451f133bdbd1e796e3e.bindPopup(popup_10154d4ff0c3d9f2fa2757e280e6ef9c)
+        ;
+
+        
+    
+    
+            var marker_9884a28aac4c464e7c1bbe423201691d = L.marker(
+                [6.056756056492425, 0.3161171485112797],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_5246fb8affc19c6da3ad0bf6c31d3471 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9884a28aac4c464e7c1bbe423201691d.setIcon(icon_5246fb8affc19c6da3ad0bf6c31d3471);
+        
+    
+        var popup_8ebdea80d2a4638d297cfc47b6243451 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6deaa5f297927be84d942621c6d380ff = $(`<div id="html_6deaa5f297927be84d942621c6d380ff" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_8ebdea80d2a4638d297cfc47b6243451.setContent(html_6deaa5f297927be84d942621c6d380ff);
+            
+        
+
+        marker_9884a28aac4c464e7c1bbe423201691d.bindPopup(popup_8ebdea80d2a4638d297cfc47b6243451)
+        ;
+
+        
+    
+    
+            var marker_c067dd7f9258bbf216e6e34f3f448b86 = L.marker(
+                [6.056756056437981, 0.31692563256732276],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_49d83f70229ec89b5a2ff05cc539fbff = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c067dd7f9258bbf216e6e34f3f448b86.setIcon(icon_49d83f70229ec89b5a2ff05cc539fbff);
+        
+    
+        var popup_36c9f7ab8116198106a78f244dded4f5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fb1441a7ae6608740036fac15a7f1d4e = $(`<div id="html_fb1441a7ae6608740036fac15a7f1d4e" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_36c9f7ab8116198106a78f244dded4f5.setContent(html_fb1441a7ae6608740036fac15a7f1d4e);
+            
+        
+
+        marker_c067dd7f9258bbf216e6e34f3f448b86.bindPopup(popup_36c9f7ab8116198106a78f244dded4f5)
+        ;
+
+        
+    
+    
+            var marker_c4f2e8c72ea328eb1fd9ad07f047ac08 = L.marker(
+                [6.056486560419193, 0.31759936784856413],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_376eba6aeee9d8066454bbc4740f7b88 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c4f2e8c72ea328eb1fd9ad07f047ac08.setIcon(icon_376eba6aeee9d8066454bbc4740f7b88);
+        
+    
+        var popup_526ec0ab457028cd3ff9ac8bc39cf9ef = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4ecd45dc6bf4f0bd551447e6044b04dc = $(`<div id="html_4ecd45dc6bf4f0bd551447e6044b04dc" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_526ec0ab457028cd3ff9ac8bc39cf9ef.setContent(html_4ecd45dc6bf4f0bd551447e6044b04dc);
+            
+        
+
+        marker_c4f2e8c72ea328eb1fd9ad07f047ac08.bindPopup(popup_526ec0ab457028cd3ff9ac8bc39cf9ef)
+        ;
+
+        
+    
+    
+            var marker_cc7f97f593c6c158de2172f843578c24 = L.marker(
+                [6.055902659955955, 0.32150704238968064],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_ec2caf603d0edf1c84f2b31207b73091 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cc7f97f593c6c158de2172f843578c24.setIcon(icon_ec2caf603d0edf1c84f2b31207b73091);
+        
+    
+        var popup_1c2179d0a432864e5fffc528eaad2d94 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f88c857e01e6738eb4b51aad918a6baf = $(`<div id="html_f88c857e01e6738eb4b51aad918a6baf" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_1c2179d0a432864e5fffc528eaad2d94.setContent(html_f88c857e01e6738eb4b51aad918a6baf);
+            
+        
+
+        marker_cc7f97f593c6c158de2172f843578c24.bindPopup(popup_1c2179d0a432864e5fffc528eaad2d94)
+        ;
+
+        
+    
+    
+            var marker_05a3d1df07a2eb09c1853389941143ea = L.marker(
+                [6.054903280556268, 0.3260884483463147],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_4e29f3d5a9e3c485d896383046f21730 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_05a3d1df07a2eb09c1853389941143ea.setIcon(icon_4e29f3d5a9e3c485d896383046f21730);
+        
+    
+        var popup_e6e9760f0e69dd82fd8d97f45e85f3cf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dff6c669b9f38a2de7afa33d14449241 = $(`<div id="html_dff6c669b9f38a2de7afa33d14449241" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_e6e9760f0e69dd82fd8d97f45e85f3cf.setContent(html_dff6c669b9f38a2de7afa33d14449241);
+            
+        
+
+        marker_05a3d1df07a2eb09c1853389941143ea.bindPopup(popup_e6e9760f0e69dd82fd8d97f45e85f3cf)
+        ;
+
+        
+    
+    
+            var marker_a9504e3a921297e30ab8d37d04cd951f = L.marker(
+                [6.051931077517663, 0.33444280174923113],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_466b68890a472e54f756ac46de9ad3e5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a9504e3a921297e30ab8d37d04cd951f.setIcon(icon_466b68890a472e54f756ac46de9ad3e5);
+        
+    
+        var popup_eefe094abdbf47dd0637ba461e29dcc2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e52680f0a21d201f84d3129b7a9d2584 = $(`<div id="html_e52680f0a21d201f84d3129b7a9d2584" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_eefe094abdbf47dd0637ba461e29dcc2.setContent(html_e52680f0a21d201f84d3129b7a9d2584);
+            
+        
+
+        marker_a9504e3a921297e30ab8d37d04cd951f.bindPopup(popup_eefe094abdbf47dd0637ba461e29dcc2)
+        ;
+
+        
+    
+    
+            var marker_6cd8d1d158a30baedfa07e9734d36ee9 = L.marker(
+                [6.0492102063231235, 0.3418538806352598],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_e616c444bc2b1f2e501ed4b1260a637e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6cd8d1d158a30baedfa07e9734d36ee9.setIcon(icon_e616c444bc2b1f2e501ed4b1260a637e);
+        
+    
+        var popup_43d1cea0abdac4085c406b49cbce4a22 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1a47ae5b0217725ab57fb07c3d82f6bc = $(`<div id="html_1a47ae5b0217725ab57fb07c3d82f6bc" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_43d1cea0abdac4085c406b49cbce4a22.setContent(html_1a47ae5b0217725ab57fb07c3d82f6bc);
+            
+        
+
+        marker_6cd8d1d158a30baedfa07e9734d36ee9.bindPopup(popup_43d1cea0abdac4085c406b49cbce4a22)
+        ;
+
+        
+    
+    
+            var marker_6268a34d6ad49b5e381d17ad272ae1f8 = L.marker(
+                [6.045278791699631, 0.3686692799658953],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_34e304a61fbb246966248b8d195a1fd5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6268a34d6ad49b5e381d17ad272ae1f8.setIcon(icon_34e304a61fbb246966248b8d195a1fd5);
+        
+    
+        var popup_bc4a2514ab934c9df165484a5b733056 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_757c1d156e9bb382a23c28d7d0f85637 = $(`<div id="html_757c1d156e9bb382a23c28d7d0f85637" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_bc4a2514ab934c9df165484a5b733056.setContent(html_757c1d156e9bb382a23c28d7d0f85637);
+            
+        
+
+        marker_6268a34d6ad49b5e381d17ad272ae1f8.bindPopup(popup_bc4a2514ab934c9df165484a5b733056)
+        ;
+
+        
+    
+    
+            var marker_cb9e45563a6cb45c0e55cf8e2b93434b = L.marker(
+                [6.0539263627221835, 0.39278835838262244],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_2e7acc27398b58ce24cb972e02aa407e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cb9e45563a6cb45c0e55cf8e2b93434b.setIcon(icon_2e7acc27398b58ce24cb972e02aa407e);
+        
+    
+        var popup_f8ca2214f8d3b30c6229520c6569a522 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_75924da647515d18826d99951f68dec1 = $(`<div id="html_75924da647515d18826d99951f68dec1" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_f8ca2214f8d3b30c6229520c6569a522.setContent(html_75924da647515d18826d99951f68dec1);
+            
+        
+
+        marker_cb9e45563a6cb45c0e55cf8e2b93434b.bindPopup(popup_f8ca2214f8d3b30c6229520c6569a522)
+        ;
+
+        
+    
+    
+            var marker_2d21d875ef62a9219cf90896042a6215 = L.marker(
+                [6.067243071338417, 0.39586865109526426],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_bacea9a81bd69432cf7eb9450f83ca3e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2d21d875ef62a9219cf90896042a6215.setIcon(icon_bacea9a81bd69432cf7eb9450f83ca3e);
+        
+    
+        var popup_55712145764c9d64546a977ef3bcd5c6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2ce5e149f5b49b1ff282a770aebe40c1 = $(`<div id="html_2ce5e149f5b49b1ff282a770aebe40c1" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_55712145764c9d64546a977ef3bcd5c6.setContent(html_2ce5e149f5b49b1ff282a770aebe40c1);
+            
+        
+
+        marker_2d21d875ef62a9219cf90896042a6215.bindPopup(popup_55712145764c9d64546a977ef3bcd5c6)
+        ;
+
+        
+    
+    
+            var marker_bc71948234eb556ffaebdb0559035fbe = L.marker(
+                [6.079932590285955, 0.4030291523166362],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_fc4b9b7896b83ec9c27bbf13ea2d1408 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bc71948234eb556ffaebdb0559035fbe.setIcon(icon_fc4b9b7896b83ec9c27bbf13ea2d1408);
+        
+    
+        var popup_38853c5bd8477ddce9b53c004769e881 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8dd972041495a408853632d8b1f6e57b = $(`<div id="html_8dd972041495a408853632d8b1f6e57b" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_38853c5bd8477ddce9b53c004769e881.setContent(html_8dd972041495a408853632d8b1f6e57b);
+            
+        
+
+        marker_bc71948234eb556ffaebdb0559035fbe.bindPopup(popup_38853c5bd8477ddce9b53c004769e881)
+        ;
+
+        
+    
+    
+            var marker_be9946b538375e8641bb667f62387161 = L.marker(
+                [6.0802020858781525, 0.40356814256209234],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_17db7276b1b5a6f0616db5aec686d69c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_be9946b538375e8641bb667f62387161.setIcon(icon_17db7276b1b5a6f0616db5aec686d69c);
+        
+    
+        var popup_a3fc52ceff5277bfde11989a9052e78d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ed5e14fc1601f99249fbcc68dcde3eae = $(`<div id="html_ed5e14fc1601f99249fbcc68dcde3eae" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_a3fc52ceff5277bfde11989a9052e78d.setContent(html_ed5e14fc1601f99249fbcc68dcde3eae);
+            
+        
+
+        marker_be9946b538375e8641bb667f62387161.bindPopup(popup_a3fc52ceff5277bfde11989a9052e78d)
+        ;
+
+        
+    
+    
+            var marker_93e8e8e4419f8a41a0aa026bd5f67ece = L.marker(
+                [6.08047157872663, 0.40464611994631877],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_0e01895f598684fe9efe84edfd6f72c3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_93e8e8e4419f8a41a0aa026bd5f67ece.setIcon(icon_0e01895f598684fe9efe84edfd6f72c3);
+        
+    
+        var popup_d46a28daaada86b308cfa0e8f3f702ca = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0dbd52f3d016daeee8101fa8bb299288 = $(`<div id="html_0dbd52f3d016daeee8101fa8bb299288" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_d46a28daaada86b308cfa0e8f3f702ca.setContent(html_0dbd52f3d016daeee8101fa8bb299288);
+            
+        
+
+        marker_93e8e8e4419f8a41a0aa026bd5f67ece.bindPopup(popup_d46a28daaada86b308cfa0e8f3f702ca)
+        ;
+
+        
+    
+    
+            var marker_02226ed0c1e74cadb4639f7448f4d58e = L.marker(
+                [6.080741074949122, 0.40585884512367953],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_4026e205eb57989b15507e26ee8e6188 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_02226ed0c1e74cadb4639f7448f4d58e.setIcon(icon_4026e205eb57989b15507e26ee8e6188);
+        
+    
+        var popup_f436059d2d62be872a645b1e266e26d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5a04643571f38cad16c845fa1a9a290a = $(`<div id="html_5a04643571f38cad16c845fa1a9a290a" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_f436059d2d62be872a645b1e266e26d5.setContent(html_5a04643571f38cad16c845fa1a9a290a);
+            
+        
+
+        marker_02226ed0c1e74cadb4639f7448f4d58e.bindPopup(popup_f436059d2d62be872a645b1e266e26d5)
+        ;
+
+        
+    
+    
+            var marker_def1ca10d662edc6f72ad3d6858665d7 = L.marker(
+                [6.082868195262723, 0.41771659062813354],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_003665b790628e5fb1740ba20c0fc571 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_def1ca10d662edc6f72ad3d6858665d7.setIcon(icon_003665b790628e5fb1740ba20c0fc571);
+        
+    
+        var popup_6384c4bd5404bb236cb11a79a681b8ae = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7a87c37844ed435fb8b82406249c8bef = $(`<div id="html_7a87c37844ed435fb8b82406249c8bef" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_6384c4bd5404bb236cb11a79a681b8ae.setContent(html_7a87c37844ed435fb8b82406249c8bef);
+            
+        
+
+        marker_def1ca10d662edc6f72ad3d6858665d7.bindPopup(popup_6384c4bd5404bb236cb11a79a681b8ae)
+        ;
+
+        
+    
+    
+            var marker_1836c875be8d4f5b81f0bdd65cb68aa4 = L.marker(
+                [6.083256357475949, 0.4297091159288146],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_3df553b0ced3544cace8e647c3422256 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1836c875be8d4f5b81f0bdd65cb68aa4.setIcon(icon_3df553b0ced3544cace8e647c3422256);
+        
+    
+        var popup_36e8266850e510d0bfa3d74712a19502 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c6aac6559dc8b0b7636d1e6f4f479089 = $(`<div id="html_c6aac6559dc8b0b7636d1e6f4f479089" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_36e8266850e510d0bfa3d74712a19502.setContent(html_c6aac6559dc8b0b7636d1e6f4f479089);
+            
+        
+
+        marker_1836c875be8d4f5b81f0bdd65cb68aa4.bindPopup(popup_36e8266850e510d0bfa3d74712a19502)
+        ;
+
+        
+    
+    
+            var marker_3bf8017706952d8ddfb738ddbce549e1 = L.marker(
+                [6.083166525532242, 0.43051759963006625],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_35df2270eda554f4a55439687944f8dd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3bf8017706952d8ddfb738ddbce549e1.setIcon(icon_35df2270eda554f4a55439687944f8dd);
+        
+    
+        var popup_eb83cc31434f955b5521b2235dce0e51 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_39d2b4d8e17d97f68d0f94cb34c84580 = $(`<div id="html_39d2b4d8e17d97f68d0f94cb34c84580" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_eb83cc31434f955b5521b2235dce0e51.setContent(html_39d2b4d8e17d97f68d0f94cb34c84580);
+            
+        
+
+        marker_3bf8017706952d8ddfb738ddbce549e1.bindPopup(popup_eb83cc31434f955b5521b2235dce0e51)
+        ;
+
+        
+    
+    
+            var marker_8316c411a79334beb0fd41ee5b5399d8 = L.marker(
+                [6.083166524972339, 0.4314608311361125],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_d0b9a9f70a326152d6b9558342b119c2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8316c411a79334beb0fd41ee5b5399d8.setIcon(icon_d0b9a9f70a326152d6b9558342b119c2);
+        
+    
+        var popup_a890e5c387acc8114e45e962d621393f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_97358bd462afb9f040ee6758ec158c17 = $(`<div id="html_97358bd462afb9f040ee6758ec158c17" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_a890e5c387acc8114e45e962d621393f.setContent(html_97358bd462afb9f040ee6758ec158c17);
+            
+        
+
+        marker_8316c411a79334beb0fd41ee5b5399d8.bindPopup(popup_a890e5c387acc8114e45e962d621393f)
+        ;
+
+        
+    
+    
+            var marker_06d3a2336493e3820d37779416fa1876 = L.marker(
+                [6.083166525691728, 0.4326735561918863],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_4595d2ce889f4014d14e4530a6a8e935 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_06d3a2336493e3820d37779416fa1876.setIcon(icon_4595d2ce889f4014d14e4530a6a8e935);
+        
+    
+        var popup_3ae25b7a7e15eab068911ad7f2250401 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b4cd5c2a2402732a796d4a0859a99e71 = $(`<div id="html_b4cd5c2a2402732a796d4a0859a99e71" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_3ae25b7a7e15eab068911ad7f2250401.setContent(html_b4cd5c2a2402732a796d4a0859a99e71);
+            
+        
+
+        marker_06d3a2336493e3820d37779416fa1876.bindPopup(popup_3ae25b7a7e15eab068911ad7f2250401)
+        ;
+
+        
+    
+    
+            var marker_45ceeb301d47f9370661ee756171a3d5 = L.marker(
+                [6.081137028748396, 0.4445313577985621],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_54280e4b8f0b4ccc0483de4a26580309 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_45ceeb301d47f9370661ee756171a3d5.setIcon(icon_54280e4b8f0b4ccc0483de4a26580309);
+        
+    
+        var popup_b196e031dc4e43471b2d5783f51b0ded = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c6bb318ee7498b37a33af88698c8df61 = $(`<div id="html_c6bb318ee7498b37a33af88698c8df61" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_b196e031dc4e43471b2d5783f51b0ded.setContent(html_c6bb318ee7498b37a33af88698c8df61);
+            
+        
+
+        marker_45ceeb301d47f9370661ee756171a3d5.bindPopup(popup_b196e031dc4e43471b2d5783f51b0ded)
+        ;
+
+        
+    
+    
+            var marker_f9336aa808909e826e7479f6a7c84007 = L.marker(
+                [6.076294412847231, 0.45598483883181595],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_c6ec2e637520bd1fecfd9b6b663082a8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f9336aa808909e826e7479f6a7c84007.setIcon(icon_c6ec2e637520bd1fecfd9b6b663082a8);
+        
+    
+        var popup_f62c5df04b7dccf00e99ba6c64194f0e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_95fe996e5308892bf8c568803636d0cd = $(`<div id="html_95fe996e5308892bf8c568803636d0cd" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_f62c5df04b7dccf00e99ba6c64194f0e.setContent(html_95fe996e5308892bf8c568803636d0cd);
+            
+        
+
+        marker_f9336aa808909e826e7479f6a7c84007.bindPopup(popup_f62c5df04b7dccf00e99ba6c64194f0e)
+        ;
+
+        
+    
+    
+            var marker_3f71b85b42f256774345cf795eae1cc6 = L.marker(
+                [6.07589017153884, 0.4566585740090531],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_68faddf7bd63e0fd3fe2514df88ee512 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3f71b85b42f256774345cf795eae1cc6.setIcon(icon_68faddf7bd63e0fd3fe2514df88ee512);
+        
+    
+        var popup_2e35d353b106bad02cbb9f7dc1e5e344 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_233017170595b7efc49dc9608493b5f3 = $(`<div id="html_233017170595b7efc49dc9608493b5f3" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_2e35d353b106bad02cbb9f7dc1e5e344.setContent(html_233017170595b7efc49dc9608493b5f3);
+            
+        
+
+        marker_3f71b85b42f256774345cf795eae1cc6.bindPopup(popup_2e35d353b106bad02cbb9f7dc1e5e344)
+        ;
+
+        
+    
+    
+            var marker_4e2172a69135a9772c426a1d3e9e5019 = L.marker(
+                [6.072364284886967, 0.46191373809210373],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_21ccf25280ea9c404ff6bbc8942418f2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4e2172a69135a9772c426a1d3e9e5019.setIcon(icon_21ccf25280ea9c404ff6bbc8942418f2);
+        
+    
+        var popup_949495fa77b9a52215e9b44b6ee763d8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b22d8dfe12e7724c74a61e52e86d53d9 = $(`<div id="html_b22d8dfe12e7724c74a61e52e86d53d9" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_949495fa77b9a52215e9b44b6ee763d8.setContent(html_b22d8dfe12e7724c74a61e52e86d53d9);
+            
+        
+
+        marker_4e2172a69135a9772c426a1d3e9e5019.bindPopup(popup_949495fa77b9a52215e9b44b6ee763d8)
+        ;
+
+        
+    
+    
+            var marker_1e3585b4259bc6c754c8b1a213581736 = L.marker(
+                [6.068748564809927, 0.46730361019398253],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_47f364737714d3d7f748954c6028f2a6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1e3585b4259bc6c754c8b1a213581736.setIcon(icon_47f364737714d3d7f748954c6028f2a6);
+        
+    
+        var popup_f35dc8b550b5829682ef754ad17a4659 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ca514aa550ecde64dccc0d6b6d8e5319 = $(`<div id="html_ca514aa550ecde64dccc0d6b6d8e5319" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_f35dc8b550b5829682ef754ad17a4659.setContent(html_ca514aa550ecde64dccc0d6b6d8e5319);
+            
+        
+
+        marker_1e3585b4259bc6c754c8b1a213581736.bindPopup(popup_f35dc8b550b5829682ef754ad17a4659)
+        ;
+
+        
+    
+    
+            var marker_5e36e15a51038103151bbbcc9e8c7d76 = L.marker(
+                [6.068074828467689, 0.4685163351249827],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_7f5c1157281ab58eb161e6c7d26efa3a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5e36e15a51038103151bbbcc9e8c7d76.setIcon(icon_7f5c1157281ab58eb161e6c7d26efa3a);
+        
+    
+        var popup_4ff2a0941f932e4e20903786ca9b4cb4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_75955e6695fa6fbd678f5ff6be83a738 = $(`<div id="html_75955e6695fa6fbd678f5ff6be83a738" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_4ff2a0941f932e4e20903786ca9b4cb4.setContent(html_75955e6695fa6fbd678f5ff6be83a738);
+            
+        
+
+        marker_5e36e15a51038103151bbbcc9e8c7d76.bindPopup(popup_4ff2a0941f932e4e20903786ca9b4cb4)
+        ;
+
+        
+    
+    
+            var marker_6713d6dd71d9fa62433e7b0321518be1 = L.marker(
+                [6.065802632095045, 0.4784876503166331],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_7dd970c8ce2e73f972d7e5869816b7dc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6713d6dd71d9fa62433e7b0321518be1.setIcon(icon_7dd970c8ce2e73f972d7e5869816b7dc);
+        
+    
+        var popup_db138d5186a116af7903be6e9427f841 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cab3ec95809f18f2829a5ed7959aa423 = $(`<div id="html_cab3ec95809f18f2829a5ed7959aa423" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_db138d5186a116af7903be6e9427f841.setContent(html_cab3ec95809f18f2829a5ed7959aa423);
+            
+        
+
+        marker_6713d6dd71d9fa62433e7b0321518be1.bindPopup(popup_db138d5186a116af7903be6e9427f841)
+        ;
+
+        
+    
+    
+            var marker_37260db9ba9dd7a0871f63546eb21db7 = L.marker(
+                [6.062145949354013, 0.48953691463361876],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_e0d330f701811707c8e489813d296634 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_37260db9ba9dd7a0871f63546eb21db7.setIcon(icon_e0d330f701811707c8e489813d296634);
+        
+    
+        var popup_1eb4787a1ae4f4a582a6d040e1c7a590 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_263dda5286572455c9dad177ba8c985a = $(`<div id="html_263dda5286572455c9dad177ba8c985a" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_1eb4787a1ae4f4a582a6d040e1c7a590.setContent(html_263dda5286572455c9dad177ba8c985a);
+            
+        
+
+        marker_37260db9ba9dd7a0871f63546eb21db7.bindPopup(popup_1eb4787a1ae4f4a582a6d040e1c7a590)
+        ;
+
+        
+    
+    
+            var marker_46b459212d1f725d765364f7e95b0a4b = L.marker(
+                [6.061876452756724, 0.49007590340835666],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_1cc20707c97e4005395cd0f9628088ed = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_46b459212d1f725d765364f7e95b0a4b.setIcon(icon_1cc20707c97e4005395cd0f9628088ed);
+        
+    
+        var popup_a5984d73f2b09c479e5a61ce8d9ca3b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f636f89c9bb8b39c5127438ffe816d8d = $(`<div id="html_f636f89c9bb8b39c5127438ffe816d8d" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_a5984d73f2b09c479e5a61ce8d9ca3b7.setContent(html_f636f89c9bb8b39c5127438ffe816d8d);
+            
+        
+
+        marker_46b459212d1f725d765364f7e95b0a4b.bindPopup(popup_a5984d73f2b09c479e5a61ce8d9ca3b7)
+        ;
+
+        
+    
+    
+            var marker_4c0d21a71a40c876e8a9fb5eff6bff30 = L.marker(
+                [6.061741705699332, 0.4907496406699695],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_0043a0cf605fd9d5710077663d9deba9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4c0d21a71a40c876e8a9fb5eff6bff30.setIcon(icon_0043a0cf605fd9d5710077663d9deba9);
+        
+    
+        var popup_fa40bb01adf36826a2a654ea8e918aa9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a8d85568016b7ec9b570b8af8237f66 = $(`<div id="html_0a8d85568016b7ec9b570b8af8237f66" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_fa40bb01adf36826a2a654ea8e918aa9.setContent(html_0a8d85568016b7ec9b570b8af8237f66);
+            
+        
+
+        marker_4c0d21a71a40c876e8a9fb5eff6bff30.bindPopup(popup_fa40bb01adf36826a2a654ea8e918aa9)
+        ;
+
+        
+    
+    
+            var marker_a07fd0452f46afd036ceb49bc0caac51 = L.marker(
+                [6.061157800867117, 0.4919623658661893],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_5f1bcd210ad43044d499248b0f60388a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a07fd0452f46afd036ceb49bc0caac51.setIcon(icon_5f1bcd210ad43044d499248b0f60388a);
+        
+    
+        var popup_d8c03eacdd861ad97da6d2233e60fceb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_042d7a2f2de6687f02a8967b9b6460bd = $(`<div id="html_042d7a2f2de6687f02a8967b9b6460bd" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_d8c03eacdd861ad97da6d2233e60fceb.setContent(html_042d7a2f2de6687f02a8967b9b6460bd);
+            
+        
+
+        marker_a07fd0452f46afd036ceb49bc0caac51.bindPopup(popup_d8c03eacdd861ad97da6d2233e60fceb)
+        ;
+
+        
+    
+    
+            var marker_ccaa730560d1a3950e9557e208dba544 = L.marker(
+                [6.060663727764732, 0.49317509125727965],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_b6f77ed63abf726c7d037f0f293ad2a5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ccaa730560d1a3950e9557e208dba544.setIcon(icon_b6f77ed63abf726c7d037f0f293ad2a5);
+        
+    
+        var popup_086692914b0bc60adc8ff098bc94aca5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a2e905fd411236c9b1a87a06f1d9a0c = $(`<div id="html_0a2e905fd411236c9b1a87a06f1d9a0c" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_086692914b0bc60adc8ff098bc94aca5.setContent(html_0a2e905fd411236c9b1a87a06f1d9a0c);
+            
+        
+
+        marker_ccaa730560d1a3950e9557e208dba544.bindPopup(popup_086692914b0bc60adc8ff098bc94aca5)
+        ;
+
+        
+    
+    
+            var marker_1b8553ecb740f271645f7cdfdd869f10 = L.marker(
+                [6.055678077840036, 0.5040896204268925],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_8116004a788bb36aaad7483e169404d2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1b8553ecb740f271645f7cdfdd869f10.setIcon(icon_8116004a788bb36aaad7483e169404d2);
+        
+    
+        var popup_04fa670e33b2c250ec57337529b30209 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_108f1429e8306210615cfda9361cdc8d = $(`<div id="html_108f1429e8306210615cfda9361cdc8d" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_04fa670e33b2c250ec57337529b30209.setContent(html_108f1429e8306210615cfda9361cdc8d);
+            
+        
+
+        marker_1b8553ecb740f271645f7cdfdd869f10.bindPopup(popup_04fa670e33b2c250ec57337529b30209)
+        ;
+
+        
+    
+    
+            var marker_bebc0354a2a68b87444a30aae9bf10f8 = L.marker(
+                [6.053867414689856, 0.5090752808207558],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_505ee12fc9bf09c0faa4535272a0554f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bebc0354a2a68b87444a30aae9bf10f8.setIcon(icon_505ee12fc9bf09c0faa4535272a0554f);
+        
+    
+        var popup_0a355afdb3ea31202906b61336d8e17d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6f39e95af7d37a543971c47a4eab7b89 = $(`<div id="html_6f39e95af7d37a543971c47a4eab7b89" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_0a355afdb3ea31202906b61336d8e17d.setContent(html_6f39e95af7d37a543971c47a4eab7b89);
+            
+        
+
+        marker_bebc0354a2a68b87444a30aae9bf10f8.bindPopup(popup_0a355afdb3ea31202906b61336d8e17d)
+        ;
+
+        
+    
+    
+            var marker_f7b0cf3453941b35fa1b32f1ef873965 = L.marker(
+                [6.051096670563534, 0.5140609201664172],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_c8713924277689cdfba00b306e68230a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f7b0cf3453941b35fa1b32f1ef873965.setIcon(icon_c8713924277689cdfba00b306e68230a);
+        
+    
+        var popup_379a9058144cb426e0930a852fe35768 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dea0b10093538dd2518665b2584b2460 = $(`<div id="html_dea0b10093538dd2518665b2584b2460" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_379a9058144cb426e0930a852fe35768.setContent(html_dea0b10093538dd2518665b2584b2460);
+            
+        
+
+        marker_f7b0cf3453941b35fa1b32f1ef873965.bindPopup(popup_379a9058144cb426e0930a852fe35768)
+        ;
+
+        
+    
+    
+            var marker_8fbdf9c46177c4a26c1877d23998153e = L.marker(
+                [6.032771036396891, 0.5249142044037068],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_7895abe0a79fd5b37288ec7e80e3f34c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8fbdf9c46177c4a26c1877d23998153e.setIcon(icon_7895abe0a79fd5b37288ec7e80e3f34c);
+        
+    
+        var popup_9bf9581705584c5695a031a47cdd86be = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dbfd308c99d9b2dd094a137f92ff405c = $(`<div id="html_dbfd308c99d9b2dd094a137f92ff405c" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_9bf9581705584c5695a031a47cdd86be.setContent(html_dbfd308c99d9b2dd094a137f92ff405c);
+            
+        
+
+        marker_8fbdf9c46177c4a26c1877d23998153e.bindPopup(popup_9bf9581705584c5695a031a47cdd86be)
+        ;
+
+        
+    
+    
+            var marker_70789631967c7a0b5e476a570b463e4b = L.marker(
+                [6.030345586352991, 0.5260803797111553],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_84cf698ed7c0159943a9a6d0de71d6ba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_70789631967c7a0b5e476a570b463e4b.setIcon(icon_84cf698ed7c0159943a9a6d0de71d6ba);
+        
+    
+        var popup_328760f5da1470837564e86f7e6b5e96 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_af213db6747b3a943260f94be425c1b0 = $(`<div id="html_af213db6747b3a943260f94be425c1b0" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_328760f5da1470837564e86f7e6b5e96.setContent(html_af213db6747b3a943260f94be425c1b0);
+            
+        
+
+        marker_70789631967c7a0b5e476a570b463e4b.bindPopup(popup_328760f5da1470837564e86f7e6b5e96)
+        ;
+
+        
+    
+    
+            var marker_52ffcf0d8cde3cc239d191a977edc370 = L.marker(
+                [6.036813456046657, 0.5280746395055167],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_dc52471d1a3844ce7b87729265343228 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_52ffcf0d8cde3cc239d191a977edc370.setIcon(icon_dc52471d1a3844ce7b87729265343228);
+        
+    
+        var popup_4df92595ea78ee89cfa04156193bd438 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_beb9989b4e1476861db829da402ad7df = $(`<div id="html_beb9989b4e1476861db829da402ad7df" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_4df92595ea78ee89cfa04156193bd438.setContent(html_beb9989b4e1476861db829da402ad7df);
+            
+        
+
+        marker_52ffcf0d8cde3cc239d191a977edc370.bindPopup(popup_4df92595ea78ee89cfa04156193bd438)
+        ;
+
+        
+    
+    
+            var marker_63e98f2fee90bf66e08f546cc03e3d5e = L.marker(
+                [6.0164355203700906, 0.5342730171082153],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_cb4a28035c0f904ec46041b75e9c6de1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_63e98f2fee90bf66e08f546cc03e3d5e.setIcon(icon_cb4a28035c0f904ec46041b75e9c6de1);
+        
+    
+        var popup_3d076b7c2d3a8b48200b6ea4d0ac72ce = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0f3cdac643bf9557ddfaf382f24d1eea = $(`<div id="html_0f3cdac643bf9557ddfaf382f24d1eea" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_3d076b7c2d3a8b48200b6ea4d0ac72ce.setContent(html_0f3cdac643bf9557ddfaf382f24d1eea);
+            
+        
+
+        marker_63e98f2fee90bf66e08f546cc03e3d5e.bindPopup(popup_3d076b7c2d3a8b48200b6ea4d0ac72ce)
+        ;
+
+        
+    
+    
+            var marker_dc3c0140ba5d925d7590bad0166807b0 = L.marker(
+                [6.015253889234196, 0.5372374543441113],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_b389377f22cba318b24add0af8108931 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_dc3c0140ba5d925d7590bad0166807b0.setIcon(icon_b389377f22cba318b24add0af8108931);
+        
+    
+        var popup_84ead51a1c9aa51948a3287c22645a72 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2839f6c53e8466fa201ca1cf8fa5d33c = $(`<div id="html_2839f6c53e8466fa201ca1cf8fa5d33c" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_84ead51a1c9aa51948a3287c22645a72.setContent(html_2839f6c53e8466fa201ca1cf8fa5d33c);
+            
+        
+
+        marker_dc3c0140ba5d925d7590bad0166807b0.bindPopup(popup_84ead51a1c9aa51948a3287c22645a72)
+        ;
+
+        
+    
+    
+            var marker_e52417a727b8138327980bb78fa9b611 = L.marker(
+                [6.014175911352252, 0.5525986468126545],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_81feb15787427febe403c978bd938d70 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e52417a727b8138327980bb78fa9b611.setIcon(icon_81feb15787427febe403c978bd938d70);
+        
+    
+        var popup_0e809401c6c60b8c308f9d03ab5a909b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_29a4a8486fb41e5559b04e0bac67d983 = $(`<div id="html_29a4a8486fb41e5559b04e0bac67d983" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_0e809401c6c60b8c308f9d03ab5a909b.setContent(html_29a4a8486fb41e5559b04e0bac67d983);
+            
+        
+
+        marker_e52417a727b8138327980bb78fa9b611.bindPopup(popup_0e809401c6c60b8c308f9d03ab5a909b)
+        ;
+
+        
+    
+    
+            var marker_2eaaac01da788aec2430330469611653 = L.marker(
+                [6.0112114725410155, 0.5542156148730909],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_da1e745d52a3c9c25de88785d1b54b74 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2eaaac01da788aec2430330469611653.setIcon(icon_da1e745d52a3c9c25de88785d1b54b74);
+        
+    
+        var popup_5a0d2e12469d9cd9fcbb36082a3615fe = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_063e81d736c6f324adc1986b134855e8 = $(`<div id="html_063e81d736c6f324adc1986b134855e8" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_5a0d2e12469d9cd9fcbb36082a3615fe.setContent(html_063e81d736c6f324adc1986b134855e8);
+            
+        
+
+        marker_2eaaac01da788aec2430330469611653.bindPopup(popup_5a0d2e12469d9cd9fcbb36082a3615fe)
+        ;
+
+        
+    
+    
+            var marker_9eabfb8467e49af343304497b39aa6c9 = L.marker(
+                [6.010588271488001, 0.5594707613022836],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_aa41b3be333d92c037a03ae2f8bf6cd7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9eabfb8467e49af343304497b39aa6c9.setIcon(icon_aa41b3be333d92c037a03ae2f8bf6cd7);
+        
+    
+        var popup_bf19d60c21c22f73bf12b6b051853348 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4b4e7eb1807aa959ac1e29662e39ad93 = $(`<div id="html_4b4e7eb1807aa959ac1e29662e39ad93" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_bf19d60c21c22f73bf12b6b051853348.setContent(html_4b4e7eb1807aa959ac1e29662e39ad93);
+            
+        
+
+        marker_9eabfb8467e49af343304497b39aa6c9.bindPopup(popup_bf19d60c21c22f73bf12b6b051853348)
+        ;
+
+        
+    
+    
+            var marker_0326c15f348d7e2bd88aacfd52ffbfec = L.marker(
+                [6.009491840863611, 0.5671513578511516],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_3a3d100e2fac07522f64bc5df013f0a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0326c15f348d7e2bd88aacfd52ffbfec.setIcon(icon_3a3d100e2fac07522f64bc5df013f0a7);
+        
+    
+        var popup_af4a95e5b39ed126011d056c0de48a56 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c90d6bf8e6a546b91f31ec94a75239ef = $(`<div id="html_c90d6bf8e6a546b91f31ec94a75239ef" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_af4a95e5b39ed126011d056c0de48a56.setContent(html_c90d6bf8e6a546b91f31ec94a75239ef);
+            
+        
+
+        marker_0326c15f348d7e2bd88aacfd52ffbfec.bindPopup(popup_af4a95e5b39ed126011d056c0de48a56)
+        ;
+
+        
+    
+    
+            var marker_ac6031554f44f3ac42dc663ec1d3cb20 = L.marker(
+                [6.0060658103500515, 0.5751014582141531],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_f50c30fdda0e41ccfbbf9aabcef01959 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ac6031554f44f3ac42dc663ec1d3cb20.setIcon(icon_f50c30fdda0e41ccfbbf9aabcef01959);
+        
+    
+        var popup_d5542133e4c1fe52eae00839f41c4785 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fe78a9fb6fc3d24e1b9d1bfab0c3e45b = $(`<div id="html_fe78a9fb6fc3d24e1b9d1bfab0c3e45b" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_d5542133e4c1fe52eae00839f41c4785.setContent(html_fe78a9fb6fc3d24e1b9d1bfab0c3e45b);
+            
+        
+
+        marker_ac6031554f44f3ac42dc663ec1d3cb20.bindPopup(popup_d5542133e4c1fe52eae00839f41c4785)
+        ;
+
+        
+    
+    
+            var marker_c5cbfda2f669585719ce6d586074a18e = L.marker(
+                [5.992885838834125, 0.5860159756783575],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_20563b800da48c8f05afe75b962a815c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c5cbfda2f669585719ce6d586074a18e.setIcon(icon_20563b800da48c8f05afe75b962a815c);
+        
+    
+        var popup_bb550f3c534749cf280fb2710ebb27fd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_98d60a3caf6502cee3401fd78e087e03 = $(`<div id="html_98d60a3caf6502cee3401fd78e087e03" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_bb550f3c534749cf280fb2710ebb27fd.setContent(html_98d60a3caf6502cee3401fd78e087e03);
+            
+        
+
+        marker_c5cbfda2f669585719ce6d586074a18e.bindPopup(popup_bb550f3c534749cf280fb2710ebb27fd)
+        ;
+
+        
+    
+    
+            var marker_3001025d5f685edf6f518b053255f9d0 = L.marker(
+                [5.988681719713676, 0.5894924725135515],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_a4ec0bf3db93635f360d991858f7e769 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3001025d5f685edf6f518b053255f9d0.setIcon(icon_a4ec0bf3db93635f360d991858f7e769);
+        
+    
+        var popup_bd1f3327e42bc2484b9d340e057167a6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d7ca25244ab3ec826f8e00c6b98c6efe = $(`<div id="html_d7ca25244ab3ec826f8e00c6b98c6efe" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_bd1f3327e42bc2484b9d340e057167a6.setContent(html_d7ca25244ab3ec826f8e00c6b98c6efe);
+            
+        
+
+        marker_3001025d5f685edf6f518b053255f9d0.bindPopup(popup_bd1f3327e42bc2484b9d340e057167a6)
+        ;
+
+        
+    
+    
+            var marker_b4df0c700ba3acd191101f60b29f3297 = L.marker(
+                [6.295472769209598, 0.06213436865590433],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_744b780a20234d03e52f0e6e6c6852f3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b4df0c700ba3acd191101f60b29f3297.setIcon(icon_744b780a20234d03e52f0e6e6c6852f3);
+        
+    
+        var popup_cebc0f2fa142137330111c20ea94f62b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ed22f5a2c2d468ed45676e399fac925b = $(`<div id="html_ed22f5a2c2d468ed45676e399fac925b" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_cebc0f2fa142137330111c20ea94f62b.setContent(html_ed22f5a2c2d468ed45676e399fac925b);
+            
+        
+
+        marker_b4df0c700ba3acd191101f60b29f3297.bindPopup(popup_cebc0f2fa142137330111c20ea94f62b)
+        ;
+
+        
+    
+    
+            var marker_6d05056f7e50a30a4417bdfe35f0fca7 = L.marker(
+                [5.984801002130781, 0.593831319278554],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_34dac0e07671dbc7b011359df9e58d6a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6d05056f7e50a30a4417bdfe35f0fca7.setIcon(icon_34dac0e07671dbc7b011359df9e58d6a);
+        
+    
+        var popup_ea0f9a627ecc97547011b621335c330e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_471918f7d959361675e392693e9526aa = $(`<div id="html_471918f7d959361675e392693e9526aa" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_ea0f9a627ecc97547011b621335c330e.setContent(html_471918f7d959361675e392693e9526aa);
+            
+        
+
+        marker_6d05056f7e50a30a4417bdfe35f0fca7.bindPopup(popup_ea0f9a627ecc97547011b621335c330e)
+        ;
+
+        
+    
+    
+            var marker_42b2f755af4ebc7975f97a31bcf79d5e = L.marker(
+                [5.972808492518532, 0.6046784760639311],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_5c528dcaf4da5125492745c33507bc88 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_42b2f755af4ebc7975f97a31bcf79d5e.setIcon(icon_5c528dcaf4da5125492745c33507bc88);
+        
+    
+        var popup_3201146e91275924e00d2196a617a589 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7d9971df3a66b107c60edfe011f65f74 = $(`<div id="html_7d9971df3a66b107c60edfe011f65f74" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_3201146e91275924e00d2196a617a589.setContent(html_7d9971df3a66b107c60edfe011f65f74);
+            
+        
+
+        marker_42b2f755af4ebc7975f97a31bcf79d5e.bindPopup(popup_3201146e91275924e00d2196a617a589)
+        ;
+
+        
+    
+    
+            var marker_caed95c8b3e110f8784f18b393cf15f9 = L.marker(
+                [5.971730513939543, 0.6055543332572844],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_bbfd2bef8a3b5b3aa01d4fc809777f8a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_caed95c8b3e110f8784f18b393cf15f9.setIcon(icon_bbfd2bef8a3b5b3aa01d4fc809777f8a);
+        
+    
+        var popup_e607b443603d6aae218b9029e7ca55d4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_da1cdaf582313db5c1c6792b1b6d91ed = $(`<div id="html_da1cdaf582313db5c1c6792b1b6d91ed" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_e607b443603d6aae218b9029e7ca55d4.setContent(html_da1cdaf582313db5c1c6792b1b6d91ed);
+            
+        
+
+        marker_caed95c8b3e110f8784f18b393cf15f9.bindPopup(popup_e607b443603d6aae218b9029e7ca55d4)
+        ;
+
+        
+    
+    
+            var marker_f31980a357302baa4adfe6b9ed115601 = L.marker(
+                [6.282592519020136, 0.06077102941435005],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_aa99cf0dbc48e4d6bbab59bfa2ea7ca2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f31980a357302baa4adfe6b9ed115601.setIcon(icon_aa99cf0dbc48e4d6bbab59bfa2ea7ca2);
+        
+    
+        var popup_77a4a1073243c33dc585436d7668c996 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8d293ab1dfb9c6cb85b2ba8493b58a96 = $(`<div id="html_8d293ab1dfb9c6cb85b2ba8493b58a96" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_77a4a1073243c33dc585436d7668c996.setContent(html_8d293ab1dfb9c6cb85b2ba8493b58a96);
+            
+        
+
+        marker_f31980a357302baa4adfe6b9ed115601.bindPopup(popup_77a4a1073243c33dc585436d7668c996)
+        ;
+
+        
+    
+    
+            var marker_177b407a58e80a8ced5839d0d1cbcfa6 = L.marker(
+                [6.284478980855268, 0.061040523737491054],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_d762d70192121ef09f3e99eaddadd301 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_177b407a58e80a8ced5839d0d1cbcfa6.setIcon(icon_d762d70192121ef09f3e99eaddadd301);
+        
+    
+        var popup_ff67969b35fbe25f15d4056cffe3d533 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f94a8b867d31077ff8a1088b2a585aad = $(`<div id="html_f94a8b867d31077ff8a1088b2a585aad" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_ff67969b35fbe25f15d4056cffe3d533.setContent(html_f94a8b867d31077ff8a1088b2a585aad);
+            
+        
+
+        marker_177b407a58e80a8ced5839d0d1cbcfa6.bindPopup(popup_ff67969b35fbe25f15d4056cffe3d533)
+        ;
+
+        
+    
+    
+            var marker_05934ccf5a86957b3a427cbf2c60558e = L.marker(
+                [6.281514539875857, 0.06139984980664249],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_74bb27523f0911344a56bfab85d966fb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_05934ccf5a86957b3a427cbf2c60558e.setIcon(icon_74bb27523f0911344a56bfab85d966fb);
+        
+    
+        var popup_a3ce5a178585e0a3c9d7965e9f8586e3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e1a1db52d47fe4bbe8c08e27c0c51966 = $(`<div id="html_e1a1db52d47fe4bbe8c08e27c0c51966" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_a3ce5a178585e0a3c9d7965e9f8586e3.setContent(html_e1a1db52d47fe4bbe8c08e27c0c51966);
+            
+        
+
+        marker_05934ccf5a86957b3a427cbf2c60558e.bindPopup(popup_a3ce5a178585e0a3c9d7965e9f8586e3)
+        ;
+
+        
+    
+    
+            var marker_dac17c1b3f9be3aac85e35e8e0a8002b = L.marker(
+                [5.965666885854465, 0.6129654358023369],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_71731be99dc497d553f904c0262b6132 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_dac17c1b3f9be3aac85e35e8e0a8002b.setIcon(icon_71731be99dc497d553f904c0262b6132);
+        
+    
+        var popup_9f00cb61d0fbbd5f1186831325fcb245 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_595f8af9eb4c62397bbd1ebc12c56fc0 = $(`<div id="html_595f8af9eb4c62397bbd1ebc12c56fc0" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_9f00cb61d0fbbd5f1186831325fcb245.setContent(html_595f8af9eb4c62397bbd1ebc12c56fc0);
+            
+        
+
+        marker_dac17c1b3f9be3aac85e35e8e0a8002b.bindPopup(popup_9f00cb61d0fbbd5f1186831325fcb245)
+        ;
+
+        
+    
+    
+            var marker_60e96f527c73a8d08f1ba17309bfc3f6 = L.marker(
+                [5.964049918130763, 0.6143129075831283],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_3aae153c437b8db031b31660841afebc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_60e96f527c73a8d08f1ba17309bfc3f6.setIcon(icon_3aae153c437b8db031b31660841afebc);
+        
+    
+        var popup_d111050d6980bb06368a9a89ca0a4992 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3c8b031dc385c945ca92e7f1ad53eb35 = $(`<div id="html_3c8b031dc385c945ca92e7f1ad53eb35" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_d111050d6980bb06368a9a89ca0a4992.setContent(html_3c8b031dc385c945ca92e7f1ad53eb35);
+            
+        
+
+        marker_60e96f527c73a8d08f1ba17309bfc3f6.bindPopup(popup_d111050d6980bb06368a9a89ca0a4992)
+        ;
+
+        
+    
+    
+            var marker_e8d103d8d53192a2e276f10da6094fa3 = L.marker(
+                [5.963241434324501, 0.6151213913789604],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_798eb0850d22481dd3d5a9dab5d9dcd0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e8d103d8d53192a2e276f10da6094fa3.setIcon(icon_798eb0850d22481dd3d5a9dab5d9dcd0);
+        
+    
+        var popup_f6a5532036e53cef973936069a172687 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c79b9d1b44a3cb5d58f2c3bf6903b150 = $(`<div id="html_c79b9d1b44a3cb5d58f2c3bf6903b150" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_f6a5532036e53cef973936069a172687.setContent(html_c79b9d1b44a3cb5d58f2c3bf6903b150);
+            
+        
+
+        marker_e8d103d8d53192a2e276f10da6094fa3.bindPopup(popup_f6a5532036e53cef973936069a172687)
+        ;
+
+        
+    
+    
+            var marker_258680f7d621051bc02e5cc051605341 = L.marker(
+                [5.9617592142295095, 0.6161993700659694],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_71b3eb7c687984d6290349dab2999436 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_258680f7d621051bc02e5cc051605341.setIcon(icon_71b3eb7c687984d6290349dab2999436);
+        
+    
+        var popup_ccf7c14d5cd3a42bc70a4dec792b2d65 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9f468d620db20ce7739247a9d0568ab1 = $(`<div id="html_9f468d620db20ce7739247a9d0568ab1" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_ccf7c14d5cd3a42bc70a4dec792b2d65.setContent(html_9f468d620db20ce7739247a9d0568ab1);
+            
+        
+
+        marker_258680f7d621051bc02e5cc051605341.bindPopup(popup_ccf7c14d5cd3a42bc70a4dec792b2d65)
+        ;
+
+        
+    
+    
+            var marker_6b2f4cc9d0902acef98028e50d5bdfd4 = L.marker(
+                [5.952731144842404, 0.6213197656616608],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_d5b27dc18abd6a8528fa7db9c429e04e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6b2f4cc9d0902acef98028e50d5bdfd4.setIcon(icon_d5b27dc18abd6a8528fa7db9c429e04e);
+        
+    
+        var popup_6e33df987e3eeb2473c0f4e378a5057b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_748bacb0576f85a1fdc8bef34de154ee = $(`<div id="html_748bacb0576f85a1fdc8bef34de154ee" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_6e33df987e3eeb2473c0f4e378a5057b.setContent(html_748bacb0576f85a1fdc8bef34de154ee);
+            
+        
+
+        marker_6b2f4cc9d0902acef98028e50d5bdfd4.bindPopup(popup_6e33df987e3eeb2473c0f4e378a5057b)
+        ;
+
+        
+    
+    
+            var marker_b9e881dcadafd3ac8d7403c18c06d786 = L.marker(
+                [5.947745488703202, 0.6238799734707045],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_56888cc30703aba75a3148c2d2456286 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b9e881dcadafd3ac8d7403c18c06d786.setIcon(icon_56888cc30703aba75a3148c2d2456286);
+        
+    
+        var popup_faa6696c36b0953857dc687bf45eb33d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_41068b6805adea20f08cc14495d84fc8 = $(`<div id="html_41068b6805adea20f08cc14495d84fc8" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_faa6696c36b0953857dc687bf45eb33d.setContent(html_41068b6805adea20f08cc14495d84fc8);
+            
+        
+
+        marker_b9e881dcadafd3ac8d7403c18c06d786.bindPopup(popup_faa6696c36b0953857dc687bf45eb33d)
+        ;
+
+        
+    
+    
+            var marker_aaa60a5ea1993c4a374dea458797959b = L.marker(
+                [5.929689351506555, 0.6325038002200072],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_390a3eeec70fb477444f46ebe63f6a20 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_aaa60a5ea1993c4a374dea458797959b.setIcon(icon_390a3eeec70fb477444f46ebe63f6a20);
+        
+    
+        var popup_dccaa9bdc2bb590c47dccffd960f61ee = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_676c8ba35d28c9f216015784c71e40bb = $(`<div id="html_676c8ba35d28c9f216015784c71e40bb" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_dccaa9bdc2bb590c47dccffd960f61ee.setContent(html_676c8ba35d28c9f216015784c71e40bb);
+            
+        
+
+        marker_aaa60a5ea1993c4a374dea458797959b.bindPopup(popup_dccaa9bdc2bb590c47dccffd960f61ee)
+        ;
+
+        
+    
+    
+            var marker_f351a9692f12eec500ab55fbd7bf35f4 = L.marker(
+                [6.290407860598566, 0.06346597468174711],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_81f622f6828e53e57912ed8ed849e01e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f351a9692f12eec500ab55fbd7bf35f4.setIcon(icon_81f622f6828e53e57912ed8ed849e01e);
+        
+    
+        var popup_961d91aef536ea118977d02d02372862 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_559389bc88f5eaf5620ce2285254bc77 = $(`<div id="html_559389bc88f5eaf5620ce2285254bc77" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_961d91aef536ea118977d02d02372862.setContent(html_559389bc88f5eaf5620ce2285254bc77);
+            
+        
+
+        marker_f351a9692f12eec500ab55fbd7bf35f4.bindPopup(popup_961d91aef536ea118977d02d02372862)
+        ;
+
+        
+    
+    
+            var marker_22a93499bbff59432557df4626c7f81b = L.marker(
+                [5.821731828588191, 0.6462052720287548],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_98710fc7fc9f5b9021154f5a68e330ca = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_22a93499bbff59432557df4626c7f81b.setIcon(icon_98710fc7fc9f5b9021154f5a68e330ca);
+        
+    
+        var popup_efd62bae869de65c33d17b2e243e98c2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a228adf07db6a143435088046b79465 = $(`<div id="html_0a228adf07db6a143435088046b79465" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_efd62bae869de65c33d17b2e243e98c2.setContent(html_0a228adf07db6a143435088046b79465);
+            
+        
+
+        marker_22a93499bbff59432557df4626c7f81b.bindPopup(popup_efd62bae869de65c33d17b2e243e98c2)
+        ;
+
+        
+    
+    
+            var marker_c0d729ab6de02eb872cdd1d1f2b8e2e3 = L.marker(
+                [5.84183412409104, 0.6374894417560957],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_38ee80e114ac6a1bae11a5eea4701b89 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c0d729ab6de02eb872cdd1d1f2b8e2e3.setIcon(icon_38ee80e114ac6a1bae11a5eea4701b89);
+        
+    
+        var popup_a8f957a4921b570c94251a38d85eca48 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6846c889c7a79e936708f948f93c519c = $(`<div id="html_6846c889c7a79e936708f948f93c519c" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_a8f957a4921b570c94251a38d85eca48.setContent(html_6846c889c7a79e936708f948f93c519c);
+            
+        
+
+        marker_c0d729ab6de02eb872cdd1d1f2b8e2e3.bindPopup(popup_a8f957a4921b570c94251a38d85eca48)
+        ;
+
+        
+    
+    
+            var marker_add8b45996a4d8baac17c755361dc4bd = L.marker(
+                [5.846819773660744, 0.6382979250266436],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_6291f146880c64eac3104e0ac2a2dbae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_add8b45996a4d8baac17c755361dc4bd.setIcon(icon_6291f146880c64eac3104e0ac2a2dbae);
+        
+    
+        var popup_e8d05f065e55909adf0924c8e2ca8e9f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c29c9056e280b8da532124da90285ae7 = $(`<div id="html_c29c9056e280b8da532124da90285ae7" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_e8d05f065e55909adf0924c8e2ca8e9f.setContent(html_c29c9056e280b8da532124da90285ae7);
+            
+        
+
+        marker_add8b45996a4d8baac17c755361dc4bd.bindPopup(popup_e8d05f065e55909adf0924c8e2ca8e9f)
+        ;
+
+        
+    
+    
+            var marker_4b62f680b1ef882cb38cf19fd6c23654 = L.marker(
+                [6.2789094251757795, 0.06427445896518309],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_0945484a041ff4ee87b38bf9aef2b01e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4b62f680b1ef882cb38cf19fd6c23654.setIcon(icon_0945484a041ff4ee87b38bf9aef2b01e);
+        
+    
+        var popup_4626091fb2a1cd620142eb820d946ddc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_96aebed6aed202033282c31fb1040543 = $(`<div id="html_96aebed6aed202033282c31fb1040543" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_4626091fb2a1cd620142eb820d946ddc.setContent(html_96aebed6aed202033282c31fb1040543);
+            
+        
+
+        marker_4b62f680b1ef882cb38cf19fd6c23654.bindPopup(popup_4626091fb2a1cd620142eb820d946ddc)
+        ;
+
+        
+    
+    
+            var marker_93b9f6c3603e03f0762712c64c0e2543 = L.marker(
+                [6.290946850531633, 0.06400496463537773],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_92ca5c2ee56b575aaefeff4114d1fad1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_93b9f6c3603e03f0762712c64c0e2543.setIcon(icon_92ca5c2ee56b575aaefeff4114d1fad1);
+        
+    
+        var popup_ad3126f0c280da9d9874e49941c2b4e4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f395b5f7790dd0daa63f96881cac9720 = $(`<div id="html_f395b5f7790dd0daa63f96881cac9720" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_ad3126f0c280da9d9874e49941c2b4e4.setContent(html_f395b5f7790dd0daa63f96881cac9720);
+            
+        
+
+        marker_93b9f6c3603e03f0762712c64c0e2543.bindPopup(popup_ad3126f0c280da9d9874e49941c2b4e4)
+        ;
+
+        
+    
+    
+            var marker_49368993fcc81d25e28af0d0301cc917 = L.marker(
+                [5.919044323326507, 0.6391064084758626],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_ab9ae993376605a2271cd2e0abb21bdc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_49368993fcc81d25e28af0d0301cc917.setIcon(icon_ab9ae993376605a2271cd2e0abb21bdc);
+        
+    
+        var popup_a860ab407d44d37ec469fe880d814543 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d9044e7ab7f775b330f6bf4b6dc9cf32 = $(`<div id="html_d9044e7ab7f775b330f6bf4b6dc9cf32" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_a860ab407d44d37ec469fe880d814543.setContent(html_d9044e7ab7f775b330f6bf4b6dc9cf32);
+            
+        
+
+        marker_49368993fcc81d25e28af0d0301cc917.bindPopup(popup_a860ab407d44d37ec469fe880d814543)
+        ;
+
+        
+    
+    
+            var marker_8304d8b5d417c81522cd6d6e510a4f14 = L.marker(
+                [5.908938219996713, 0.6411164075114353],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_b89c4aa88a4189c69b9bf3be3e5224d6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8304d8b5d417c81522cd6d6e510a4f14.setIcon(icon_b89c4aa88a4189c69b9bf3be3e5224d6);
+        
+    
+        var popup_2179ef392f6140f270e42d6af8151e6e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_92314c9370925e37966083714b4f5697 = $(`<div id="html_92314c9370925e37966083714b4f5697" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_2179ef392f6140f270e42d6af8151e6e.setContent(html_92314c9370925e37966083714b4f5697);
+            
+        
+
+        marker_8304d8b5d417c81522cd6d6e510a4f14.bindPopup(popup_2179ef392f6140f270e42d6af8151e6e)
+        ;
+
+        
+    
+    
+            var marker_b56c5fc5203bc75bc999b89872618993 = L.marker(
+                [5.852748655060752, 0.6426098383125618],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_70a81a5bc5587074163ea1f93d358348 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b56c5fc5203bc75bc999b89872618993.setIcon(icon_70a81a5bc5587074163ea1f93d358348);
+        
+    
+        var popup_281c92c9e25317d0dea74e9f55726313 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_165cdc8414e88e1c4edb39ab415ae132 = $(`<div id="html_165cdc8414e88e1c4edb39ab415ae132" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_281c92c9e25317d0dea74e9f55726313.setContent(html_165cdc8414e88e1c4edb39ab415ae132);
+            
+        
+
+        marker_b56c5fc5203bc75bc999b89872618993.bindPopup(popup_281c92c9e25317d0dea74e9f55726313)
+        ;
+
+        
+    
+    
+            var marker_0e60e4fcc660a3eac09946343162d08b = L.marker(
+                [5.854500369326292, 0.6438225641279677],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_7b6f46bc76ce196943dd4738a879ec03 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0e60e4fcc660a3eac09946343162d08b.setIcon(icon_7b6f46bc76ce196943dd4738a879ec03);
+        
+    
+        var popup_8b3e6217be7ad956b34bebf61a005955 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ce53a83812b6ed5da6921a16e54d70b9 = $(`<div id="html_ce53a83812b6ed5da6921a16e54d70b9" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_8b3e6217be7ad956b34bebf61a005955.setContent(html_ce53a83812b6ed5da6921a16e54d70b9);
+            
+        
+
+        marker_0e60e4fcc660a3eac09946343162d08b.bindPopup(popup_8b3e6217be7ad956b34bebf61a005955)
+        ;
+
+        
+    
+    
+            var marker_2cb58207ee884dd0c6f66ba7151fb246 = L.marker(
+                [5.893981324719614, 0.6447865267250416],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_de5214da4c80be9084a3f25dc09381f2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2cb58207ee884dd0c6f66ba7151fb246.setIcon(icon_de5214da4c80be9084a3f25dc09381f2);
+        
+    
+        var popup_aad6808907f93beb196a854b17acfa1b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1fa6ad4af94e8e9a2a50baaf6afa3ee2 = $(`<div id="html_1fa6ad4af94e8e9a2a50baaf6afa3ee2" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_aad6808907f93beb196a854b17acfa1b.setContent(html_1fa6ad4af94e8e9a2a50baaf6afa3ee2);
+            
+        
+
+        marker_2cb58207ee884dd0c6f66ba7151fb246.bindPopup(popup_aad6808907f93beb196a854b17acfa1b)
+        ;
+
+        
+    
+    
+            var marker_9d001ce8ea18a0ac881f76d890df9717 = L.marker(
+                [5.883201500829375, 0.6482692390454293],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_ac5da70a86cda56ec431805cbe5b6b49 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9d001ce8ea18a0ac881f76d890df9717.setIcon(icon_ac5da70a86cda56ec431805cbe5b6b49);
+        
+    
+        var popup_3524da8c9682167396180e6382d6d98d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b4024e43c48cdf942dbb1863658977a6 = $(`<div id="html_b4024e43c48cdf942dbb1863658977a6" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_3524da8c9682167396180e6382d6d98d.setContent(html_b4024e43c48cdf942dbb1863658977a6);
+            
+        
+
+        marker_9d001ce8ea18a0ac881f76d890df9717.bindPopup(popup_3524da8c9682167396180e6382d6d98d)
+        ;
+
+        
+    
+    
+            var marker_e37675ec6d2318e279ca1264b4b10ddc = L.marker(
+                [6.278550098640046, 0.06562193196164132],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_6a0c365541909c98fd45d0e4f6b3227f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e37675ec6d2318e279ca1264b4b10ddc.setIcon(icon_6a0c365541909c98fd45d0e4f6b3227f);
+        
+    
+        var popup_e7792c41588c20b728e7cc088ca52619 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_23273106ece7c36aa95ec9d362550001 = $(`<div id="html_23273106ece7c36aa95ec9d362550001" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_e7792c41588c20b728e7cc088ca52619.setContent(html_23273106ece7c36aa95ec9d362550001);
+            
+        
+
+        marker_e37675ec6d2318e279ca1264b4b10ddc.bindPopup(popup_e7792c41588c20b728e7cc088ca52619)
+        ;
+
+        
+    
+    
+            var marker_7ef908c7d36920d556ac0880384057bf = L.marker(
+                [5.803565893110641, 0.6612049640875175],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_08a1678c448a0ce404827cb1668607a9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7ef908c7d36920d556ac0880384057bf.setIcon(icon_08a1678c448a0ce404827cb1668607a9);
+        
+    
+        var popup_625ee5e8cff244d336e9bb04060e2ac7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_edb23e8ef02983f98de730098704ac6e = $(`<div id="html_edb23e8ef02983f98de730098704ac6e" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_625ee5e8cff244d336e9bb04060e2ac7.setContent(html_edb23e8ef02983f98de730098704ac6e);
+            
+        
+
+        marker_7ef908c7d36920d556ac0880384057bf.bindPopup(popup_625ee5e8cff244d336e9bb04060e2ac7)
+        ;
+
+        
+    
+    
+            var marker_eca8c92e62d062f4ad306e33172e3368 = L.marker(
+                [5.801005693468967, 0.6627729347896126],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_ae47a96230469db514d40f5df8d807e2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_eca8c92e62d062f4ad306e33172e3368.setIcon(icon_ae47a96230469db514d40f5df8d807e2);
+        
+    
+        var popup_ceebb546a0b805f5694457412b97c12f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_152bade3e0f2864c1845bf168911b3de = $(`<div id="html_152bade3e0f2864c1845bf168911b3de" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_ceebb546a0b805f5694457412b97c12f.setContent(html_152bade3e0f2864c1845bf168911b3de);
+            
+        
+
+        marker_eca8c92e62d062f4ad306e33172e3368.bindPopup(popup_ceebb546a0b805f5694457412b97c12f)
+        ;
+
+        
+    
+    
+            var marker_2ba3482a5f34c371ab6f5c24cf198460 = L.marker(
+                [5.790225877754084, 0.6692989688380147],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_5b8350c8c96d4f20e785d3c28c2441ad = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2ba3482a5f34c371ab6f5c24cf198460.setIcon(icon_5b8350c8c96d4f20e785d3c28c2441ad);
+        
+    
+        var popup_024a51035e49b0d3018ec061dac93490 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0d33ea5f69cdeb0aaf88c02bc250beff = $(`<div id="html_0d33ea5f69cdeb0aaf88c02bc250beff" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_024a51035e49b0d3018ec061dac93490.setContent(html_0d33ea5f69cdeb0aaf88c02bc250beff);
+            
+        
+
+        marker_2ba3482a5f34c371ab6f5c24cf198460.bindPopup(popup_024a51035e49b0d3018ec061dac93490)
+        ;
+
+        
+    
+    
+            var marker_c028397d718ffa4426350947853a6eb9 = L.marker(
+                [5.777424912844221, 0.670176894591281],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_50c84f3405177e28592fe47431ba04e4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c028397d718ffa4426350947853a6eb9.setIcon(icon_50c84f3405177e28592fe47431ba04e4);
+        
+    
+        var popup_ead7ebb80a48f5d633ca3ed86868fbb7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3435ce44e73d383535f9dac0a0e15f90 = $(`<div id="html_3435ce44e73d383535f9dac0a0e15f90" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_ead7ebb80a48f5d633ca3ed86868fbb7.setContent(html_3435ce44e73d383535f9dac0a0e15f90);
+            
+        
+
+        marker_c028397d718ffa4426350947853a6eb9.bindPopup(popup_ead7ebb80a48f5d633ca3ed86868fbb7)
+        ;
+
+        
+    
+    
+            var marker_7d7fc6bd9a3db81b0952ea73ec2ab8b0 = L.marker(
+                [6.271812734865019, 0.07559323118459553],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_70eea32786174e4c50c05efc73099e35 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7d7fc6bd9a3db81b0952ea73ec2ab8b0.setIcon(icon_70eea32786174e4c50c05efc73099e35);
+        
+    
+        var popup_f23ad85455668a03352d41f1b3c49219 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2065b3a9f64fc29e763951fed76b78b8 = $(`<div id="html_2065b3a9f64fc29e763951fed76b78b8" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_f23ad85455668a03352d41f1b3c49219.setContent(html_2065b3a9f64fc29e763951fed76b78b8);
+            
+        
+
+        marker_7d7fc6bd9a3db81b0952ea73ec2ab8b0.bindPopup(popup_f23ad85455668a03352d41f1b3c49219)
+        ;
+
+        
+    
+    
+            var marker_1d85a3d2036b4c5f71d0bd3763474ca9 = L.marker(
+                [6.1648233838085025, 0.07643165965099354],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_c526ec5225222152b0b7c7a1d4ae239f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1d85a3d2036b4c5f71d0bd3763474ca9.setIcon(icon_c526ec5225222152b0b7c7a1d4ae239f);
+        
+    
+        var popup_9e83c758a950ba14b0b264520df93605 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bdfecec3074b0938a69e2dc9b5c5fb74 = $(`<div id="html_bdfecec3074b0938a69e2dc9b5c5fb74" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_9e83c758a950ba14b0b264520df93605.setContent(html_bdfecec3074b0938a69e2dc9b5c5fb74);
+            
+        
+
+        marker_1d85a3d2036b4c5f71d0bd3763474ca9.bindPopup(popup_9e83c758a950ba14b0b264520df93605)
+        ;
+
+        
+    
+    
+            var marker_df10b55a7277ba16a7a91a8bb9ddf842 = L.marker(
+                [6.271543239783371, 0.07667120976818864],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_938d3c8e4626bea7fdbe8298bc23a103 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_df10b55a7277ba16a7a91a8bb9ddf842.setIcon(icon_938d3c8e4626bea7fdbe8298bc23a103);
+        
+    
+        var popup_a060258b20024723c9f3788624097033 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e77936cb4a3a8f97aec874f452d69361 = $(`<div id="html_e77936cb4a3a8f97aec874f452d69361" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_a060258b20024723c9f3788624097033.setContent(html_e77936cb4a3a8f97aec874f452d69361);
+            
+        
+
+        marker_df10b55a7277ba16a7a91a8bb9ddf842.bindPopup(popup_a060258b20024723c9f3788624097033)
+        ;
+
+        
+    
+    
+            var marker_15e92a99873fb5c389c101682122f113 = L.marker(
+                [6.271273747060803, 0.07801868239297251],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_daf30dba92d8f0023e1a3df537b06697 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_15e92a99873fb5c389c101682122f113.setIcon(icon_daf30dba92d8f0023e1a3df537b06697);
+        
+    
+        var popup_0baa5b1fdcc8de0188b27c86b2b3e060 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8a45a02db6aa3a8244b104259669bca9 = $(`<div id="html_8a45a02db6aa3a8244b104259669bca9" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_0baa5b1fdcc8de0188b27c86b2b3e060.setContent(html_8a45a02db6aa3a8244b104259669bca9);
+            
+        
+
+        marker_15e92a99873fb5c389c101682122f113.bindPopup(popup_0baa5b1fdcc8de0188b27c86b2b3e060)
+        ;
+
+        
+    
+    
+            var marker_949b87a143798983f08d922481d7ade1 = L.marker(
+                [6.155121580651996, 0.07936615603777109],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_cd67894f21891cbe929dff6e2c09c4de = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_949b87a143798983f08d922481d7ade1.setIcon(icon_cd67894f21891cbe929dff6e2c09c4de);
+        
+    
+        var popup_862f28a6954615d55dad7db9e719e3d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0ae12c666e46936ea8a3af56a63261d0 = $(`<div id="html_0ae12c666e46936ea8a3af56a63261d0" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_862f28a6954615d55dad7db9e719e3d5.setContent(html_0ae12c666e46936ea8a3af56a63261d0);
+            
+        
+
+        marker_949b87a143798983f08d922481d7ade1.bindPopup(popup_862f28a6954615d55dad7db9e719e3d5)
+        ;
+
+        
+    
+    
+            var marker_1f5f3de1e131c61554afba4dfca08595 = L.marker(
+                [6.271004251916785, 0.08017464004099652],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_e4b2d06055a92366f09836ac38a67d5e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1f5f3de1e131c61554afba4dfca08595.setIcon(icon_e4b2d06055a92366f09836ac38a67d5e);
+        
+    
+        var popup_ce0e807d5256cb5cb19b789620b1c02e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_de9ace569d11767df04b8f25f66513b6 = $(`<div id="html_de9ace569d11767df04b8f25f66513b6" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_ce0e807d5256cb5cb19b789620b1c02e.setContent(html_de9ace569d11767df04b8f25f66513b6);
+            
+        
+
+        marker_1f5f3de1e131c61554afba4dfca08595.bindPopup(popup_ce0e807d5256cb5cb19b789620b1c02e)
+        ;
+
+        
+    
+    
+            var marker_bf6837ecfdc91d400059cc07cd4206cf = L.marker(
+                [6.177220135107636, 0.08574419292867767],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_2084a1a18121786b5e2112fa3858a8f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bf6837ecfdc91d400059cc07cd4206cf.setIcon(icon_2084a1a18121786b5e2112fa3858a8f0);
+        
+    
+        var popup_782dc98669e6fd1070ab59afb5af59ab = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_665e61976b0eae4c569e23080e0ac549 = $(`<div id="html_665e61976b0eae4c569e23080e0ac549" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_782dc98669e6fd1070ab59afb5af59ab.setContent(html_665e61976b0eae4c569e23080e0ac549);
+            
+        
+
+        marker_bf6837ecfdc91d400059cc07cd4206cf.bindPopup(popup_782dc98669e6fd1070ab59afb5af59ab)
+        ;
+
+        
+    
+    
+            var marker_632ac930964d296365e456088d1c0e5e = L.marker(
+                [6.181666788098376, 0.08782635231553737],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_e25fb873e1ae7d240082e3a125670061 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_632ac930964d296365e456088d1c0e5e.setIcon(icon_e25fb873e1ae7d240082e3a125670061);
+        
+    
+        var popup_c0ea18413ee191f0ba2136d504cf3300 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_115c40a428b865ab45740555de789ff9 = $(`<div id="html_115c40a428b865ab45740555de789ff9" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_c0ea18413ee191f0ba2136d504cf3300.setContent(html_115c40a428b865ab45740555de789ff9);
+            
+        
+
+        marker_632ac930964d296365e456088d1c0e5e.bindPopup(popup_c0ea18413ee191f0ba2136d504cf3300)
+        ;
+
+        
+    
+    
+            var marker_f1f8a6d2f5bd357281fb8b457fe1e12a = L.marker(
+                [6.186113456498916, 0.08987644521906718],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_96847a25620af1e02a5ef6e60d6bc550 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f1f8a6d2f5bd357281fb8b457fe1e12a.setIcon(icon_96847a25620af1e02a5ef6e60d6bc550);
+        
+    
+        var popup_150ce622856f2c9a6a731fe11ae361b8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_19a1e56afe5e963732a408204e86f1a2 = $(`<div id="html_19a1e56afe5e963732a408204e86f1a2" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_150ce622856f2c9a6a731fe11ae361b8.setContent(html_19a1e56afe5e963732a408204e86f1a2);
+            
+        
+
+        marker_f1f8a6d2f5bd357281fb8b457fe1e12a.bindPopup(popup_150ce622856f2c9a6a731fe11ae361b8)
+        ;
+
+        
+    
+    
+            var marker_134200d77bb4bfd887d17951b649178b = L.marker(
+                [6.187730424169804, 0.09059509584467361],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_839d19253a36f5a3728de5406b102f5a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_134200d77bb4bfd887d17951b649178b.setIcon(icon_839d19253a36f5a3728de5406b102f5a);
+        
+    
+        var popup_954f03713f041e0dd2ab01184cdee09c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b3ecf44c20f0bd127c8491b3632ef9b7 = $(`<div id="html_b3ecf44c20f0bd127c8491b3632ef9b7" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_954f03713f041e0dd2ab01184cdee09c.setContent(html_b3ecf44c20f0bd127c8491b3632ef9b7);
+            
+        
+
+        marker_134200d77bb4bfd887d17951b649178b.bindPopup(popup_954f03713f041e0dd2ab01184cdee09c)
+        ;
+
+        
+    
+    
+            var marker_7ac80b5e0c58d588487bac08e6754991 = L.marker(
+                [6.252139591117853, 0.09266276387457559],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_9a76f2b8540ccd61bb7513a1632bd447 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7ac80b5e0c58d588487bac08e6754991.setIcon(icon_9a76f2b8540ccd61bb7513a1632bd447);
+        
+    
+        var popup_07fe10c7420e27f05e0ee396d405e633 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b240f77934559d9dfe154a73d42f2eaf = $(`<div id="html_b240f77934559d9dfe154a73d42f2eaf" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_07fe10c7420e27f05e0ee396d405e633.setContent(html_b240f77934559d9dfe154a73d42f2eaf);
+            
+        
+
+        marker_7ac80b5e0c58d588487bac08e6754991.bindPopup(popup_07fe10c7420e27f05e0ee396d405e633)
+        ;
+
+        
+    
+    
+            var marker_0d1a40411e00137f20aa62b95eaf0cc0 = L.marker(
+                [6.190021126880002, 0.09158324171051146],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_9734303b6352ae8780ac6992dc68f202 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0d1a40411e00137f20aa62b95eaf0cc0.setIcon(icon_9734303b6352ae8780ac6992dc68f202);
+        
+    
+        var popup_bb78a48a7d3d1078726b4fbea931da6f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6bb79bccd48d5e0644197f74a8d180d2 = $(`<div id="html_6bb79bccd48d5e0644197f74a8d180d2" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_bb78a48a7d3d1078726b4fbea931da6f.setContent(html_6bb79bccd48d5e0644197f74a8d180d2);
+            
+        
+
+        marker_0d1a40411e00137f20aa62b95eaf0cc0.bindPopup(popup_bb78a48a7d3d1078726b4fbea931da6f)
+        ;
+
+        
+    
+    
+            var marker_8a4d79021f473152a6d8a05f4bc29cbb = L.marker(
+                [6.1941982938907705, 0.09346970529596894],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_4ee3f757d03b3f36108777c97db5ef69 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8a4d79021f473152a6d8a05f4bc29cbb.setIcon(icon_4ee3f757d03b3f36108777c97db5ef69);
+        
+    
+        var popup_85636861d2f7166f1571aef945f28a95 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_771e90cc736286bd8b736ee772a9b2d8 = $(`<div id="html_771e90cc736286bd8b736ee772a9b2d8" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_85636861d2f7166f1571aef945f28a95.setContent(html_771e90cc736286bd8b736ee772a9b2d8);
+            
+        
+
+        marker_8a4d79021f473152a6d8a05f4bc29cbb.bindPopup(popup_85636861d2f7166f1571aef945f28a95)
+        ;
+
+        
+    
+    
+            var marker_5fc8050acda8c14138d71c4c788afcaf = L.marker(
+                [6.237586922387232, 0.09634431529381676],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_067b0270ce80f6c92a02ef75767d2d37 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5fc8050acda8c14138d71c4c788afcaf.setIcon(icon_067b0270ce80f6c92a02ef75767d2d37);
+        
+    
+        var popup_004b8a8bb9ad0cf31151a342abc06039 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e16591d1c7426de2b0e7d1d36bb18d62 = $(`<div id="html_e16591d1c7426de2b0e7d1d36bb18d62" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_004b8a8bb9ad0cf31151a342abc06039.setContent(html_e16591d1c7426de2b0e7d1d36bb18d62);
+            
+        
+
+        marker_5fc8050acda8c14138d71c4c788afcaf.bindPopup(popup_004b8a8bb9ad0cf31151a342abc06039)
+        ;
+
+        
+    
+    
+            var marker_c960afbcd155b92a3f7dcbb4e9f34f00 = L.marker(
+                [6.23650894377447, 0.0968833045901967],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_c90af07ba48070d800d510dff852a7f4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c960afbcd155b92a3f7dcbb4e9f34f00.setIcon(icon_c90af07ba48070d800d510dff852a7f4);
+        
+    
+        var popup_218d836eb26d3a6a433e38cc91d4d9a6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_51097cb74458c58514ed7a35cb18f1b3 = $(`<div id="html_51097cb74458c58514ed7a35cb18f1b3" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_218d836eb26d3a6a433e38cc91d4d9a6.setContent(html_51097cb74458c58514ed7a35cb18f1b3);
+            
+        
+
+        marker_c960afbcd155b92a3f7dcbb4e9f34f00.bindPopup(popup_218d836eb26d3a6a433e38cc91d4d9a6)
+        ;
+
+        
+    
+    
+            var marker_29bddd731882248e95ced174ed3ce857 = L.marker(
+                [6.235835207386802, 0.09715279726600518],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_78a1e5fa8b1b33cff2c95837e6ef2ccd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_29bddd731882248e95ced174ed3ce857.setIcon(icon_78a1e5fa8b1b33cff2c95837e6ef2ccd);
+        
+    
+        var popup_c144253337d1754b279b954a6b4b3c21 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_84ec29c758d788e101d8e158021b9a19 = $(`<div id="html_84ec29c758d788e101d8e158021b9a19" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_c144253337d1754b279b954a6b4b3c21.setContent(html_84ec29c758d788e101d8e158021b9a19);
+            
+        
+
+        marker_29bddd731882248e95ced174ed3ce857.bindPopup(popup_c144253337d1754b279b954a6b4b3c21)
+        ;
+
+        
+    
+    
+            var marker_ab5d090325ffdbc74e2342f661b47831 = L.marker(
+                [6.230849557949585, 0.10052148072591481],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_a3bfdf15b22753dca0c8d388b996cb7b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ab5d090325ffdbc74e2342f661b47831.setIcon(icon_a3bfdf15b22753dca0c8d388b996cb7b);
+        
+    
+        var popup_15b11bffab382b52c1b94c790ece33e8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8b7e89001550318abf73bcdb196224ac = $(`<div id="html_8b7e89001550318abf73bcdb196224ac" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_15b11bffab382b52c1b94c790ece33e8.setContent(html_8b7e89001550318abf73bcdb196224ac);
+            
+        
+
+        marker_ab5d090325ffdbc74e2342f661b47831.bindPopup(popup_15b11bffab382b52c1b94c790ece33e8)
+        ;
+
+        
+    
+    
+            var marker_ba8d9497aba01fb457a7550ea7b7baaa = L.marker(
+                [6.230714810722121, 0.10348592047097621],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_4b08c551551d08285bd2579201402e5b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ba8d9497aba01fb457a7550ea7b7baaa.setIcon(icon_4b08c551551d08285bd2579201402e5b);
+        
+    
+        var popup_db5d403bda5210bfc3cd7d05a95f481a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d4b8d3aefd94e6d9e2dc56157ff617af = $(`<div id="html_d4b8d3aefd94e6d9e2dc56157ff617af" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_db5d403bda5210bfc3cd7d05a95f481a.setContent(html_d4b8d3aefd94e6d9e2dc56157ff617af);
+            
+        
+
+        marker_ba8d9497aba01fb457a7550ea7b7baaa.bindPopup(popup_db5d403bda5210bfc3cd7d05a95f481a)
+        ;
+
+        
+    
+    
+            var marker_643446c86b2cb6ab5214f41e586948c7 = L.marker(
+                [6.230926556995447, 0.10496814150564039],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_dc80e6d460b0289fd648ab72464f59cb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_643446c86b2cb6ab5214f41e586948c7.setIcon(icon_dc80e6d460b0289fd648ab72464f59cb);
+        
+    
+        var popup_1859e21fa72da8666b2491447907b07d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6e95fe4fa3e197aa826182717878d5b5 = $(`<div id="html_6e95fe4fa3e197aa826182717878d5b5" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_1859e21fa72da8666b2491447907b07d.setContent(html_6e95fe4fa3e197aa826182717878d5b5);
+            
+        
+
+        marker_643446c86b2cb6ab5214f41e586948c7.bindPopup(popup_1859e21fa72da8666b2491447907b07d)
+        ;
+
+        
+    
+    
+            var marker_fb0a77500a16e6022c69eace9e15dfa9 = L.marker(
+                [6.218183313153276, 0.10550713066351401],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_43b5286487dc777dafeabf80b1140e4f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fb0a77500a16e6022c69eace9e15dfa9.setIcon(icon_43b5286487dc777dafeabf80b1140e4f);
+        
+    
+        var popup_659f2e17aca815b5ed6a460b06af09c6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a01c9a6db9b5947293d82cdbe3c61b98 = $(`<div id="html_a01c9a6db9b5947293d82cdbe3c61b98" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_659f2e17aca815b5ed6a460b06af09c6.setContent(html_a01c9a6db9b5947293d82cdbe3c61b98);
+            
+        
+
+        marker_fb0a77500a16e6022c69eace9e15dfa9.bindPopup(popup_659f2e17aca815b5ed6a460b06af09c6)
+        ;
+
+        
+    
+    
+            var marker_ffbfda037e23824e75514e52175fc88b = L.marker(
+                [6.220608761820274, 0.10575589488221943],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_d8e10e0f6fea2818d40537510076d628 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ffbfda037e23824e75514e52175fc88b.setIcon(icon_d8e10e0f6fea2818d40537510076d628);
+        
+    
+        var popup_afbac0ce2f4f00fe81b4a1ae21faf8ad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a3beaa1e8ca0858d59361dcf22b88028 = $(`<div id="html_a3beaa1e8ca0858d59361dcf22b88028" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_afbac0ce2f4f00fe81b4a1ae21faf8ad.setContent(html_a3beaa1e8ca0858d59361dcf22b88028);
+            
+        
+
+        marker_ffbfda037e23824e75514e52175fc88b.bindPopup(popup_afbac0ce2f4f00fe81b4a1ae21faf8ad)
+        ;
+
+        
+    
+    
+            var marker_0754fcf4d07d834ccbc52dc02daebdd2 = L.marker(
+                [6.102480304166927, 0.15886705830608275],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_3ad75641577b7fc8ea79b734c04806f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0754fcf4d07d834ccbc52dc02daebdd2.setIcon(icon_3ad75641577b7fc8ea79b734c04806f0);
+        
+    
+        var popup_e2418cd9310a9e076d983f2040da7ac7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cde7210e2a792f38cc9276c6b1e5a73e = $(`<div id="html_cde7210e2a792f38cc9276c6b1e5a73e" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_e2418cd9310a9e076d983f2040da7ac7.setContent(html_cde7210e2a792f38cc9276c6b1e5a73e);
+            
+        
+
+        marker_0754fcf4d07d834ccbc52dc02daebdd2.bindPopup(popup_e2418cd9310a9e076d983f2040da7ac7)
+        ;
+
+        
+    
+    
+            var marker_c68e5b7828c4a6e694846c8ddfad678b = L.marker(
+                [6.10212097739256, 0.1599450365892409],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_b4b9a58557536da4bc242dcd6c40ac27 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c68e5b7828c4a6e694846c8ddfad678b.setIcon(icon_b4b9a58557536da4bc242dcd6c40ac27);
+        
+    
+        var popup_6fa7ad379efda23277e5247121463424 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0dbe13f2ac5edbad33a1b3acb0b79ecd = $(`<div id="html_0dbe13f2ac5edbad33a1b3acb0b79ecd" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_6fa7ad379efda23277e5247121463424.setContent(html_0dbe13f2ac5edbad33a1b3acb0b79ecd);
+            
+        
+
+        marker_c68e5b7828c4a6e694846c8ddfad678b.bindPopup(popup_6fa7ad379efda23277e5247121463424)
+        ;
+
+        
+    
+    
+            var marker_4ca85062435932b7b385014aacfe8058 = L.marker(
+                [6.101761652135232, 0.16088826717652233],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_2ef8ffcc4613cd2c6a881b21ca17a49a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4ca85062435932b7b385014aacfe8058.setIcon(icon_2ef8ffcc4613cd2c6a881b21ca17a49a);
+        
+    
+        var popup_c90dc28fad42ac3e40715f746f7cf875 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_315096cddbbf05445821c6ba44d14c55 = $(`<div id="html_315096cddbbf05445821c6ba44d14c55" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_c90dc28fad42ac3e40715f746f7cf875.setContent(html_315096cddbbf05445821c6ba44d14c55);
+            
+        
+
+        marker_4ca85062435932b7b385014aacfe8058.bindPopup(popup_c90dc28fad42ac3e40715f746f7cf875)
+        ;
+
+        
+    
+    
+            var marker_89c307a5fb2f8658afa824908828c27b = L.marker(
+                [6.101492156958643, 0.1615620036532533],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_2f4a464379128504fe935f91dbdcd934 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_89c307a5fb2f8658afa824908828c27b.setIcon(icon_2f4a464379128504fe935f91dbdcd934);
+        
+    
+        var popup_dc6cb8e20f9be8276c08553f4c8db13e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7cfe074aff242cfdb9e6a90dffc1d496 = $(`<div id="html_7cfe074aff242cfdb9e6a90dffc1d496" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_dc6cb8e20f9be8276c08553f4c8db13e.setContent(html_7cfe074aff242cfdb9e6a90dffc1d496);
+            
+        
+
+        marker_89c307a5fb2f8658afa824908828c27b.bindPopup(popup_dc6cb8e20f9be8276c08553f4c8db13e)
+        ;
+
+        
+    
+    
+            var marker_71eab6fedf12ea813f9b5b3c99898646 = L.marker(
+                [6.101222664067339, 0.16223574015936212],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_85d82ba010fac427058c807000043011 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_71eab6fedf12ea813f9b5b3c99898646.setIcon(icon_85d82ba010fac427058c807000043011);
+        
+    
+        var popup_f50432e10a3afe25fc98dd3bf3797f40 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_07112e9c01a021cc04b0545437a3dac6 = $(`<div id="html_07112e9c01a021cc04b0545437a3dac6" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_f50432e10a3afe25fc98dd3bf3797f40.setContent(html_07112e9c01a021cc04b0545437a3dac6);
+            
+        
+
+        marker_71eab6fedf12ea813f9b5b3c99898646.bindPopup(popup_f50432e10a3afe25fc98dd3bf3797f40)
+        ;
+
+        
+    
+    
+            var marker_4e728e0ac36c620eef9472286a53627b = L.marker(
+                [6.100953167419596, 0.16290947669317754],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_0d7f0b775545b8da7b6fdc0938042caf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4e728e0ac36c620eef9472286a53627b.setIcon(icon_0d7f0b775545b8da7b6fdc0938042caf);
+        
+    
+        var popup_d9c0efd23c785be71a8b5b460f5e94a9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5d88e8a4120a70ab7cdf7d60cc9b053b = $(`<div id="html_5d88e8a4120a70ab7cdf7d60cc9b053b" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_d9c0efd23c785be71a8b5b460f5e94a9.setContent(html_5d88e8a4120a70ab7cdf7d60cc9b053b);
+            
+        
+
+        marker_4e728e0ac36c620eef9472286a53627b.bindPopup(popup_d9c0efd23c785be71a8b5b460f5e94a9)
+        ;
+
+        
+    
+    
+            var marker_1b7fce934fcdbb9737c118c894fbf62e = L.marker(
+                [6.100683673405862, 0.16371795995022576],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_c6e95fbd8a2e857d933d00631589ee05 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1b7fce934fcdbb9737c118c894fbf62e.setIcon(icon_c6e95fbd8a2e857d933d00631589ee05);
+        
+    
+        var popup_cd73b3197173aa60732ab98bf18d5d76 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b227b79b45cc055dff12bc5ba4f8d61b = $(`<div id="html_b227b79b45cc055dff12bc5ba4f8d61b" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_cd73b3197173aa60732ab98bf18d5d76.setContent(html_b227b79b45cc055dff12bc5ba4f8d61b);
+            
+        
+
+        marker_1b7fce934fcdbb9737c118c894fbf62e.bindPopup(popup_cd73b3197173aa60732ab98bf18d5d76)
+        ;
+
+        
+    
+    
+            var marker_426d17aca496d716474b94ad56fb2c30 = L.marker(
+                [6.0994132003398684, 0.16722139449676754],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_eace892cb83b619dc1ec37e8adb791ba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_426d17aca496d716474b94ad56fb2c30.setIcon(icon_eace892cb83b619dc1ec37e8adb791ba);
+        
+    
+        var popup_cfa45f0025d1d21e8d01c97e4bf2b191 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ddbbcd7dc4229544a9bb0ea1a1bd9bc7 = $(`<div id="html_ddbbcd7dc4229544a9bb0ea1a1bd9bc7" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_cfa45f0025d1d21e8d01c97e4bf2b191.setContent(html_ddbbcd7dc4229544a9bb0ea1a1bd9bc7);
+            
+        
+
+        marker_426d17aca496d716474b94ad56fb2c30.bindPopup(popup_cfa45f0025d1d21e8d01c97e4bf2b191)
+        ;
+
+        
+    
+    
+            var marker_b65b212cb7eaae360a12f5e23b776bca = L.marker(
+                [6.097449738887062, 0.17045532391323795],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_995b98984db009599f740ac6149fecd5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b65b212cb7eaae360a12f5e23b776bca.setIcon(icon_995b98984db009599f740ac6149fecd5);
+        
+    
+        var popup_1063c2ff5e8eedb8598da5288004600c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6e078b71233ff6c481d8e64c222419f4 = $(`<div id="html_6e078b71233ff6c481d8e64c222419f4" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_1063c2ff5e8eedb8598da5288004600c.setContent(html_6e078b71233ff6c481d8e64c222419f4);
+            
+        
+
+        marker_b65b212cb7eaae360a12f5e23b776bca.bindPopup(popup_1063c2ff5e8eedb8598da5288004600c)
+        ;
+
+        
+    
+    
+            var marker_e9618af78225f1ecde5f003137de1402 = L.marker(
+                [6.09664125439674, 0.17099431498432063],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_8efbd613d2d3a5ceccd03bcb3f4d39ee = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e9618af78225f1ecde5f003137de1402.setIcon(icon_8efbd613d2d3a5ceccd03bcb3f4d39ee);
+        
+    
+        var popup_e7fb2584ed519ff5232c4ccd79fee3f7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4a1607474205ec27d6c149fdf4afdf8f = $(`<div id="html_4a1607474205ec27d6c149fdf4afdf8f" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_e7fb2584ed519ff5232c4ccd79fee3f7.setContent(html_4a1607474205ec27d6c149fdf4afdf8f);
+            
+        
+
+        marker_e9618af78225f1ecde5f003137de1402.bindPopup(popup_e7fb2584ed519ff5232c4ccd79fee3f7)
+        ;
+
+        
+    
+    
+            var marker_bc92bf67eb3217d444524b374cf4d611 = L.marker(
+                [6.094019809739032, 0.1883767124235325],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_d4c0fef8d830d06aec9983a6bb3d3eeb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bc92bf67eb3217d444524b374cf4d611.setIcon(icon_d4c0fef8d830d06aec9983a6bb3d3eeb);
+        
+    
+        var popup_eb6f7675c6adfdf849a27de23974f6ef = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_85d8327ee173ef594fba950382e19470 = $(`<div id="html_85d8327ee173ef594fba950382e19470" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_eb6f7675c6adfdf849a27de23974f6ef.setContent(html_85d8327ee173ef594fba950382e19470);
+            
+        
+
+        marker_bc92bf67eb3217d444524b374cf4d611.bindPopup(popup_eb6f7675c6adfdf849a27de23974f6ef)
+        ;
+
+        
+    
+    
+            var marker_da5c0bc8494df66329e175478502bf17 = L.marker(
+                [6.094754793121075, 0.1917453965415786],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_f010e43e091c122786a9a6c4193d9b02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_da5c0bc8494df66329e175478502bf17.setIcon(icon_f010e43e091c122786a9a6c4193d9b02);
+        
+    
+        var popup_30f2b809f65229938690681f4c9cf628 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7aa0a673f1f44bb8cfe16efe0819496e = $(`<div id="html_7aa0a673f1f44bb8cfe16efe0819496e" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_30f2b809f65229938690681f4c9cf628.setContent(html_7aa0a673f1f44bb8cfe16efe0819496e);
+            
+        
+
+        marker_da5c0bc8494df66329e175478502bf17.bindPopup(popup_30f2b809f65229938690681f4c9cf628)
+        ;
+
+        
+    
+    
+            var marker_707f89f4cee732d2e7c04df7f9218311 = L.marker(
+                [6.094754792915211, 0.19241913380306508],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_b9938c640674a28a17768d8545da44cc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_707f89f4cee732d2e7c04df7f9218311.setIcon(icon_b9938c640674a28a17768d8545da44cc);
+        
+    
+        var popup_d075ab5acb6cfba84fe5f491201713c2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6deb48667c3fb8e59339f0defbf77e53 = $(`<div id="html_6deb48667c3fb8e59339f0defbf77e53" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_d075ab5acb6cfba84fe5f491201713c2.setContent(html_6deb48667c3fb8e59339f0defbf77e53);
+            
+        
+
+        marker_707f89f4cee732d2e7c04df7f9218311.bindPopup(popup_d075ab5acb6cfba84fe5f491201713c2)
+        ;
+
+        
+    
+    
+            var marker_5d99cd0b07c14b6d6e344943f2a01d1b = L.marker(
+                [6.097180242493111, 0.19794377215259265],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_61d50e0357269ce2db73bfe30e462874 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5d99cd0b07c14b6d6e344943f2a01d1b.setIcon(icon_61d50e0357269ce2db73bfe30e462874);
+        
+    
+        var popup_1424959e0d2b0731279d08f70e3f87ea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ade36eac1f60eb7bb5969a3dc8bc3385 = $(`<div id="html_ade36eac1f60eb7bb5969a3dc8bc3385" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_1424959e0d2b0731279d08f70e3f87ea.setContent(html_ade36eac1f60eb7bb5969a3dc8bc3385);
+            
+        
+
+        marker_5d99cd0b07c14b6d6e344943f2a01d1b.bindPopup(popup_1424959e0d2b0731279d08f70e3f87ea)
+        ;
+
+        
+    
+    
+            var marker_b9f85d77cdce5a8c709f98aa6db09294 = L.marker(
+                [6.097449738509599, 0.19875225595637339],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_7ece4bb91c36fff04e298cb9ee312cba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b9f85d77cdce5a8c709f98aa6db09294.setIcon(icon_7ece4bb91c36fff04e298cb9ee312cba);
+        
+    
+        var popup_44eef9262d18176dad9b1c9584833244 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2654268b33d5d7eae405beea04ee826c = $(`<div id="html_2654268b33d5d7eae405beea04ee826c" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_44eef9262d18176dad9b1c9584833244.setContent(html_2654268b33d5d7eae405beea04ee826c);
+            
+        
+
+        marker_b9f85d77cdce5a8c709f98aa6db09294.bindPopup(popup_44eef9262d18176dad9b1c9584833244)
+        ;
+
+        
+    
+    
+            var marker_ae0b5c4293df3cc109b8d51c12d4ef8d = L.marker(
+                [6.098527716660452, 0.2033336641927012],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_9107a6a6d81481558e2a41166cb43241 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ae0b5c4293df3cc109b8d51c12d4ef8d.setIcon(icon_9107a6a6d81481558e2a41166cb43241);
+        
+    
+        var popup_5e4a6b6a3a67b4d516f4af41ba5710eb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e8ade6673da00fd00dcdf839474fe89b = $(`<div id="html_e8ade6673da00fd00dcdf839474fe89b" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_5e4a6b6a3a67b4d516f4af41ba5710eb.setContent(html_e8ade6673da00fd00dcdf839474fe89b);
+            
+        
+
+        marker_ae0b5c4293df3cc109b8d51c12d4ef8d.bindPopup(popup_5e4a6b6a3a67b4d516f4af41ba5710eb)
+        ;
+
+        
+    
+    
+            var marker_6d39a20faa466419c1d9a3b63df775b7 = L.marker(
+                [6.098797211111434, 0.20427689547171737],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_648dc3b93496586b28fd5d49951a8315 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6d39a20faa466419c1d9a3b63df775b7.setIcon(icon_648dc3b93496586b28fd5d49951a8315);
+        
+    
+        var popup_5bb3402785872d6424fe5e46c53fc4f8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0c8f51ebce9b9fa1c414928c52bbf674 = $(`<div id="html_0c8f51ebce9b9fa1c414928c52bbf674" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_5bb3402785872d6424fe5e46c53fc4f8.setContent(html_0c8f51ebce9b9fa1c414928c52bbf674);
+            
+        
+
+        marker_6d39a20faa466419c1d9a3b63df775b7.bindPopup(popup_5bb3402785872d6424fe5e46c53fc4f8)
+        ;
+
+        
+    
+    
+            var marker_5a9a8b7d64953379155a4c7242b5777a = L.marker(
+                [6.099679196097028, 0.2077803224865211],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_e3de4dd642a35074a6ff94072cb62859 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5a9a8b7d64953379155a4c7242b5777a.setIcon(icon_e3de4dd642a35074a6ff94072cb62859);
+        
+    
+        var popup_e107320f4f626792c4440c08683080ff = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3e1f828dd53757fabc08b576259d9bad = $(`<div id="html_3e1f828dd53757fabc08b576259d9bad" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_e107320f4f626792c4440c08683080ff.setContent(html_3e1f828dd53757fabc08b576259d9bad);
+            
+        
+
+        marker_5a9a8b7d64953379155a4c7242b5777a.bindPopup(popup_e107320f4f626792c4440c08683080ff)
+        ;
+
+        
+    
+    
+            var marker_85046c99492a6d2991340036770cc73b = L.marker(
+                [6.100414178192251, 0.2111490074761273],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_45c12b82be9f993c45f8b11ad8e82c6c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_85046c99492a6d2991340036770cc73b.setIcon(icon_45c12b82be9f993c45f8b11ad8e82c6c);
+        
+    
+        var popup_be3bbceab8893855ea274db383afa4a8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c28b4089ed492c1c7fcb4df8319af41f = $(`<div id="html_c28b4089ed492c1c7fcb4df8319af41f" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_be3bbceab8893855ea274db383afa4a8.setContent(html_c28b4089ed492c1c7fcb4df8319af41f);
+            
+        
+
+        marker_85046c99492a6d2991340036770cc73b.bindPopup(popup_be3bbceab8893855ea274db383afa4a8)
+        ;
+
+        
+    
+    
+            var marker_c924a2fb3254871377a53b147a9f675d = L.marker(
+                [6.100683672994867, 0.2122269860892461],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_7b2ca6b9ea4f1cedcd9e58ee8f2ca90b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c924a2fb3254871377a53b147a9f675d.setIcon(icon_7b2ca6b9ea4f1cedcd9e58ee8f2ca90b);
+        
+    
+        var popup_c49e2d1aa1d726a7f1c5645c141215c9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d658c6d458854a83e3c7907978cceec9 = $(`<div id="html_d658c6d458854a83e3c7907978cceec9" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_c49e2d1aa1d726a7f1c5645c141215c9.setContent(html_d658c6d458854a83e3c7907978cceec9);
+            
+        
+
+        marker_c924a2fb3254871377a53b147a9f675d.bindPopup(popup_c49e2d1aa1d726a7f1c5645c141215c9)
+        ;
+
+        
+    
+    
+            var marker_b59fa73e752faa761da6ef46a6f8cc2e = L.marker(
+                [6.1008184208416605, 0.21343971165699885],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_c9c01909899bec2b99428bfa6af68c8f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b59fa73e752faa761da6ef46a6f8cc2e.setIcon(icon_c9c01909899bec2b99428bfa6af68c8f);
+        
+    
+        var popup_9b619ad2e95e427ee1a1fc959e7ab58d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_85eba1b4a87953a3b273efee3a4f47fe = $(`<div id="html_85eba1b4a87953a3b273efee3a4f47fe" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_9b619ad2e95e427ee1a1fc959e7ab58d.setContent(html_85eba1b4a87953a3b273efee3a4f47fe);
+            
+        
+
+        marker_b59fa73e752faa761da6ef46a6f8cc2e.bindPopup(popup_9b619ad2e95e427ee1a1fc959e7ab58d)
+        ;
+
+        
+    
+    
+            var marker_8de35c75f381fabe6592b499e1f7a57b = L.marker(
+                [6.101114865531564, 0.21492193144140248],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_cdf1a549e50106cbe28dc305b245a776 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8de35c75f381fabe6592b499e1f7a57b.setIcon(icon_cdf1a549e50106cbe28dc305b245a776);
+        
+    
+        var popup_6423756e1b68c87cf0908a0657e426a4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b0a8d09291828e3de4c7bf3d5f3af3a5 = $(`<div id="html_b0a8d09291828e3de4c7bf3d5f3af3a5" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_6423756e1b68c87cf0908a0657e426a4.setContent(html_b0a8d09291828e3de4c7bf3d5f3af3a5);
+            
+        
+
+        marker_8de35c75f381fabe6592b499e1f7a57b.bindPopup(popup_6423756e1b68c87cf0908a0657e426a4)
+        ;
+
+        
+    
+    
+            var marker_917dd0a865b2ba6134f2a9b55f05e51c = L.marker(
+                [6.1021517173454365, 0.22098555410402776],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_1f77970c851e4d0864d350948067ec0b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_917dd0a865b2ba6134f2a9b55f05e51c.setIcon(icon_1f77970c851e4d0864d350948067ec0b);
+        
+    
+        var popup_80662b09eac2e1929eb5539389005014 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_87c68df4a96f6a2990fdf7d0dafd0af1 = $(`<div id="html_87c68df4a96f6a2990fdf7d0dafd0af1" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_80662b09eac2e1929eb5539389005014.setContent(html_87c68df4a96f6a2990fdf7d0dafd0af1);
+            
+        
+
+        marker_917dd0a865b2ba6134f2a9b55f05e51c.bindPopup(popup_80662b09eac2e1929eb5539389005014)
+        ;
+
+        
+    
+    
+            var marker_e62d60d7bea913e1504313669e38730f = L.marker(
+                [6.103378617744009, 0.22691444059060709],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_e13f489bdec528beab163367e3c4a89b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e62d60d7bea913e1504313669e38730f.setIcon(icon_e13f489bdec528beab163367e3c4a89b);
+        
+    
+        var popup_0ba5714288eb1d201d50142365d50b09 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5456976b54fc7c09ccba121981f0722a = $(`<div id="html_5456976b54fc7c09ccba121981f0722a" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_0ba5714288eb1d201d50142365d50b09.setContent(html_5456976b54fc7c09ccba121981f0722a);
+            
+        
+
+        marker_e62d60d7bea913e1504313669e38730f.bindPopup(popup_0ba5714288eb1d201d50142365d50b09)
+        ;
+
+        
+    
+    
+            var marker_ebd73bc61cbf51c6cfc3d0e454f0060a = L.marker(
+                [6.10472609214181, 0.23216958611865507],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_b4b385a29c50609dc7cab1129ac85145 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ebd73bc61cbf51c6cfc3d0e454f0060a.setIcon(icon_b4b385a29c50609dc7cab1129ac85145);
+        
+    
+        var popup_446291c3dcf1cd12c02333d38ee69be8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_25738b320c1432f006dc056605a385e2 = $(`<div id="html_25738b320c1432f006dc056605a385e2" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_446291c3dcf1cd12c02333d38ee69be8.setContent(html_25738b320c1432f006dc056605a385e2);
+            
+        
+
+        marker_ebd73bc61cbf51c6cfc3d0e454f0060a.bindPopup(popup_446291c3dcf1cd12c02333d38ee69be8)
+        ;
+
+        
+    
+    
+            var marker_a560d41ec8e35c59e55003097c659f27 = L.marker(
+                [6.104726092063549, 0.23270857375681434],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_9c751a2f114545b05a8c4f9948d46632 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a560d41ec8e35c59e55003097c659f27.setIcon(icon_9c751a2f114545b05a8c4f9948d46632);
+        
+    
+        var popup_d30bcd901a612b19177f7e6ba7035949 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ac31c6d275b47212f1e328d1cfdae28d = $(`<div id="html_ac31c6d275b47212f1e328d1cfdae28d" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_d30bcd901a612b19177f7e6ba7035949.setContent(html_ac31c6d275b47212f1e328d1cfdae28d);
+            
+        
+
+        marker_a560d41ec8e35c59e55003097c659f27.bindPopup(popup_d30bcd901a612b19177f7e6ba7035949)
+        ;
+
+        
+    
+    
+            var marker_41b00e97d201afc32ae1e5eb33cde88e = L.marker(
+                [6.105103384907198, 0.23405604721960896],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_47c4285dd2103ea379dcb43c8f9cf9fc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_41b00e97d201afc32ae1e5eb33cde88e.setIcon(icon_47c4285dd2103ea379dcb43c8f9cf9fc);
+        
+    
+        var popup_6dadfa8948546fd73ba1a153572c0ede = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_28efac26c7bf818ada27f644cbdeddcc = $(`<div id="html_28efac26c7bf818ada27f644cbdeddcc" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_6dadfa8948546fd73ba1a153572c0ede.setContent(html_28efac26c7bf818ada27f644cbdeddcc);
+            
+        
+
+        marker_41b00e97d201afc32ae1e5eb33cde88e.bindPopup(popup_6dadfa8948546fd73ba1a153572c0ede)
+        ;
+
+        
+    
+    
+            var marker_d0393515b389feaffbbdb4ece82e1d79 = L.marker(
+                [6.105444744779284, 0.23540351995800188],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_bff4654d6b7ab21fb8bda7409af16372 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d0393515b389feaffbbdb4ece82e1d79.setIcon(icon_bff4654d6b7ab21fb8bda7409af16372);
+        
+    
+        var popup_1bf91b4372404d9193e7b600b05c942e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dc05a2c5a970792fc6830f01b1bb95cc = $(`<div id="html_dc05a2c5a970792fc6830f01b1bb95cc" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_1bf91b4372404d9193e7b600b05c942e.setContent(html_dc05a2c5a970792fc6830f01b1bb95cc);
+            
+        
+
+        marker_d0393515b389feaffbbdb4ece82e1d79.bindPopup(popup_1bf91b4372404d9193e7b600b05c942e)
+        ;
+
+        
+    
+    
+            var marker_89e5b8105d36d3814b8465e1a8087e92 = L.marker(
+                [6.105534576038954, 0.23648149992923015],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_05920d6f2719ce29570084f05f875508 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_89e5b8105d36d3814b8465e1a8087e92.setIcon(icon_05920d6f2719ce29570084f05f875508);
+        
+    
+        var popup_7d4eda5dc5051d2bf2633076920eec69 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8024dbdcd5e03017d0ecfed96307199f = $(`<div id="html_8024dbdcd5e03017d0ecfed96307199f" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_7d4eda5dc5051d2bf2633076920eec69.setContent(html_8024dbdcd5e03017d0ecfed96307199f);
+            
+        
+
+        marker_89e5b8105d36d3814b8465e1a8087e92.bindPopup(popup_7d4eda5dc5051d2bf2633076920eec69)
+        ;
+
+        
+    
+    
+            var marker_2b52957fbdde4eeff8b30005a27ae68c = L.marker(
+                [7.530037869552125, -0.10851868460288934],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_a02883b0683254685f08a2ab0c7efef3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2b52957fbdde4eeff8b30005a27ae68c.setIcon(icon_a02883b0683254685f08a2ab0c7efef3);
+        
+    
+        var popup_e0b0848c40b80c1bad15928435225068 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2909a2d49a7409d43af4f1ee7f8c8ef3 = $(`<div id="html_2909a2d49a7409d43af4f1ee7f8c8ef3" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_e0b0848c40b80c1bad15928435225068.setContent(html_2909a2d49a7409d43af4f1ee7f8c8ef3);
+            
+        
+
+        marker_2b52957fbdde4eeff8b30005a27ae68c.bindPopup(popup_e0b0848c40b80c1bad15928435225068)
+        ;
+
+        
+    
+    
+            var marker_7d3470396022bcd8c602be1193cad954 = L.marker(
+                [8.644029590573375, -0.94799222484486],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_c32077262dc11061352d052244864202 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7d3470396022bcd8c602be1193cad954.setIcon(icon_c32077262dc11061352d052244864202);
+        
+    
+        var popup_36de721a991e42259dce776f6028fe0f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ecfa13171e668f15a56171df966eeda9 = $(`<div id="html_ecfa13171e668f15a56171df966eeda9" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Volta River</div>`)[0];
+                popup_36de721a991e42259dce776f6028fe0f.setContent(html_ecfa13171e668f15a56171df966eeda9);
+            
+        
+
+        marker_7d3470396022bcd8c602be1193cad954.bindPopup(popup_36de721a991e42259dce776f6028fe0f)
+        ;
+
+        
+    
+    
+            var tile_layer_2cc30904e3b54fae97af1cc4d309accf = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/ee-amansieboatengkofi/maps/e1f9eaab9df189d6f0fbbc183672a266-b0852f69c9679673427a7ca4e1c741cf/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2cc30904e3b54fae97af1cc4d309accf.addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var marker_06598e606d7332cea5ea6428608629c5 = L.marker(
+                [5.027556235113574, -1.6173717534233785],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_07368f52e5fa6c48e809af7992aff258 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_06598e606d7332cea5ea6428608629c5.setIcon(icon_07368f52e5fa6c48e809af7992aff258);
+        
+    
+        var popup_1dc57da95202e37b9c7c33aed1f5740b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0c29f94be3c8243b3ae696250fa5ff31 = $(`<div id="html_0c29f94be3c8243b3ae696250fa5ff31" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Pra River</div>`)[0];
+                popup_1dc57da95202e37b9c7c33aed1f5740b.setContent(html_0c29f94be3c8243b3ae696250fa5ff31);
+            
+        
+
+        marker_06598e606d7332cea5ea6428608629c5.bindPopup(popup_1dc57da95202e37b9c7c33aed1f5740b)
+        ;
+
+        
+    
+    
+            var marker_fea6b9db63145810a3e94e90000dbb4c = L.marker(
+                [5.013273021585344, -1.628960020184027],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_444f728274f41f00e3ad840806df5055 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fea6b9db63145810a3e94e90000dbb4c.setIcon(icon_444f728274f41f00e3ad840806df5055);
+        
+    
+        var popup_95d71b4401a8cd273c805b357c98d51f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_17c80266a83b12a2ac22efcc11b7701a = $(`<div id="html_17c80266a83b12a2ac22efcc11b7701a" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Pra River</div>`)[0];
+                popup_95d71b4401a8cd273c805b357c98d51f.setContent(html_17c80266a83b12a2ac22efcc11b7701a);
+            
+        
+
+        marker_fea6b9db63145810a3e94e90000dbb4c.bindPopup(popup_95d71b4401a8cd273c805b357c98d51f)
+        ;
+
+        
+    
+    
+            var tile_layer_b3b16532f4eb9bc96afb64c5750bd113 = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/ee-amansieboatengkofi/maps/0dd7145f678143e1ebe77e8b52f8c7bf-d6041cf4a6ed88537faf72ba64c572d4/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b3b16532f4eb9bc96afb64c5750bd113.addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var marker_2f6329543b82554c840638317fcaf273 = L.marker(
+                [5.216741432857103, -2.2033877292382393],
+                {
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+        
+    
+            var icon_93c0f237abd54d8694b8be5c643b3b17 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2f6329543b82554c840638317fcaf273.setIcon(icon_93c0f237abd54d8694b8be5c643b3b17);
+        
+    
+        var popup_5ed52c4f70b2ea169d22bf93027a9942 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f37719fd49fb7f889883449e33c8eae6 = $(`<div id="html_f37719fd49fb7f889883449e33c8eae6" style="width: 100.0%; height: 100.0%;">Potential Galamsey Spot - Ankobra River</div>`)[0];
+                popup_5ed52c4f70b2ea169d22bf93027a9942.setContent(html_f37719fd49fb7f889883449e33c8eae6);
+            
+        
+
+        marker_2f6329543b82554c840638317fcaf273.bindPopup(popup_5ed52c4f70b2ea169d22bf93027a9942)
+        ;
+
+        
+    
+    
+    var color_map_a15a9cfb546c96857cb056d26364d646 = {};
+
+    
+    color_map_a15a9cfb546c96857cb056d26364d646.color = d3.scale.threshold()
+              .domain([-1.0, -0.9959919839679359, -0.9919839679358717, -0.9879759519038076, -0.9839679358717435, -0.9799599198396793, -0.9759519038076152, -0.9719438877755511, -0.9679358717434869, -0.9639278557114228, -0.9599198396793587, -0.9559118236472945, -0.9519038076152304, -0.9478957915831663, -0.9438877755511021, -0.9398797595190381, -0.935871743486974, -0.9318637274549099, -0.9278557114228457, -0.9238476953907816, -0.9198396793587175, -0.9158316633266533, -0.9118236472945892, -0.9078156312625251, -0.9038076152304609, -0.8997995991983968, -0.8957915831663327, -0.8917835671342685, -0.8877755511022044, -0.8837675350701403, -0.8797595190380761, -0.875751503006012, -0.8717434869739479, -0.8677354709418837, -0.8637274549098196, -0.8597194388777555, -0.8557114228456913, -0.8517034068136272, -0.8476953907815631, -0.8436873747494991, -0.8396793587174349, -0.8356713426853708, -0.8316633266533067, -0.8276553106212425, -0.8236472945891784, -0.8196392785571143, -0.8156312625250501, -0.811623246492986, -0.8076152304609219, -0.8036072144288577, -0.7995991983967936, -0.7955911823647295, -0.7915831663326653, -0.7875751503006012, -0.7835671342685371, -0.779559118236473, -0.7755511022044088, -0.7715430861723447, -0.7675350701402806, -0.7635270541082164, -0.7595190380761523, -0.7555110220440882, -0.751503006012024, -0.7474949899799599, -0.7434869739478958, -0.7394789579158316, -0.7354709418837675, -0.7314629258517034, -0.7274549098196392, -0.7234468937875751, -0.719438877755511, -0.7154308617234468, -0.7114228456913827, -0.7074148296593186, -0.7034068136272544, -0.6993987975951903, -0.6953907815631262, -0.6913827655310621, -0.687374749498998, -0.6833667334669339, -0.6793587174348698, -0.6753507014028056, -0.6713426853707415, -0.6673346693386774, -0.6633266533066132, -0.6593186372745491, -0.655310621242485, -0.6513026052104208, -0.6472945891783567, -0.6432865731462926, -0.6392785571142284, -0.6352705410821644, -0.6312625250501003, -0.6272545090180361, -0.623246492985972, -0.6192384769539079, -0.6152304609218437, -0.6112224448897796, -0.6072144288577155, -0.6032064128256514, -0.5991983967935872, -0.5951903807615231, -0.591182364729459, -0.5871743486973948, -0.5831663326653307, -0.5791583166332666, -0.5751503006012024, -0.5711422845691383, -0.5671342685370742, -0.56312625250501, -0.5591182364729459, -0.5551102204408818, -0.5511022044088176, -0.5470941883767535, -0.5430861723446894, -0.5390781563126252, -0.5350701402805611, -0.531062124248497, -0.5270541082164328, -0.5230460921843687, -0.5190380761523046, -0.5150300601202404, -0.5110220440881763, -0.5070140280561122, -0.503006012024048, -0.498997995991984, -0.4949899799599199, -0.49098196392785576, -0.4869739478957916, -0.4829659318637275, -0.47895791583166336, -0.47494989979959923, -0.4709418837675351, -0.46693386773547096, -0.46292585170340683, -0.4589178356713427, -0.45490981963927857, -0.45090180360721444, -0.4468937875751503, -0.44288577154308617, -0.43887775551102204, -0.4348697394789579, -0.4308617234468938, -0.42685370741482964, -0.4228456913827655, -0.4188376753507014, -0.41482965931863724, -0.4108216432865731, -0.406813627254509, -0.40280561122244485, -0.3987975951903807, -0.3947895791583166, -0.39078156312625245, -0.38677354709418843, -0.3827655310621243, -0.37875751503006017, -0.37474949899799603, -0.3707414829659319, -0.36673346693386777, -0.36272545090180364, -0.3587174348697395, -0.35470941883767537, -0.35070140280561124, -0.3466933867735471, -0.342685370741483, -0.33867735470941884, -0.3346693386773547, -0.3306613226452906, -0.32665330661322645, -0.3226452905811623, -0.3186372745490982, -0.31462925851703405, -0.3106212424849699, -0.3066132264529058, -0.30260521042084165, -0.2985971943887775, -0.2945891783567134, -0.29058116232464926, -0.2865731462925851, -0.282565130260521, -0.27855711422845686, -0.27454909819639284, -0.2705410821643287, -0.2665330661322646, -0.26252505010020044, -0.2585170340681363, -0.2545090180360722, -0.25050100200400804, -0.2464929859719439, -0.24248496993987978, -0.23847695390781565, -0.23446893787575152, -0.23046092184368738, -0.22645290581162325, -0.22244488977955912, -0.218436873747495, -0.21442885771543085, -0.21042084168336672, -0.2064128256513026, -0.20240480961923846, -0.19839679358717432, -0.1943887775551102, -0.19038076152304606, -0.18637274549098193, -0.1823647294589178, -0.17835671342685366, -0.17434869739478953, -0.1703406813627254, -0.16633266533066138, -0.16232464929859725, -0.1583166332665331, -0.15430861723446898, -0.15030060120240485, -0.14629258517034072, -0.14228456913827658, -0.13827655310621245, -0.13426853707414832, -0.1302605210420842, -0.12625250501002006, -0.12224448897795592, -0.11823647294589179, -0.11422845691382766, -0.11022044088176353, -0.1062124248496994, -0.10220440881763526, -0.09819639278557113, -0.094188376753507, -0.09018036072144286, -0.08617234468937873, -0.0821643286573146, -0.07815631262525047, -0.07414829659318634, -0.0701402805611222, -0.06613226452905807, -0.06212424849699394, -0.05811623246492981, -0.054108216432865786, -0.05010020040080165, -0.04609218436873752, -0.04208416833667339, -0.038076152304609256, -0.034068136272545124, -0.030060120240480992, -0.02605210420841686, -0.022044088176352727, -0.018036072144288595, -0.014028056112224463, -0.01002004008016033, -0.006012024048096198, -0.002004008016032066, 0.002004008016031955, 0.006012024048096087, 0.01002004008016022, 0.014028056112224352, 0.018036072144288484, 0.022044088176352616, 0.02605210420841675, 0.03006012024048088, 0.03406813627254501, 0.038076152304609145, 0.04208416833667328, 0.04609218436873741, 0.05010020040080154, 0.054108216432865675, 0.05811623246492981, 0.06212424849699394, 0.06613226452905807, 0.0701402805611222, 0.07414829659318634, 0.07815631262525047, 0.0821643286573146, 0.08617234468937873, 0.09018036072144286, 0.094188376753507, 0.09819639278557113, 0.10220440881763526, 0.1062124248496994, 0.11022044088176353, 0.11422845691382766, 0.11823647294589179, 0.12224448897795592, 0.12625250501002006, 0.1302605210420842, 0.13426853707414832, 0.13827655310621245, 0.14228456913827658, 0.14629258517034072, 0.15030060120240485, 0.15430861723446898, 0.1583166332665331, 0.16232464929859725, 0.16633266533066138, 0.1703406813627255, 0.17434869739478964, 0.17835671342685377, 0.1823647294589179, 0.18637274549098204, 0.19038076152304617, 0.1943887775551103, 0.19839679358717444, 0.20240480961923857, 0.2064128256513027, 0.21042084168336683, 0.21442885771543096, 0.2184368737474951, 0.222444889779559, 0.22645290581162314, 0.23046092184368727, 0.2344689378757514, 0.23847695390781554, 0.24248496993987967, 0.2464929859719438, 0.25050100200400793, 0.25450901803607207, 0.2585170340681362, 0.26252505010020033, 0.26653306613226446, 0.2705410821643286, 0.2745490981963927, 0.27855711422845686, 0.282565130260521, 0.2865731462925851, 0.29058116232464926, 0.2945891783567134, 0.2985971943887775, 0.30260521042084165, 0.3066132264529058, 0.3106212424849699, 0.31462925851703405, 0.3186372745490982, 0.3226452905811623, 0.32665330661322645, 0.3306613226452906, 0.3346693386773547, 0.33867735470941884, 0.342685370741483, 0.3466933867735471, 0.35070140280561124, 0.35470941883767537, 0.3587174348697395, 0.36272545090180364, 0.36673346693386777, 0.3707414829659319, 0.37474949899799603, 0.37875751503006017, 0.3827655310621243, 0.38677354709418843, 0.39078156312625256, 0.3947895791583167, 0.3987975951903808, 0.40280561122244496, 0.4068136272545091, 0.4108216432865732, 0.41482965931863736, 0.4188376753507015, 0.4228456913827656, 0.42685370741482975, 0.4308617234468939, 0.434869739478958, 0.43887775551102215, 0.4428857715430863, 0.4468937875751502, 0.4509018036072143, 0.45490981963927846, 0.4589178356713426, 0.4629258517034067, 0.46693386773547085, 0.470941883767535, 0.4749498997995991, 0.47895791583166325, 0.4829659318637274, 0.4869739478957915, 0.49098196392785565, 0.4949899799599198, 0.4989979959919839, 0.503006012024048, 0.5070140280561122, 0.5110220440881763, 0.5150300601202404, 0.5190380761523046, 0.5230460921843687, 0.5270541082164328, 0.531062124248497, 0.5350701402805611, 0.5390781563126252, 0.5430861723446894, 0.5470941883767535, 0.5511022044088176, 0.5551102204408818, 0.5591182364729459, 0.56312625250501, 0.5671342685370742, 0.5711422845691383, 0.5751503006012024, 0.5791583166332666, 0.5831663326653307, 0.5871743486973948, 0.591182364729459, 0.5951903807615231, 0.5991983967935872, 0.6032064128256514, 0.6072144288577155, 0.6112224448897796, 0.6152304609218437, 0.6192384769539079, 0.623246492985972, 0.6272545090180361, 0.6312625250501003, 0.6352705410821644, 0.6392785571142285, 0.6432865731462927, 0.6472945891783568, 0.6513026052104209, 0.6553106212424851, 0.6593186372745492, 0.6633266533066133, 0.6673346693386772, 0.6713426853707414, 0.6753507014028055, 0.6793587174348696, 0.6833667334669338, 0.6873747494989979, 0.691382765531062, 0.6953907815631262, 0.6993987975951903, 0.7034068136272544, 0.7074148296593186, 0.7114228456913827, 0.7154308617234468, 0.719438877755511, 0.7234468937875751, 0.7274549098196392, 0.7314629258517034, 0.7354709418837675, 0.7394789579158316, 0.7434869739478958, 0.7474949899799599, 0.751503006012024, 0.7555110220440882, 0.7595190380761523, 0.7635270541082164, 0.7675350701402806, 0.7715430861723447, 0.7755511022044088, 0.779559118236473, 0.7835671342685371, 0.7875751503006012, 0.7915831663326653, 0.7955911823647295, 0.7995991983967936, 0.8036072144288577, 0.8076152304609219, 0.811623246492986, 0.8156312625250501, 0.8196392785571143, 0.8236472945891784, 0.8276553106212425, 0.8316633266533067, 0.8356713426853708, 0.8396793587174349, 0.8436873747494991, 0.8476953907815632, 0.8517034068136273, 0.8557114228456915, 0.8597194388777556, 0.8637274549098197, 0.8677354709418839, 0.871743486973948, 0.8757515030060121, 0.8797595190380763, 0.8837675350701404, 0.8877755511022045, 0.8917835671342684, 0.8957915831663326, 0.8997995991983967, 0.9038076152304608, 0.907815631262525, 0.9118236472945891, 0.9158316633266532, 0.9198396793587174, 0.9238476953907815, 0.9278557114228456, 0.9318637274549098, 0.9358717434869739, 0.939879759519038, 0.9438877755511021, 0.9478957915831663, 0.9519038076152304, 0.9559118236472945, 0.9599198396793587, 0.9639278557114228, 0.9679358717434869, 0.9719438877755511, 0.9759519038076152, 0.9799599198396793, 0.9839679358717435, 0.9879759519038076, 0.9919839679358717, 0.9959919839679359, 1.0])
+              .range(['#ff0000ff', '#ff0100ff', '#ff0200ff', '#ff0300ff', '#ff0400ff', '#ff0500ff', '#ff0600ff', '#ff0700ff', '#ff0800ff', '#ff0900ff', '#ff0a00ff', '#ff0b00ff', '#ff0c00ff', '#ff0d00ff', '#ff0e00ff', '#ff0f00ff', '#ff1000ff', '#ff1100ff', '#ff1200ff', '#ff1300ff', '#ff1400ff', '#ff1500ff', '#ff1600ff', '#ff1700ff', '#ff1800ff', '#ff1900ff', '#ff1a00ff', '#ff1b00ff', '#ff1c00ff', '#ff1d00ff', '#ff1e00ff', '#ff1f00ff', '#ff2000ff', '#ff2100ff', '#ff2200ff', '#ff2300ff', '#ff2400ff', '#ff2500ff', '#ff2600ff', '#ff2800ff', '#ff2900ff', '#ff2a00ff', '#ff2b00ff', '#ff2c00ff', '#ff2d00ff', '#ff2e00ff', '#ff2f00ff', '#ff3000ff', '#ff3100ff', '#ff3200ff', '#ff3300ff', '#ff3400ff', '#ff3500ff', '#ff3600ff', '#ff3700ff', '#ff3800ff', '#ff3900ff', '#ff3a00ff', '#ff3b00ff', '#ff3c00ff', '#ff3d00ff', '#ff3e00ff', '#ff3f00ff', '#ff4000ff', '#ff4100ff', '#ff4200ff', '#ff4300ff', '#ff4400ff', '#ff4500ff', '#ff4600ff', '#ff4700ff', '#ff4800ff', '#ff4900ff', '#ff4a00ff', '#ff4b00ff', '#ff4c00ff', '#ff4d00ff', '#ff4f00ff', '#ff5000ff', '#ff5100ff', '#ff5200ff', '#ff5300ff', '#ff5400ff', '#ff5500ff', '#ff5600ff', '#ff5700ff', '#ff5800ff', '#ff5900ff', '#ff5a00ff', '#ff5b00ff', '#ff5c00ff', '#ff5d00ff', '#ff5e00ff', '#ff5f00ff', '#ff6000ff', '#ff6100ff', '#ff6200ff', '#ff6300ff', '#ff6400ff', '#ff6500ff', '#ff6600ff', '#ff6700ff', '#ff6800ff', '#ff6900ff', '#ff6a00ff', '#ff6b00ff', '#ff6c00ff', '#ff6d00ff', '#ff6e00ff', '#ff6f00ff', '#ff7000ff', '#ff7100ff', '#ff7200ff', '#ff7300ff', '#ff7400ff', '#ff7500ff', '#ff7700ff', '#ff7800ff', '#ff7900ff', '#ff7a00ff', '#ff7b00ff', '#ff7c00ff', '#ff7d00ff', '#ff7e00ff', '#ff7f00ff', '#ff8000ff', '#ff8100ff', '#ff8200ff', '#ff8300ff', '#ff8400ff', '#ff8500ff', '#ff8600ff', '#ff8700ff', '#ff8800ff', '#ff8900ff', '#ff8a00ff', '#ff8b00ff', '#ff8c00ff', '#ff8d00ff', '#ff8e00ff', '#ff8f00ff', '#ff9000ff', '#ff9100ff', '#ff9200ff', '#ff9300ff', '#ff9400ff', '#ff9500ff', '#ff9600ff', '#ff9700ff', '#ff9800ff', '#ff9900ff', '#ff9a00ff', '#ff9b00ff', '#ff9c00ff', '#ff9e00ff', '#ff9f00ff', '#ffa000ff', '#ffa100ff', '#ffa200ff', '#ffa300ff', '#ffa400ff', '#ffa500ff', '#ffa600ff', '#ffa700ff', '#ffa800ff', '#ffa900ff', '#ffaa00ff', '#ffab00ff', '#ffac00ff', '#ffad00ff', '#ffae00ff', '#ffaf00ff', '#ffb000ff', '#ffb100ff', '#ffb200ff', '#ffb300ff', '#ffb400ff', '#ffb500ff', '#ffb600ff', '#ffb700ff', '#ffb800ff', '#ffb900ff', '#ffba00ff', '#ffbb00ff', '#ffbc00ff', '#ffbd00ff', '#ffbe00ff', '#ffbf00ff', '#ffc000ff', '#ffc100ff', '#ffc200ff', '#ffc300ff', '#ffc500ff', '#ffc600ff', '#ffc700ff', '#ffc800ff', '#ffc900ff', '#ffca00ff', '#ffcb00ff', '#ffcc00ff', '#ffcd00ff', '#ffce00ff', '#ffcf00ff', '#ffd000ff', '#ffd100ff', '#ffd200ff', '#ffd300ff', '#ffd400ff', '#ffd500ff', '#ffd600ff', '#ffd700ff', '#ffd800ff', '#ffd900ff', '#ffda00ff', '#ffdb00ff', '#ffdc00ff', '#ffdd00ff', '#ffde00ff', '#ffdf00ff', '#ffe000ff', '#ffe100ff', '#ffe200ff', '#ffe300ff', '#ffe400ff', '#ffe500ff', '#ffe600ff', '#ffe700ff', '#ffe800ff', '#ffe900ff', '#ffea00ff', '#ffeb00ff', '#ffed00ff', '#ffee00ff', '#ffef00ff', '#fff000ff', '#fff100ff', '#fff200ff', '#fff300ff', '#fff400ff', '#fff500ff', '#fff600ff', '#fff700ff', '#fff800ff', '#fff900ff', '#fffa00ff', '#fffb00ff', '#fffc00ff', '#fffd00ff', '#fffe00ff', '#ffff00ff', '#ffff00ff', '#feff00ff', '#fdfe00ff', '#fcfe00ff', '#fbfd00ff', '#fafd00ff', '#f9fc00ff', '#f8fc00ff', '#f7fb00ff', '#f6fb00ff', '#f5fa00ff', '#f4fa00ff', '#f3f900ff', '#f2f900ff', '#f1f800ff', '#f0f800ff', '#eff700ff', '#eef700ff', '#edf600ff', '#ebf600ff', '#eaf500ff', '#e9f500ff', '#e8f400ff', '#e7f300ff', '#e6f300ff', '#e5f200ff', '#e4f200ff', '#e3f100ff', '#e2f100ff', '#e1f000ff', '#e0f000ff', '#dfef00ff', '#deef00ff', '#ddee00ff', '#dcee00ff', '#dbed00ff', '#daed00ff', '#d9ec00ff', '#d8ec00ff', '#d7eb00ff', '#d6eb00ff', '#d5ea00ff', '#d4ea00ff', '#d3e900ff', '#d2e900ff', '#d1e800ff', '#d0e800ff', '#cfe700ff', '#cee700ff', '#cde600ff', '#cce600ff', '#cbe500ff', '#cae500ff', '#c9e400ff', '#c8e400ff', '#c7e300ff', '#c6e300ff', '#c5e200ff', '#c3e200ff', '#c2e100ff', '#c1e100ff', '#c0e000ff', '#bfe000ff', '#bedf00ff', '#bddf00ff', '#bcde00ff', '#bbde00ff', '#badd00ff', '#b9dc00ff', '#b8dc00ff', '#b7db00ff', '#b6db00ff', '#b5da00ff', '#b4da00ff', '#b3d900ff', '#b2d900ff', '#b1d800ff', '#b0d800ff', '#afd700ff', '#aed700ff', '#add600ff', '#acd600ff', '#abd500ff', '#aad500ff', '#a9d400ff', '#a8d400ff', '#a7d300ff', '#a6d300ff', '#a5d200ff', '#a4d200ff', '#a3d100ff', '#a2d100ff', '#a1d000ff', '#a0d000ff', '#9fcf00ff', '#9ecf00ff', '#9cce00ff', '#9bce00ff', '#9acd00ff', '#99cd00ff', '#98cc00ff', '#97cc00ff', '#96cb00ff', '#95cb00ff', '#94ca00ff', '#93ca00ff', '#92c900ff', '#91c900ff', '#90c800ff', '#8fc800ff', '#8ec700ff', '#8dc700ff', '#8cc600ff', '#8bc500ff', '#8ac500ff', '#89c400ff', '#88c400ff', '#87c300ff', '#86c300ff', '#85c200ff', '#84c200ff', '#83c100ff', '#82c100ff', '#81c000ff', '#80c000ff', '#7fbf00ff', '#7ebf00ff', '#7dbe00ff', '#7cbe00ff', '#7bbd00ff', '#7abd00ff', '#79bc00ff', '#78bc00ff', '#77bb00ff', '#75bb00ff', '#74ba00ff', '#73ba00ff', '#72b900ff', '#71b900ff', '#70b800ff', '#6fb800ff', '#6eb700ff', '#6db700ff', '#6cb600ff', '#6bb600ff', '#6ab500ff', '#69b500ff', '#68b400ff', '#67b400ff', '#66b300ff', '#65b300ff', '#64b200ff', '#63b200ff', '#62b100ff', '#61b100ff', '#60b000ff', '#5fb000ff', '#5eaf00ff', '#5daf00ff', '#5cae00ff', '#5bad00ff', '#5aad00ff', '#59ac00ff', '#58ac00ff', '#57ab00ff', '#56ab00ff', '#55aa00ff', '#54aa00ff', '#53a900ff', '#52a900ff', '#51a800ff', '#50a800ff', '#4fa700ff', '#4da700ff', '#4ca600ff', '#4ba600ff', '#4aa500ff', '#49a500ff', '#48a400ff', '#47a400ff', '#46a300ff', '#45a300ff', '#44a200ff', '#43a200ff', '#42a100ff', '#41a100ff', '#40a000ff', '#3fa000ff', '#3e9f00ff', '#3d9f00ff', '#3c9e00ff', '#3b9e00ff', '#3a9d00ff', '#399d00ff', '#389c00ff', '#379c00ff', '#369b00ff', '#359b00ff', '#349a00ff', '#339a00ff', '#329900ff', '#319900ff', '#309800ff', '#2f9800ff', '#2e9700ff', '#2d9600ff', '#2c9600ff', '#2b9500ff', '#2a9500ff', '#299400ff', '#289400ff', '#269300ff', '#259300ff', '#249200ff', '#239200ff', '#229100ff', '#219100ff', '#209000ff', '#1f9000ff', '#1e8f00ff', '#1d8f00ff', '#1c8e00ff', '#1b8e00ff', '#1a8d00ff', '#198d00ff', '#188c00ff', '#178c00ff', '#168b00ff', '#158b00ff', '#148a00ff', '#138a00ff', '#128900ff', '#118900ff', '#108800ff', '#0f8800ff', '#0e8700ff', '#0d8700ff', '#0c8600ff', '#0b8600ff', '#0a8500ff', '#098500ff', '#088400ff', '#078400ff', '#068300ff', '#058300ff', '#048200ff', '#038200ff', '#028100ff', '#018100ff', '#008000ff']);
+    
+
+    color_map_a15a9cfb546c96857cb056d26364d646.x = d3.scale.linear()
+              .domain([-1.0, 1.0])
+              .range([0, 450 - 50]);
+
+    color_map_a15a9cfb546c96857cb056d26364d646.legend = L.control({position: 'topright'});
+    color_map_a15a9cfb546c96857cb056d26364d646.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_a15a9cfb546c96857cb056d26364d646.legend.addTo(map_aead335e87758e26db5e65b1f63bcd94);
+
+    color_map_a15a9cfb546c96857cb056d26364d646.xAxis = d3.svg.axis()
+        .scale(color_map_a15a9cfb546c96857cb056d26364d646.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([-1.0, 0.0, 1.0]);
+
+    color_map_a15a9cfb546c96857cb056d26364d646.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_a15a9cfb546c96857cb056d26364d646.g = color_map_a15a9cfb546c96857cb056d26364d646.svg.append("g")
+        .attr("class", "key")
+        .attr("fill", "black")
+        .attr("transform", "translate(25,16)");
+
+    color_map_a15a9cfb546c96857cb056d26364d646.g.selectAll("rect")
+        .data(color_map_a15a9cfb546c96857cb056d26364d646.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_a15a9cfb546c96857cb056d26364d646.x(color_map_a15a9cfb546c96857cb056d26364d646.color.domain()[i - 1]) : color_map_a15a9cfb546c96857cb056d26364d646.x.range()[0],
+            x1: i < color_map_a15a9cfb546c96857cb056d26364d646.color.domain().length ? color_map_a15a9cfb546c96857cb056d26364d646.x(color_map_a15a9cfb546c96857cb056d26364d646.color.domain()[i]) : color_map_a15a9cfb546c96857cb056d26364d646.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_a15a9cfb546c96857cb056d26364d646.g.call(color_map_a15a9cfb546c96857cb056d26364d646.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .attr("fill", "black")
+        .text("NDWI Values (Pollution Levels)");
+    
+            var layer_control_a7785a4710de478c58960cb113af996a_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_a52b951a160d76999bc9cdf367c0a86b,
+                },
+                overlays :  {
+                    "Volta River - NDWI" : tile_layer_3e80f053f468cb4fb4c1c4d83c5db116,
+                    "Pra River - NDWI" : tile_layer_2cc30904e3b54fae97af1cc4d309accf,
+                    "Ankobra River - NDWI" : tile_layer_b3b16532f4eb9bc96afb64c5750bd113,
+                },
+            };
+            let layer_control_a7785a4710de478c58960cb113af996a = L.control.layers(
+                layer_control_a7785a4710de478c58960cb113af996a_layers.base_layers,
+                layer_control_a7785a4710de478c58960cb113af996a_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_aead335e87758e26db5e65b1f63bcd94);
+
+        
+</script>
+</html>
