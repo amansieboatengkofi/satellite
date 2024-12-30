@@ -1,0 +1,490 @@
+{
+    "Pra River - Grid 1": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": 0.09908210379336896
+            }
+        ]
+    },
+    "Pra River - Grid 2": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.13523311789615192
+            }
+        ]
+    },
+    "Pra River - Grid 3": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.23242070716839755
+            }
+        ]
+    },
+    "Pra River - Grid 4": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.23651417795389015
+            }
+        ]
+    },
+    "Pra River - Grid 5": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.24273205394834194
+            }
+        ]
+    },
+    "Pra River - Grid 6": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2132120531469783
+            }
+        ]
+    },
+    "Pra River - Grid 7": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22604482754454802
+            }
+        ]
+    },
+    "Pra River - Grid 8": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2087101984910893
+            }
+        ]
+    },
+    "Pra River - Grid 9": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.23488742698310053
+            }
+        ]
+    },
+    "Pra River - Grid 10": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22665308238568463
+            }
+        ]
+    },
+    "Pra River - Grid 11": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": 0.1784642888483324
+            }
+        ]
+    },
+    "Pra River - Grid 12": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": 0.09286531637040836
+            }
+        ]
+    },
+    "Pra River - Grid 13": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.18750810778172725
+            }
+        ]
+    },
+    "Pra River - Grid 15": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2334092257582813
+            }
+        ]
+    },
+    "Pra River - Grid 16": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.21923274785015384
+            }
+        ]
+    },
+    "Pra River - Grid 17": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2202947559095128
+            }
+        ]
+    },
+    "Pra River - Grid 18": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.20198885640780312
+            }
+        ]
+    },
+    "Pra River - Grid 19": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22137230223258933
+            }
+        ]
+    },
+    "Pra River - Grid 20": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22794443590903568
+            }
+        ]
+    },
+    "Pra River - Grid 21": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2307512446967111
+            }
+        ]
+    },
+    "Pra River - Grid 22": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.21582052737275567
+            }
+        ]
+    },
+    "Pra River - Grid 23": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22130574645856402
+            }
+        ]
+    },
+    "Pra River - Grid 24": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.23396204137360765
+            }
+        ]
+    },
+    "Pra River - Grid 25": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2223031407669863
+            }
+        ]
+    },
+    "Pra River - Grid 26": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.23662747489752214
+            }
+        ]
+    },
+    "Pra River - Grid 27": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22376615177349898
+            }
+        ]
+    },
+    "Pra River - Grid 28": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.21604382887162576
+            }
+        ]
+    },
+    "Pra River - Grid 29": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.21413459601634463
+            }
+        ]
+    },
+    "Pra River - Grid 30": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.21734947130957002
+            }
+        ]
+    },
+    "Pra River - Grid 31": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22785614492254644
+            }
+        ]
+    },
+    "Pra River - Grid 32": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.23888220668843677
+            }
+        ]
+    },
+    "Pra River - Grid 33": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22893814923473543
+            }
+        ]
+    },
+    "Pra River - Grid 35": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22829628966046914
+            }
+        ]
+    },
+    "Pra River - Grid 36": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22263646349275093
+            }
+        ]
+    },
+    "Pra River - Grid 37": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2361857360948082
+            }
+        ]
+    },
+    "Pra River - Grid 38": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.23794421233368093
+            }
+        ]
+    },
+    "Pra River - Grid 39": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.20837165955136616
+            }
+        ]
+    },
+    "Pra River - Grid 42": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.24169914636788858
+            }
+        ]
+    },
+    "Pra River - Grid 43": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2476068937291115
+            }
+        ]
+    },
+    "Pra River - Grid 44": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2620614864645368
+            }
+        ]
+    },
+    "Pra River - Grid 45": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.24854841644174602
+            }
+        ]
+    },
+    "Pra River - Grid 46": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2569651516671491
+            }
+        ]
+    },
+    "Pra River - Grid 47": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2533337462309635
+            }
+        ]
+    },
+    "Pra River - Grid 48": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2506881265735334
+            }
+        ]
+    },
+    "Pra River - Grid 49": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2545183187514713
+            }
+        ]
+    },
+    "Pra River - Grid 50": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.26159120798478
+            }
+        ]
+    },
+    "Pra River - Grid 51": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2600009637349618
+            }
+        ]
+    },
+    "Pra River - Grid 52": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.26670375014705444
+            }
+        ]
+    },
+    "Pra River - Grid 54": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2611185701890318
+            }
+        ]
+    },
+    "Pra River - Grid 55": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2623937458628246
+            }
+        ]
+    },
+    "Pra River - Grid 56": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.26551436163161113
+            }
+        ]
+    },
+    "Pra River - Grid 57": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2748734500289948
+            }
+        ]
+    },
+    "Pra River - Grid 58": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2776007354259491
+            }
+        ]
+    },
+    "Pra River - Grid 59": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.22851465092803952
+            }
+        ]
+    },
+    "Pra River - Grid 63": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2627977569846951
+            }
+        ]
+    },
+    "Pra River - Grid 64": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2489875003751711
+            }
+        ]
+    },
+    "Pra River - Grid 65": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2665121873904919
+            }
+        ]
+    },
+    "Pra River - Grid 66": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2617916079447104
+            }
+        ]
+    },
+    "Pra River - Grid 67": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.23190424718660882
+            }
+        ]
+    },
+    "Pra River - Grid 70": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.28719455003738403
+            }
+        ]
+    },
+    "Pra River - Grid 72": {
+        "history": [
+            {
+                "date": "2024-12-30",
+                "ndwi": -0.2786681620943311
+            }
+        ]
+    }
+}
