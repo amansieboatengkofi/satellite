@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    function showHistory(section) {
+        const data = JSON.parse(document.getElementById('historical-data').textContent);
+        const trend = data[section]['history'];
+        const chartElement = document.getElementById('chart-' + section);
+
+        const ctx = chartElement.getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: trend.map(entry => entry.date),
+                datasets: [{
+                    label: 'NDWI Trend',
+                    data: trend.map(entry => entry.ndwi),
+                    borderColor: 'blue',
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    x: { title: { display: true, text: 'Date' } },
+                    y: { title: { display: true, text: 'NDWI' } }
+                }
+            }
+        });
+    }
+    </script>
+    
+
+    <style>
+    .leaflet-popup-content-wrapper {
+        width: 400px !important;
+        height: 500px !important;
+    }
+    .leaflet-popup-content {
+        overflow: auto;
+    }
+    </style>
+    
+<script id='historical-data' type='application/json'>{"Ankobra River - Grid 1": {"history": [{"date": "2024-12-30", "ndwi": 0.18627627026475255}]}, "Ankobra River - Grid 2": {"history": [{"date": "2024-12-30", "ndwi": 0.19451015769354046}]}, "Ankobra River - Grid 3": {"history": [{"date": "2024-12-30", "ndwi": -0.11540706335406588}]}, "Ankobra River - Grid 4": {"history": [{"date": "2024-12-30", "ndwi": -0.14042714732267886}]}, "Ankobra River - Grid 6": {"history": [{"date": "2024-12-30", "ndwi": -0.11805838083770138}]}, "Ankobra River - Grid 7": {"history": [{"date": "2024-12-30", "ndwi": -0.15264212818537115}]}, "Ankobra River - Grid 8": {"history": [{"date": "2024-12-30", "ndwi": -0.1559399407312544}]}, "Ankobra River - Grid 9": {"history": [{"date": "2024-12-30", "ndwi": -0.13576999706488066}]}, "Ankobra River - Grid 10": {"history": [{"date": "2024-12-30", "ndwi": -0.14290848099996686}]}, "Ankobra River - Grid 11": {"history": [{"date": "2024-12-30", "ndwi": -0.16012995005519956}]}, "Ankobra River - Grid 12": {"history": [{"date": "2024-12-30", "ndwi": -0.17192066774287657}]}, "Ankobra River - Grid 13": {"history": [{"date": "2024-12-30", "ndwi": -0.26402383443817445}]}, "Ankobra River - Grid 14": {"history": [{"date": "2024-12-30", "ndwi": -0.1759546835096375}]}, "Ankobra River - Grid 15": {"history": [{"date": "2024-12-30", "ndwi": -0.16989933894283354}]}, "Ankobra River - Grid 16": {"history": [{"date": "2024-12-30", "ndwi": -0.1857238282604702}]}, "Ankobra River - Grid 17": {"history": [{"date": "2024-12-30", "ndwi": -0.16250727726968778}]}, "Ankobra River - Grid 18": {"history": [{"date": "2024-12-30", "ndwi": -0.1397692872562306}]}, "Ankobra River - Grid 19": {"history": [{"date": "2024-12-30", "ndwi": -0.14862240693852957}]}, "Ankobra River - Grid 20": {"history": [{"date": "2024-12-30", "ndwi": -0.14979706616779134}]}, "Ankobra River - Grid 21": {"history": [{"date": "2024-12-30", "ndwi": -0.15408799094839537}]}, "Ankobra River - Grid 22": {"history": [{"date": "2024-12-30", "ndwi": -0.2050142507904373}]}, "Ankobra River - Grid 23": {"history": [{"date": "2024-12-30", "ndwi": -0.09368552787328603}]}, "Ankobra River - Grid 24": {"history": [{"date": "2024-12-30", "ndwi": -0.21042881209237002}]}, "Ankobra River - Grid 25": {"history": [{"date": "2024-12-30", "ndwi": -0.1383147927047568}]}, "Ankobra River - Grid 26": {"history": [{"date": "2024-12-30", "ndwi": -0.1470093239361104}]}, "Ankobra River - Grid 27": {"history": [{"date": "2024-12-30", "ndwi": -0.10985791447382794}]}, "Ankobra River - Grid 28": {"history": [{"date": "2024-12-30", "ndwi": -0.04935784376266881}]}, "Ankobra River - Grid 29": {"history": [{"date": "2024-12-30", "ndwi": -0.04488852753844482}]}, "Ankobra River - Grid 30": {"history": [{"date": "2024-12-30", "ndwi": -0.1663309975667105}]}, "Ankobra River - Grid 31": {"history": [{"date": "2024-12-30", "ndwi": -0.13699736321530767}]}, "Ankobra River - Grid 32": {"history": [{"date": "2024-12-30", "ndwi": -0.19719441763254406}]}, "Ankobra River - Grid 34": {"history": [{"date": "2024-12-30", "ndwi": -0.05199633382116456}]}, "Ankobra River - Grid 35": {"history": [{"date": "2024-12-30", "ndwi": -0.19237401633385132}]}, "Ankobra River - Grid 36": {"history": [{"date": "2024-12-30", "ndwi": -0.2098898323726044}]}, "Ankobra River - Grid 38": {"history": [{"date": "2024-12-30", "ndwi": -0.09507057798987069}]}, "Ankobra River - Grid 39": {"history": [{"date": "2024-12-30", "ndwi": -0.11395540910315047}]}, "Ankobra River - Grid 40": {"history": [{"date": "2024-12-30", "ndwi": -0.20520271401117957}]}, "Ankobra River - Grid 41": {"history": [{"date": "2024-12-30", "ndwi": -0.16574919476774114}]}}</script>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_acb469344997af21ebfb330874b802cf {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_acb469344997af21ebfb330874b802cf" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_acb469344997af21ebfb330874b802cf = L.map(
+                "map_acb469344997af21ebfb330874b802cf",
+                {
+                    center: [5.4420673, -2.121021],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_83774e2c1c9b666e782ca7420a26671a = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_83774e2c1c9b666e782ca7420a26671a.addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+            var rectangle_3d7c5c100a8eadc64fcc484985b61198 = L.rectangle(
+                [[4.8939004552615515, -2.279038573118692], [4.9339004552615515, -2.239038573118692]],
+                {"bubblingMouseEvents": true, "color": "#d0e800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d0e800ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_da8508ed8fbb85f47562070c1007c923 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7558ea9d9f8ed5889e670eff98216539 = $(`<div id="html_7558ea9d9f8ed5889e670eff98216539" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 1</b><br>                 NDWI: 0.19<br>                 <button onclick="showHistory('Ankobra River - Grid 1')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 1" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_da8508ed8fbb85f47562070c1007c923.setContent(html_7558ea9d9f8ed5889e670eff98216539);
+            
+        
+
+        rectangle_3d7c5c100a8eadc64fcc484985b61198.bindPopup(popup_da8508ed8fbb85f47562070c1007c923)
+        ;
+
+        
+    
+    
+            var rectangle_6aa96226ae67d5faa85375a53dcad91c = L.rectangle(
+                [[4.9339004552615515, -2.279038573118692], [4.973900455261552, -2.239038573118692]],
+                {"bubblingMouseEvents": true, "color": "#cee700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cee700ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_a3be2d244a01421a3364310a52b68c11 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d4f258e626268cfb3797d3b32eaacc08 = $(`<div id="html_d4f258e626268cfb3797d3b32eaacc08" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 2</b><br>                 NDWI: 0.19<br>                 <button onclick="showHistory('Ankobra River - Grid 2')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 2" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_a3be2d244a01421a3364310a52b68c11.setContent(html_d4f258e626268cfb3797d3b32eaacc08);
+            
+        
+
+        rectangle_6aa96226ae67d5faa85375a53dcad91c.bindPopup(popup_a3be2d244a01421a3364310a52b68c11)
+        ;
+
+        
+    
+    
+            var rectangle_097f240005a77ff6a62415e38aae6181 = L.rectangle(
+                [[5.053900455261552, -2.279038573118692], [5.093900455261552, -2.239038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffe200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe200ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_0d862800eebf8158ce6a573325e9abaf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c43fd21a123c1720019baffc4b678b5d = $(`<div id="html_c43fd21a123c1720019baffc4b678b5d" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 3</b><br>                 NDWI: -0.12<br>                 <button onclick="showHistory('Ankobra River - Grid 3')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 3" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_0d862800eebf8158ce6a573325e9abaf.setContent(html_c43fd21a123c1720019baffc4b678b5d);
+            
+        
+
+        rectangle_097f240005a77ff6a62415e38aae6181.bindPopup(popup_0d862800eebf8158ce6a573325e9abaf)
+        ;
+
+        
+    
+    
+            var rectangle_d9b7ceac7b47811eaf17c36b76b0d0bb = L.rectangle(
+                [[5.093900455261552, -2.279038573118692], [5.133900455261552, -2.239038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffdc00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffdc00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_ecafd6a792ac63177e556f183c1ac666 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_db082deaeb8b801dc2a53fea35be0420 = $(`<div id="html_db082deaeb8b801dc2a53fea35be0420" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 4</b><br>                 NDWI: -0.14<br>                 <button onclick="showHistory('Ankobra River - Grid 4')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 4" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_ecafd6a792ac63177e556f183c1ac666.setContent(html_db082deaeb8b801dc2a53fea35be0420);
+            
+        
+
+        rectangle_d9b7ceac7b47811eaf17c36b76b0d0bb.bindPopup(popup_ecafd6a792ac63177e556f183c1ac666)
+        ;
+
+        
+    
+    
+            var rectangle_79dd117691dd2f60864fbdd7a46d67b2 = L.rectangle(
+                [[4.9339004552615515, -2.239038573118692], [4.973900455261552, -2.199038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffe100ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe100ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_fe209af1131069f7d740d118c98bc4b5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c27c7c8c1afe96f2d958a474161e9b33 = $(`<div id="html_c27c7c8c1afe96f2d958a474161e9b33" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 6</b><br>                 NDWI: -0.12<br>                 <button onclick="showHistory('Ankobra River - Grid 6')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 6" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_fe209af1131069f7d740d118c98bc4b5.setContent(html_c27c7c8c1afe96f2d958a474161e9b33);
+            
+        
+
+        rectangle_79dd117691dd2f60864fbdd7a46d67b2.bindPopup(popup_fe209af1131069f7d740d118c98bc4b5)
+        ;
+
+        
+    
+    
+            var rectangle_372e42f01dc596b7fb74ef8248ce7fb3 = L.rectangle(
+                [[5.013900455261552, -2.239038573118692], [5.053900455261552, -2.199038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd800ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_b8aa699380ef4be3d06c5ab71c72e631 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c81d5ed1083f52ddc7b54b8bac5bba87 = $(`<div id="html_c81d5ed1083f52ddc7b54b8bac5bba87" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 7</b><br>                 NDWI: -0.15<br>                 <button onclick="showHistory('Ankobra River - Grid 7')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 7" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_b8aa699380ef4be3d06c5ab71c72e631.setContent(html_c81d5ed1083f52ddc7b54b8bac5bba87);
+            
+        
+
+        rectangle_372e42f01dc596b7fb74ef8248ce7fb3.bindPopup(popup_b8aa699380ef4be3d06c5ab71c72e631)
+        ;
+
+        
+    
+    
+            var rectangle_8bd64dfccad7ea13759e0eb546cca2f3 = L.rectangle(
+                [[5.053900455261552, -2.239038573118692], [5.093900455261552, -2.199038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd800ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_b42f8fddd7f4546a48bcdc2dceb7592d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9bbf56e3f2d42101c413d2535a62d50e = $(`<div id="html_9bbf56e3f2d42101c413d2535a62d50e" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 8</b><br>                 NDWI: -0.16<br>                 <button onclick="showHistory('Ankobra River - Grid 8')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 8" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_b42f8fddd7f4546a48bcdc2dceb7592d.setContent(html_9bbf56e3f2d42101c413d2535a62d50e);
+            
+        
+
+        rectangle_8bd64dfccad7ea13759e0eb546cca2f3.bindPopup(popup_b42f8fddd7f4546a48bcdc2dceb7592d)
+        ;
+
+        
+    
+    
+            var rectangle_a5e2b2a09ff86dbf584f10098685b7c5 = L.rectangle(
+                [[5.093900455261552, -2.239038573118692], [5.133900455261552, -2.199038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffdd00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffdd00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_e04250308e7e86ae30c5ac025f4b03af = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1ba6007cabc7790fedad44fb94e3b7b9 = $(`<div id="html_1ba6007cabc7790fedad44fb94e3b7b9" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 9</b><br>                 NDWI: -0.14<br>                 <button onclick="showHistory('Ankobra River - Grid 9')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 9" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_e04250308e7e86ae30c5ac025f4b03af.setContent(html_1ba6007cabc7790fedad44fb94e3b7b9);
+            
+        
+
+        rectangle_a5e2b2a09ff86dbf584f10098685b7c5.bindPopup(popup_e04250308e7e86ae30c5ac025f4b03af)
+        ;
+
+        
+    
+    
+            var rectangle_33d890608efc6444cbda5bb7d24f86cd = L.rectangle(
+                [[5.133900455261552, -2.239038573118692], [5.173900455261552, -2.199038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffdb00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffdb00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_2beeddc847059ccba68b0dd7ff22c0c0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_45b92efec6a721ec2c3dca54e229eb65 = $(`<div id="html_45b92efec6a721ec2c3dca54e229eb65" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 10</b><br>                 NDWI: -0.14<br>                 <button onclick="showHistory('Ankobra River - Grid 10')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 10" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_2beeddc847059ccba68b0dd7ff22c0c0.setContent(html_45b92efec6a721ec2c3dca54e229eb65);
+            
+        
+
+        rectangle_33d890608efc6444cbda5bb7d24f86cd.bindPopup(popup_2beeddc847059ccba68b0dd7ff22c0c0)
+        ;
+
+        
+    
+    
+            var rectangle_cf3ce203d84b05b4e62bf7f3d5b064a0 = L.rectangle(
+                [[5.173900455261552, -2.239038573118692], [5.213900455261552, -2.199038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd700ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_1e109c0e055c054168ccdbc2fbc1454e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_22916849a2e5f59a833157f25ee513be = $(`<div id="html_22916849a2e5f59a833157f25ee513be" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 11</b><br>                 NDWI: -0.16<br>                 <button onclick="showHistory('Ankobra River - Grid 11')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 11" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_1e109c0e055c054168ccdbc2fbc1454e.setContent(html_22916849a2e5f59a833157f25ee513be);
+            
+        
+
+        rectangle_cf3ce203d84b05b4e62bf7f3d5b064a0.bindPopup(popup_1e109c0e055c054168ccdbc2fbc1454e)
+        ;
+
+        
+    
+    
+            var rectangle_f9558694b146f9b49688e8d7fb122ada = L.rectangle(
+                [[5.213900455261552, -2.239038573118692], [5.253900455261552, -2.199038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd300ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_dd892c13d6b8eabb847ad78dd8955ee6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b918fcf4d685b676d873d69153588103 = $(`<div id="html_b918fcf4d685b676d873d69153588103" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 12</b><br>                 NDWI: -0.17<br>                 <button onclick="showHistory('Ankobra River - Grid 12')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 12" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_dd892c13d6b8eabb847ad78dd8955ee6.setContent(html_b918fcf4d685b676d873d69153588103);
+            
+        
+
+        rectangle_f9558694b146f9b49688e8d7fb122ada.bindPopup(popup_dd892c13d6b8eabb847ad78dd8955ee6)
+        ;
+
+        
+    
+    
+            var rectangle_8eaf0dec3f721078e3f8a5c609fbda71 = L.rectangle(
+                [[5.253900455261552, -2.239038573118692], [5.293900455261552, -2.199038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffbc00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffbc00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_82c7050245931c8aec9d857c235af8a5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a935251ad8535e0b9b7fed98785f7468 = $(`<div id="html_a935251ad8535e0b9b7fed98785f7468" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 13</b><br>                 NDWI: -0.26<br>                 <button onclick="showHistory('Ankobra River - Grid 13')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 13" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_82c7050245931c8aec9d857c235af8a5.setContent(html_a935251ad8535e0b9b7fed98785f7468);
+            
+        
+
+        rectangle_8eaf0dec3f721078e3f8a5c609fbda71.bindPopup(popup_82c7050245931c8aec9d857c235af8a5)
+        ;
+
+        
+    
+    
+            var rectangle_c3b36e0ac97daa8d681ef78a23740ee0 = L.rectangle(
+                [[4.9339004552615515, -2.199038573118692], [4.973900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd200ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_df63ebf482e18eb53564139aae87fbdd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dddd03086dd134780b0d299b77b465e1 = $(`<div id="html_dddd03086dd134780b0d299b77b465e1" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 14</b><br>                 NDWI: -0.18<br>                 <button onclick="showHistory('Ankobra River - Grid 14')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 14" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_df63ebf482e18eb53564139aae87fbdd.setContent(html_dddd03086dd134780b0d299b77b465e1);
+            
+        
+
+        rectangle_c3b36e0ac97daa8d681ef78a23740ee0.bindPopup(popup_df63ebf482e18eb53564139aae87fbdd)
+        ;
+
+        
+    
+    
+            var rectangle_1ae94f6d02ac25c297dfc35032603903 = L.rectangle(
+                [[4.973900455261552, -2.199038573118692], [5.013900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd400ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd400ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_a5c2bb86c2c5ddd74fec1213d28243af = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e3457e7f7029dfee9ce4e8d970f9ca0d = $(`<div id="html_e3457e7f7029dfee9ce4e8d970f9ca0d" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 15</b><br>                 NDWI: -0.17<br>                 <button onclick="showHistory('Ankobra River - Grid 15')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 15" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_a5c2bb86c2c5ddd74fec1213d28243af.setContent(html_e3457e7f7029dfee9ce4e8d970f9ca0d);
+            
+        
+
+        rectangle_1ae94f6d02ac25c297dfc35032603903.bindPopup(popup_a5c2bb86c2c5ddd74fec1213d28243af)
+        ;
+
+        
+    
+    
+            var rectangle_7d0aeb52eaabf16201295d41c7885043 = L.rectangle(
+                [[5.013900455261552, -2.199038573118692], [5.053900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd000ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_d5344a4092432a2761897a4715909468 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dbd850cd56c06a463fb27a219450710b = $(`<div id="html_dbd850cd56c06a463fb27a219450710b" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 16</b><br>                 NDWI: -0.19<br>                 <button onclick="showHistory('Ankobra River - Grid 16')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 16" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_d5344a4092432a2761897a4715909468.setContent(html_dbd850cd56c06a463fb27a219450710b);
+            
+        
+
+        rectangle_7d0aeb52eaabf16201295d41c7885043.bindPopup(popup_d5344a4092432a2761897a4715909468)
+        ;
+
+        
+    
+    
+            var rectangle_09d5b6f06c283d0880c162b93aa60675 = L.rectangle(
+                [[5.173900455261552, -2.199038573118692], [5.213900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd600ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd600ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_dd616c90d1f4006b78ea33e2af6a1dd6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f4bf2331b5e5e9af2b8df5c878c03006 = $(`<div id="html_f4bf2331b5e5e9af2b8df5c878c03006" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 17</b><br>                 NDWI: -0.16<br>                 <button onclick="showHistory('Ankobra River - Grid 17')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 17" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_dd616c90d1f4006b78ea33e2af6a1dd6.setContent(html_f4bf2331b5e5e9af2b8df5c878c03006);
+            
+        
+
+        rectangle_09d5b6f06c283d0880c162b93aa60675.bindPopup(popup_dd616c90d1f4006b78ea33e2af6a1dd6)
+        ;
+
+        
+    
+    
+            var rectangle_bf502de30e3dc4cd84376955bd7a1367 = L.rectangle(
+                [[5.213900455261552, -2.199038573118692], [5.253900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffdc00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffdc00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_a6123664f03d10b5b9d83ff9e61e98d4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_799148b3c488adc752a640b1591b0b07 = $(`<div id="html_799148b3c488adc752a640b1591b0b07" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 18</b><br>                 NDWI: -0.14<br>                 <button onclick="showHistory('Ankobra River - Grid 18')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 18" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_a6123664f03d10b5b9d83ff9e61e98d4.setContent(html_799148b3c488adc752a640b1591b0b07);
+            
+        
+
+        rectangle_bf502de30e3dc4cd84376955bd7a1367.bindPopup(popup_a6123664f03d10b5b9d83ff9e61e98d4)
+        ;
+
+        
+    
+    
+            var rectangle_d99f5cdc9ea3c5d99289715dd9bbf05a = L.rectangle(
+                [[5.253900455261552, -2.199038573118692], [5.293900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd900ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_6025fc39e458fcb27cee28186fc17b1b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3c5ff825e7156096cfcfff9737461d72 = $(`<div id="html_3c5ff825e7156096cfcfff9737461d72" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 19</b><br>                 NDWI: -0.15<br>                 <button onclick="showHistory('Ankobra River - Grid 19')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 19" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_6025fc39e458fcb27cee28186fc17b1b.setContent(html_3c5ff825e7156096cfcfff9737461d72);
+            
+        
+
+        rectangle_d99f5cdc9ea3c5d99289715dd9bbf05a.bindPopup(popup_6025fc39e458fcb27cee28186fc17b1b)
+        ;
+
+        
+    
+    
+            var rectangle_e9707e0e7bf5992fc48aced4cc11547a = L.rectangle(
+                [[5.493900455261552, -2.199038573118692], [5.533900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd900ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_37b3c34c38db7b9df81bb743600158ba = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_aaf2dcd13871fd679b3ade6c565af8f2 = $(`<div id="html_aaf2dcd13871fd679b3ade6c565af8f2" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 20</b><br>                 NDWI: -0.15<br>                 <button onclick="showHistory('Ankobra River - Grid 20')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 20" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_37b3c34c38db7b9df81bb743600158ba.setContent(html_aaf2dcd13871fd679b3ade6c565af8f2);
+            
+        
+
+        rectangle_e9707e0e7bf5992fc48aced4cc11547a.bindPopup(popup_37b3c34c38db7b9df81bb743600158ba)
+        ;
+
+        
+    
+    
+            var rectangle_218b4dee091b9e3e422ffa64cbd32609 = L.rectangle(
+                [[5.533900455261552, -2.199038573118692], [5.573900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd800ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_ca61ed2fbfdb3984e69b0794b32f2ffa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c180254117dc245fbe5531257d617e3d = $(`<div id="html_c180254117dc245fbe5531257d617e3d" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 21</b><br>                 NDWI: -0.15<br>                 <button onclick="showHistory('Ankobra River - Grid 21')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 21" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_ca61ed2fbfdb3984e69b0794b32f2ffa.setContent(html_c180254117dc245fbe5531257d617e3d);
+            
+        
+
+        rectangle_218b4dee091b9e3e422ffa64cbd32609.bindPopup(popup_ca61ed2fbfdb3984e69b0794b32f2ffa)
+        ;
+
+        
+    
+    
+            var rectangle_7c70ab72ce8e0a14726d02d25ab13fe8 = L.rectangle(
+                [[5.573900455261552, -2.199038573118692], [5.613900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffcb00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffcb00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_79ef3dfa8db82b62e4e93fb18544f1c9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_703d194179f150ab1f4a49add1fe4921 = $(`<div id="html_703d194179f150ab1f4a49add1fe4921" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 22</b><br>                 NDWI: -0.21<br>                 <button onclick="showHistory('Ankobra River - Grid 22')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 22" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_79ef3dfa8db82b62e4e93fb18544f1c9.setContent(html_703d194179f150ab1f4a49add1fe4921);
+            
+        
+
+        rectangle_7c70ab72ce8e0a14726d02d25ab13fe8.bindPopup(popup_79ef3dfa8db82b62e4e93fb18544f1c9)
+        ;
+
+        
+    
+    
+            var rectangle_6bc82ee3fc677d962a5131a0d1a70742 = L.rectangle(
+                [[5.613900455261552, -2.199038573118692], [5.653900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffe800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe800ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_3804e65dadfa0900d68ca1f5815cf768 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5e4a41fc0fa27ce2924e2c20605eb5b9 = $(`<div id="html_5e4a41fc0fa27ce2924e2c20605eb5b9" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 23</b><br>                 NDWI: -0.09<br>                 <button onclick="showHistory('Ankobra River - Grid 23')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 23" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_3804e65dadfa0900d68ca1f5815cf768.setContent(html_5e4a41fc0fa27ce2924e2c20605eb5b9);
+            
+        
+
+        rectangle_6bc82ee3fc677d962a5131a0d1a70742.bindPopup(popup_3804e65dadfa0900d68ca1f5815cf768)
+        ;
+
+        
+    
+    
+            var rectangle_c9639b40955c095e89cd29cf9928da57 = L.rectangle(
+                [[5.653900455261552, -2.199038573118692], [5.693900455261552, -2.159038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffca00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffca00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_061ff9cc853e9e40c3bf11fc812e101e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f39abf1ee85c469d4d5370dbeab8e022 = $(`<div id="html_f39abf1ee85c469d4d5370dbeab8e022" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 24</b><br>                 NDWI: -0.21<br>                 <button onclick="showHistory('Ankobra River - Grid 24')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 24" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_061ff9cc853e9e40c3bf11fc812e101e.setContent(html_f39abf1ee85c469d4d5370dbeab8e022);
+            
+        
+
+        rectangle_c9639b40955c095e89cd29cf9928da57.bindPopup(popup_061ff9cc853e9e40c3bf11fc812e101e)
+        ;
+
+        
+    
+    
+            var rectangle_2ee3ef15593441195b2b4521166cabb2 = L.rectangle(
+                [[5.253900455261552, -2.159038573118692], [5.293900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffdc00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffdc00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_12ba281ccbf0f2a0112ec9b5ef926272 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_822f5c3e0e59a15968fccc69421b019b = $(`<div id="html_822f5c3e0e59a15968fccc69421b019b" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 25</b><br>                 NDWI: -0.14<br>                 <button onclick="showHistory('Ankobra River - Grid 25')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 25" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_12ba281ccbf0f2a0112ec9b5ef926272.setContent(html_822f5c3e0e59a15968fccc69421b019b);
+            
+        
+
+        rectangle_2ee3ef15593441195b2b4521166cabb2.bindPopup(popup_12ba281ccbf0f2a0112ec9b5ef926272)
+        ;
+
+        
+    
+    
+            var rectangle_fb710d1c8a98647b21ae240d3168be33 = L.rectangle(
+                [[5.293900455261552, -2.159038573118692], [5.333900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffda00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffda00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_e4d3f01bb70531e34290381926010831 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fd992c137415bc68f114980e2ba494fb = $(`<div id="html_fd992c137415bc68f114980e2ba494fb" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 26</b><br>                 NDWI: -0.15<br>                 <button onclick="showHistory('Ankobra River - Grid 26')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 26" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_e4d3f01bb70531e34290381926010831.setContent(html_fd992c137415bc68f114980e2ba494fb);
+            
+        
+
+        rectangle_fb710d1c8a98647b21ae240d3168be33.bindPopup(popup_e4d3f01bb70531e34290381926010831)
+        ;
+
+        
+    
+    
+            var rectangle_57f4fad012688388224bdfaf4775ed26 = L.rectangle(
+                [[5.333900455261552, -2.159038573118692], [5.373900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffe300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe300ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_d54924a1d2f15e808c27079ccdf33a18 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cc5b53dcfbe5c99b5ed04a5de692e41d = $(`<div id="html_cc5b53dcfbe5c99b5ed04a5de692e41d" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 27</b><br>                 NDWI: -0.11<br>                 <button onclick="showHistory('Ankobra River - Grid 27')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 27" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_d54924a1d2f15e808c27079ccdf33a18.setContent(html_cc5b53dcfbe5c99b5ed04a5de692e41d);
+            
+        
+
+        rectangle_57f4fad012688388224bdfaf4775ed26.bindPopup(popup_d54924a1d2f15e808c27079ccdf33a18)
+        ;
+
+        
+    
+    
+            var rectangle_0c4679826a2fce94b95e05fde02fc0a7 = L.rectangle(
+                [[5.373900455261552, -2.159038573118692], [5.413900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#fff300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fff300ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_19e632ff39a8b41d9ed2033e19ccd406 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d23e4fe11976529d90e4b94adfee5fd9 = $(`<div id="html_d23e4fe11976529d90e4b94adfee5fd9" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 28</b><br>                 NDWI: -0.05<br>                 <button onclick="showHistory('Ankobra River - Grid 28')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 28" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_19e632ff39a8b41d9ed2033e19ccd406.setContent(html_d23e4fe11976529d90e4b94adfee5fd9);
+            
+        
+
+        rectangle_0c4679826a2fce94b95e05fde02fc0a7.bindPopup(popup_19e632ff39a8b41d9ed2033e19ccd406)
+        ;
+
+        
+    
+    
+            var rectangle_aa3bfab3609955f41a464f34971e1bf7 = L.rectangle(
+                [[5.413900455261552, -2.159038573118692], [5.453900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#fff400ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fff400ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_929fa4aaabe3fce18c1536b80f294798 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8092e5c0b71127baa211163a11ae135d = $(`<div id="html_8092e5c0b71127baa211163a11ae135d" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 29</b><br>                 NDWI: -0.04<br>                 <button onclick="showHistory('Ankobra River - Grid 29')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 29" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_929fa4aaabe3fce18c1536b80f294798.setContent(html_8092e5c0b71127baa211163a11ae135d);
+            
+        
+
+        rectangle_aa3bfab3609955f41a464f34971e1bf7.bindPopup(popup_929fa4aaabe3fce18c1536b80f294798)
+        ;
+
+        
+    
+    
+            var rectangle_5fe3e4e5d99414cb16f362eac4e7a435 = L.rectangle(
+                [[5.453900455261552, -2.159038573118692], [5.493900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd500ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd500ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_09c39fb4ce7f522452589d20481a60f3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cbd1f3263b4a32516c1d0cbc2c6fce27 = $(`<div id="html_cbd1f3263b4a32516c1d0cbc2c6fce27" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 30</b><br>                 NDWI: -0.17<br>                 <button onclick="showHistory('Ankobra River - Grid 30')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 30" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_09c39fb4ce7f522452589d20481a60f3.setContent(html_cbd1f3263b4a32516c1d0cbc2c6fce27);
+            
+        
+
+        rectangle_5fe3e4e5d99414cb16f362eac4e7a435.bindPopup(popup_09c39fb4ce7f522452589d20481a60f3)
+        ;
+
+        
+    
+    
+            var rectangle_27b95218cb21f5e8d6d5fac20fc2cb80 = L.rectangle(
+                [[5.493900455261552, -2.159038573118692], [5.533900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffdc00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffdc00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_82b2ed343c5bdd4a48baaf9dc2eb9621 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_17dceb820fa70a6ac7e835f688b0070a = $(`<div id="html_17dceb820fa70a6ac7e835f688b0070a" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 31</b><br>                 NDWI: -0.14<br>                 <button onclick="showHistory('Ankobra River - Grid 31')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 31" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_82b2ed343c5bdd4a48baaf9dc2eb9621.setContent(html_17dceb820fa70a6ac7e835f688b0070a);
+            
+        
+
+        rectangle_27b95218cb21f5e8d6d5fac20fc2cb80.bindPopup(popup_82b2ed343c5bdd4a48baaf9dc2eb9621)
+        ;
+
+        
+    
+    
+            var rectangle_e41f2c289dd7f41b8ec6a55b774a78b9 = L.rectangle(
+                [[5.533900455261552, -2.159038573118692], [5.573900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffcd00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffcd00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_12e93771acf5c97ffcb235aa2516533d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7b639f605719f4715e82de6c4b39908c = $(`<div id="html_7b639f605719f4715e82de6c4b39908c" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 32</b><br>                 NDWI: -0.20<br>                 <button onclick="showHistory('Ankobra River - Grid 32')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 32" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_12e93771acf5c97ffcb235aa2516533d.setContent(html_7b639f605719f4715e82de6c4b39908c);
+            
+        
+
+        rectangle_e41f2c289dd7f41b8ec6a55b774a78b9.bindPopup(popup_12e93771acf5c97ffcb235aa2516533d)
+        ;
+
+        
+    
+    
+            var rectangle_a1bff0da03e612af879ac12efc60f838 = L.rectangle(
+                [[5.613900455261552, -2.159038573118692], [5.653900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#fff200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fff200ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_5ff04d33b6f9c764dbc1ac17c2d3964d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7beada31bc86115123a8d896026d3d22 = $(`<div id="html_7beada31bc86115123a8d896026d3d22" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 34</b><br>                 NDWI: -0.05<br>                 <button onclick="showHistory('Ankobra River - Grid 34')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 34" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_5ff04d33b6f9c764dbc1ac17c2d3964d.setContent(html_7beada31bc86115123a8d896026d3d22);
+            
+        
+
+        rectangle_a1bff0da03e612af879ac12efc60f838.bindPopup(popup_5ff04d33b6f9c764dbc1ac17c2d3964d)
+        ;
+
+        
+    
+    
+            var rectangle_86cc60d9bc2beddbf6eb30d9d1953f96 = L.rectangle(
+                [[5.653900455261552, -2.159038573118692], [5.693900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffce00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffce00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_d3c0c2157eddf7b38c0d5860bfb9b962 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3ab617e653d29cd0cbc0dc390b648ee1 = $(`<div id="html_3ab617e653d29cd0cbc0dc390b648ee1" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 35</b><br>                 NDWI: -0.19<br>                 <button onclick="showHistory('Ankobra River - Grid 35')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 35" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_d3c0c2157eddf7b38c0d5860bfb9b962.setContent(html_3ab617e653d29cd0cbc0dc390b648ee1);
+            
+        
+
+        rectangle_86cc60d9bc2beddbf6eb30d9d1953f96.bindPopup(popup_d3c0c2157eddf7b38c0d5860bfb9b962)
+        ;
+
+        
+    
+    
+            var rectangle_e68344042a033dcdb833aa8c38634ad0 = L.rectangle(
+                [[5.693900455261552, -2.159038573118692], [5.733900455261552, -2.119038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffca00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffca00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_599cecc3f5c6b60d33bec131d04b0bd8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8c280c1272f441ed3c413cb32386d6ed = $(`<div id="html_8c280c1272f441ed3c413cb32386d6ed" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 36</b><br>                 NDWI: -0.21<br>                 <button onclick="showHistory('Ankobra River - Grid 36')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 36" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_599cecc3f5c6b60d33bec131d04b0bd8.setContent(html_8c280c1272f441ed3c413cb32386d6ed);
+            
+        
+
+        rectangle_e68344042a033dcdb833aa8c38634ad0.bindPopup(popup_599cecc3f5c6b60d33bec131d04b0bd8)
+        ;
+
+        
+    
+    
+            var rectangle_88f696d0bfd3343c93873bb7b52fb4c8 = L.rectangle(
+                [[5.373900455261552, -2.119038573118692], [5.413900455261552, -2.079038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffe700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe700ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_5539b4db3052b3a27d06a4b9ccc963d4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2382dea773ea23ff399f5030d70bddfb = $(`<div id="html_2382dea773ea23ff399f5030d70bddfb" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 38</b><br>                 NDWI: -0.10<br>                 <button onclick="showHistory('Ankobra River - Grid 38')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 38" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_5539b4db3052b3a27d06a4b9ccc963d4.setContent(html_2382dea773ea23ff399f5030d70bddfb);
+            
+        
+
+        rectangle_88f696d0bfd3343c93873bb7b52fb4c8.bindPopup(popup_5539b4db3052b3a27d06a4b9ccc963d4)
+        ;
+
+        
+    
+    
+            var rectangle_4340d5b0e6e11904c5ff203c1f118337 = L.rectangle(
+                [[5.413900455261552, -2.119038573118692], [5.453900455261552, -2.079038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffe200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe200ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_c70e2c242cad9f243585a044de064c55 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_97aa9d219d5bcd76e20c14d60b71315b = $(`<div id="html_97aa9d219d5bcd76e20c14d60b71315b" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 39</b><br>                 NDWI: -0.11<br>                 <button onclick="showHistory('Ankobra River - Grid 39')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 39" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_c70e2c242cad9f243585a044de064c55.setContent(html_97aa9d219d5bcd76e20c14d60b71315b);
+            
+        
+
+        rectangle_4340d5b0e6e11904c5ff203c1f118337.bindPopup(popup_c70e2c242cad9f243585a044de064c55)
+        ;
+
+        
+    
+    
+            var rectangle_c575ff162e6a15e00816b6120678fe92 = L.rectangle(
+                [[5.453900455261552, -2.119038573118692], [5.493900455261552, -2.079038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffcb00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffcb00ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_b49a4ae4f4d3873da0956e2c5a0babad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c08fd88ebac3150257b56b32eb287d8f = $(`<div id="html_c08fd88ebac3150257b56b32eb287d8f" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 40</b><br>                 NDWI: -0.21<br>                 <button onclick="showHistory('Ankobra River - Grid 40')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 40" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_b49a4ae4f4d3873da0956e2c5a0babad.setContent(html_c08fd88ebac3150257b56b32eb287d8f);
+            
+        
+
+        rectangle_c575ff162e6a15e00816b6120678fe92.bindPopup(popup_b49a4ae4f4d3873da0956e2c5a0babad)
+        ;
+
+        
+    
+    
+            var rectangle_472a57e1f82e0b34548604c351de4199 = L.rectangle(
+                [[5.493900455261552, -2.119038573118692], [5.533900455261552, -2.079038573118692]],
+                {"bubblingMouseEvents": true, "color": "#ffd500ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd500ff", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+        
+    
+        var popup_0b13651b658293cd28e4e24936511c1a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a09bca2e67e7e88cd37bffef28d342d7 = $(`<div id="html_a09bca2e67e7e88cd37bffef28d342d7" style="width: 100.0%; height: 100.0%;">                 <b>Ankobra River - Grid 41</b><br>                 NDWI: -0.17<br>                 <button onclick="showHistory('Ankobra River - Grid 41')">View Trend</button>                 <canvas id="chart-Ankobra River - Grid 41" style="width: 100%; height: 300px;"></canvas>                 </div>`)[0];
+                popup_0b13651b658293cd28e4e24936511c1a.setContent(html_a09bca2e67e7e88cd37bffef28d342d7);
+            
+        
+
+        rectangle_472a57e1f82e0b34548604c351de4199.bindPopup(popup_0b13651b658293cd28e4e24936511c1a)
+        ;
+
+        
+    
+    
+    var color_map_1bcceda9c673f6676a2697e9b8af957f = {};
+
+    
+    color_map_1bcceda9c673f6676a2697e9b8af957f.color = d3.scale.threshold()
+              .domain([-1.0, -0.9959919839679359, -0.9919839679358717, -0.9879759519038076, -0.9839679358717435, -0.9799599198396793, -0.9759519038076152, -0.9719438877755511, -0.9679358717434869, -0.9639278557114228, -0.9599198396793587, -0.9559118236472945, -0.9519038076152304, -0.9478957915831663, -0.9438877755511021, -0.9398797595190381, -0.935871743486974, -0.9318637274549099, -0.9278557114228457, -0.9238476953907816, -0.9198396793587175, -0.9158316633266533, -0.9118236472945892, -0.9078156312625251, -0.9038076152304609, -0.8997995991983968, -0.8957915831663327, -0.8917835671342685, -0.8877755511022044, -0.8837675350701403, -0.8797595190380761, -0.875751503006012, -0.8717434869739479, -0.8677354709418837, -0.8637274549098196, -0.8597194388777555, -0.8557114228456913, -0.8517034068136272, -0.8476953907815631, -0.8436873747494991, -0.8396793587174349, -0.8356713426853708, -0.8316633266533067, -0.8276553106212425, -0.8236472945891784, -0.8196392785571143, -0.8156312625250501, -0.811623246492986, -0.8076152304609219, -0.8036072144288577, -0.7995991983967936, -0.7955911823647295, -0.7915831663326653, -0.7875751503006012, -0.7835671342685371, -0.779559118236473, -0.7755511022044088, -0.7715430861723447, -0.7675350701402806, -0.7635270541082164, -0.7595190380761523, -0.7555110220440882, -0.751503006012024, -0.7474949899799599, -0.7434869739478958, -0.7394789579158316, -0.7354709418837675, -0.7314629258517034, -0.7274549098196392, -0.7234468937875751, -0.719438877755511, -0.7154308617234468, -0.7114228456913827, -0.7074148296593186, -0.7034068136272544, -0.6993987975951903, -0.6953907815631262, -0.6913827655310621, -0.687374749498998, -0.6833667334669339, -0.6793587174348698, -0.6753507014028056, -0.6713426853707415, -0.6673346693386774, -0.6633266533066132, -0.6593186372745491, -0.655310621242485, -0.6513026052104208, -0.6472945891783567, -0.6432865731462926, -0.6392785571142284, -0.6352705410821644, -0.6312625250501003, -0.6272545090180361, -0.623246492985972, -0.6192384769539079, -0.6152304609218437, -0.6112224448897796, -0.6072144288577155, -0.6032064128256514, -0.5991983967935872, -0.5951903807615231, -0.591182364729459, -0.5871743486973948, -0.5831663326653307, -0.5791583166332666, -0.5751503006012024, -0.5711422845691383, -0.5671342685370742, -0.56312625250501, -0.5591182364729459, -0.5551102204408818, -0.5511022044088176, -0.5470941883767535, -0.5430861723446894, -0.5390781563126252, -0.5350701402805611, -0.531062124248497, -0.5270541082164328, -0.5230460921843687, -0.5190380761523046, -0.5150300601202404, -0.5110220440881763, -0.5070140280561122, -0.503006012024048, -0.498997995991984, -0.4949899799599199, -0.49098196392785576, -0.4869739478957916, -0.4829659318637275, -0.47895791583166336, -0.47494989979959923, -0.4709418837675351, -0.46693386773547096, -0.46292585170340683, -0.4589178356713427, -0.45490981963927857, -0.45090180360721444, -0.4468937875751503, -0.44288577154308617, -0.43887775551102204, -0.4348697394789579, -0.4308617234468938, -0.42685370741482964, -0.4228456913827655, -0.4188376753507014, -0.41482965931863724, -0.4108216432865731, -0.406813627254509, -0.40280561122244485, -0.3987975951903807, -0.3947895791583166, -0.39078156312625245, -0.38677354709418843, -0.3827655310621243, -0.37875751503006017, -0.37474949899799603, -0.3707414829659319, -0.36673346693386777, -0.36272545090180364, -0.3587174348697395, -0.35470941883767537, -0.35070140280561124, -0.3466933867735471, -0.342685370741483, -0.33867735470941884, -0.3346693386773547, -0.3306613226452906, -0.32665330661322645, -0.3226452905811623, -0.3186372745490982, -0.31462925851703405, -0.3106212424849699, -0.3066132264529058, -0.30260521042084165, -0.2985971943887775, -0.2945891783567134, -0.29058116232464926, -0.2865731462925851, -0.282565130260521, -0.27855711422845686, -0.27454909819639284, -0.2705410821643287, -0.2665330661322646, -0.26252505010020044, -0.2585170340681363, -0.2545090180360722, -0.25050100200400804, -0.2464929859719439, -0.24248496993987978, -0.23847695390781565, -0.23446893787575152, -0.23046092184368738, -0.22645290581162325, -0.22244488977955912, -0.218436873747495, -0.21442885771543085, -0.21042084168336672, -0.2064128256513026, -0.20240480961923846, -0.19839679358717432, -0.1943887775551102, -0.19038076152304606, -0.18637274549098193, -0.1823647294589178, -0.17835671342685366, -0.17434869739478953, -0.1703406813627254, -0.16633266533066138, -0.16232464929859725, -0.1583166332665331, -0.15430861723446898, -0.15030060120240485, -0.14629258517034072, -0.14228456913827658, -0.13827655310621245, -0.13426853707414832, -0.1302605210420842, -0.12625250501002006, -0.12224448897795592, -0.11823647294589179, -0.11422845691382766, -0.11022044088176353, -0.1062124248496994, -0.10220440881763526, -0.09819639278557113, -0.094188376753507, -0.09018036072144286, -0.08617234468937873, -0.0821643286573146, -0.07815631262525047, -0.07414829659318634, -0.0701402805611222, -0.06613226452905807, -0.06212424849699394, -0.05811623246492981, -0.054108216432865786, -0.05010020040080165, -0.04609218436873752, -0.04208416833667339, -0.038076152304609256, -0.034068136272545124, -0.030060120240480992, -0.02605210420841686, -0.022044088176352727, -0.018036072144288595, -0.014028056112224463, -0.01002004008016033, -0.006012024048096198, -0.002004008016032066, 0.002004008016031955, 0.006012024048096087, 0.01002004008016022, 0.014028056112224352, 0.018036072144288484, 0.022044088176352616, 0.02605210420841675, 0.03006012024048088, 0.03406813627254501, 0.038076152304609145, 0.04208416833667328, 0.04609218436873741, 0.05010020040080154, 0.054108216432865675, 0.05811623246492981, 0.06212424849699394, 0.06613226452905807, 0.0701402805611222, 0.07414829659318634, 0.07815631262525047, 0.0821643286573146, 0.08617234468937873, 0.09018036072144286, 0.094188376753507, 0.09819639278557113, 0.10220440881763526, 0.1062124248496994, 0.11022044088176353, 0.11422845691382766, 0.11823647294589179, 0.12224448897795592, 0.12625250501002006, 0.1302605210420842, 0.13426853707414832, 0.13827655310621245, 0.14228456913827658, 0.14629258517034072, 0.15030060120240485, 0.15430861723446898, 0.1583166332665331, 0.16232464929859725, 0.16633266533066138, 0.1703406813627255, 0.17434869739478964, 0.17835671342685377, 0.1823647294589179, 0.18637274549098204, 0.19038076152304617, 0.1943887775551103, 0.19839679358717444, 0.20240480961923857, 0.2064128256513027, 0.21042084168336683, 0.21442885771543096, 0.2184368737474951, 0.222444889779559, 0.22645290581162314, 0.23046092184368727, 0.2344689378757514, 0.23847695390781554, 0.24248496993987967, 0.2464929859719438, 0.25050100200400793, 0.25450901803607207, 0.2585170340681362, 0.26252505010020033, 0.26653306613226446, 0.2705410821643286, 0.2745490981963927, 0.27855711422845686, 0.282565130260521, 0.2865731462925851, 0.29058116232464926, 0.2945891783567134, 0.2985971943887775, 0.30260521042084165, 0.3066132264529058, 0.3106212424849699, 0.31462925851703405, 0.3186372745490982, 0.3226452905811623, 0.32665330661322645, 0.3306613226452906, 0.3346693386773547, 0.33867735470941884, 0.342685370741483, 0.3466933867735471, 0.35070140280561124, 0.35470941883767537, 0.3587174348697395, 0.36272545090180364, 0.36673346693386777, 0.3707414829659319, 0.37474949899799603, 0.37875751503006017, 0.3827655310621243, 0.38677354709418843, 0.39078156312625256, 0.3947895791583167, 0.3987975951903808, 0.40280561122244496, 0.4068136272545091, 0.4108216432865732, 0.41482965931863736, 0.4188376753507015, 0.4228456913827656, 0.42685370741482975, 0.4308617234468939, 0.434869739478958, 0.43887775551102215, 0.4428857715430863, 0.4468937875751502, 0.4509018036072143, 0.45490981963927846, 0.4589178356713426, 0.4629258517034067, 0.46693386773547085, 0.470941883767535, 0.4749498997995991, 0.47895791583166325, 0.4829659318637274, 0.4869739478957915, 0.49098196392785565, 0.4949899799599198, 0.4989979959919839, 0.503006012024048, 0.5070140280561122, 0.5110220440881763, 0.5150300601202404, 0.5190380761523046, 0.5230460921843687, 0.5270541082164328, 0.531062124248497, 0.5350701402805611, 0.5390781563126252, 0.5430861723446894, 0.5470941883767535, 0.5511022044088176, 0.5551102204408818, 0.5591182364729459, 0.56312625250501, 0.5671342685370742, 0.5711422845691383, 0.5751503006012024, 0.5791583166332666, 0.5831663326653307, 0.5871743486973948, 0.591182364729459, 0.5951903807615231, 0.5991983967935872, 0.6032064128256514, 0.6072144288577155, 0.6112224448897796, 0.6152304609218437, 0.6192384769539079, 0.623246492985972, 0.6272545090180361, 0.6312625250501003, 0.6352705410821644, 0.6392785571142285, 0.6432865731462927, 0.6472945891783568, 0.6513026052104209, 0.6553106212424851, 0.6593186372745492, 0.6633266533066133, 0.6673346693386772, 0.6713426853707414, 0.6753507014028055, 0.6793587174348696, 0.6833667334669338, 0.6873747494989979, 0.691382765531062, 0.6953907815631262, 0.6993987975951903, 0.7034068136272544, 0.7074148296593186, 0.7114228456913827, 0.7154308617234468, 0.719438877755511, 0.7234468937875751, 0.7274549098196392, 0.7314629258517034, 0.7354709418837675, 0.7394789579158316, 0.7434869739478958, 0.7474949899799599, 0.751503006012024, 0.7555110220440882, 0.7595190380761523, 0.7635270541082164, 0.7675350701402806, 0.7715430861723447, 0.7755511022044088, 0.779559118236473, 0.7835671342685371, 0.7875751503006012, 0.7915831663326653, 0.7955911823647295, 0.7995991983967936, 0.8036072144288577, 0.8076152304609219, 0.811623246492986, 0.8156312625250501, 0.8196392785571143, 0.8236472945891784, 0.8276553106212425, 0.8316633266533067, 0.8356713426853708, 0.8396793587174349, 0.8436873747494991, 0.8476953907815632, 0.8517034068136273, 0.8557114228456915, 0.8597194388777556, 0.8637274549098197, 0.8677354709418839, 0.871743486973948, 0.8757515030060121, 0.8797595190380763, 0.8837675350701404, 0.8877755511022045, 0.8917835671342684, 0.8957915831663326, 0.8997995991983967, 0.9038076152304608, 0.907815631262525, 0.9118236472945891, 0.9158316633266532, 0.9198396793587174, 0.9238476953907815, 0.9278557114228456, 0.9318637274549098, 0.9358717434869739, 0.939879759519038, 0.9438877755511021, 0.9478957915831663, 0.9519038076152304, 0.9559118236472945, 0.9599198396793587, 0.9639278557114228, 0.9679358717434869, 0.9719438877755511, 0.9759519038076152, 0.9799599198396793, 0.9839679358717435, 0.9879759519038076, 0.9919839679358717, 0.9959919839679359, 1.0])
+              .range(['#ff0000ff', '#ff0100ff', '#ff0200ff', '#ff0300ff', '#ff0400ff', '#ff0500ff', '#ff0600ff', '#ff0700ff', '#ff0800ff', '#ff0900ff', '#ff0a00ff', '#ff0b00ff', '#ff0c00ff', '#ff0d00ff', '#ff0e00ff', '#ff0f00ff', '#ff1000ff', '#ff1100ff', '#ff1200ff', '#ff1300ff', '#ff1400ff', '#ff1500ff', '#ff1600ff', '#ff1700ff', '#ff1800ff', '#ff1900ff', '#ff1a00ff', '#ff1b00ff', '#ff1c00ff', '#ff1d00ff', '#ff1e00ff', '#ff1f00ff', '#ff2000ff', '#ff2100ff', '#ff2200ff', '#ff2300ff', '#ff2400ff', '#ff2500ff', '#ff2600ff', '#ff2800ff', '#ff2900ff', '#ff2a00ff', '#ff2b00ff', '#ff2c00ff', '#ff2d00ff', '#ff2e00ff', '#ff2f00ff', '#ff3000ff', '#ff3100ff', '#ff3200ff', '#ff3300ff', '#ff3400ff', '#ff3500ff', '#ff3600ff', '#ff3700ff', '#ff3800ff', '#ff3900ff', '#ff3a00ff', '#ff3b00ff', '#ff3c00ff', '#ff3d00ff', '#ff3e00ff', '#ff3f00ff', '#ff4000ff', '#ff4100ff', '#ff4200ff', '#ff4300ff', '#ff4400ff', '#ff4500ff', '#ff4600ff', '#ff4700ff', '#ff4800ff', '#ff4900ff', '#ff4a00ff', '#ff4b00ff', '#ff4c00ff', '#ff4d00ff', '#ff4f00ff', '#ff5000ff', '#ff5100ff', '#ff5200ff', '#ff5300ff', '#ff5400ff', '#ff5500ff', '#ff5600ff', '#ff5700ff', '#ff5800ff', '#ff5900ff', '#ff5a00ff', '#ff5b00ff', '#ff5c00ff', '#ff5d00ff', '#ff5e00ff', '#ff5f00ff', '#ff6000ff', '#ff6100ff', '#ff6200ff', '#ff6300ff', '#ff6400ff', '#ff6500ff', '#ff6600ff', '#ff6700ff', '#ff6800ff', '#ff6900ff', '#ff6a00ff', '#ff6b00ff', '#ff6c00ff', '#ff6d00ff', '#ff6e00ff', '#ff6f00ff', '#ff7000ff', '#ff7100ff', '#ff7200ff', '#ff7300ff', '#ff7400ff', '#ff7500ff', '#ff7700ff', '#ff7800ff', '#ff7900ff', '#ff7a00ff', '#ff7b00ff', '#ff7c00ff', '#ff7d00ff', '#ff7e00ff', '#ff7f00ff', '#ff8000ff', '#ff8100ff', '#ff8200ff', '#ff8300ff', '#ff8400ff', '#ff8500ff', '#ff8600ff', '#ff8700ff', '#ff8800ff', '#ff8900ff', '#ff8a00ff', '#ff8b00ff', '#ff8c00ff', '#ff8d00ff', '#ff8e00ff', '#ff8f00ff', '#ff9000ff', '#ff9100ff', '#ff9200ff', '#ff9300ff', '#ff9400ff', '#ff9500ff', '#ff9600ff', '#ff9700ff', '#ff9800ff', '#ff9900ff', '#ff9a00ff', '#ff9b00ff', '#ff9c00ff', '#ff9e00ff', '#ff9f00ff', '#ffa000ff', '#ffa100ff', '#ffa200ff', '#ffa300ff', '#ffa400ff', '#ffa500ff', '#ffa600ff', '#ffa700ff', '#ffa800ff', '#ffa900ff', '#ffaa00ff', '#ffab00ff', '#ffac00ff', '#ffad00ff', '#ffae00ff', '#ffaf00ff', '#ffb000ff', '#ffb100ff', '#ffb200ff', '#ffb300ff', '#ffb400ff', '#ffb500ff', '#ffb600ff', '#ffb700ff', '#ffb800ff', '#ffb900ff', '#ffba00ff', '#ffbb00ff', '#ffbc00ff', '#ffbd00ff', '#ffbe00ff', '#ffbf00ff', '#ffc000ff', '#ffc100ff', '#ffc200ff', '#ffc300ff', '#ffc500ff', '#ffc600ff', '#ffc700ff', '#ffc800ff', '#ffc900ff', '#ffca00ff', '#ffcb00ff', '#ffcc00ff', '#ffcd00ff', '#ffce00ff', '#ffcf00ff', '#ffd000ff', '#ffd100ff', '#ffd200ff', '#ffd300ff', '#ffd400ff', '#ffd500ff', '#ffd600ff', '#ffd700ff', '#ffd800ff', '#ffd900ff', '#ffda00ff', '#ffdb00ff', '#ffdc00ff', '#ffdd00ff', '#ffde00ff', '#ffdf00ff', '#ffe000ff', '#ffe100ff', '#ffe200ff', '#ffe300ff', '#ffe400ff', '#ffe500ff', '#ffe600ff', '#ffe700ff', '#ffe800ff', '#ffe900ff', '#ffea00ff', '#ffeb00ff', '#ffed00ff', '#ffee00ff', '#ffef00ff', '#fff000ff', '#fff100ff', '#fff200ff', '#fff300ff', '#fff400ff', '#fff500ff', '#fff600ff', '#fff700ff', '#fff800ff', '#fff900ff', '#fffa00ff', '#fffb00ff', '#fffc00ff', '#fffd00ff', '#fffe00ff', '#ffff00ff', '#ffff00ff', '#feff00ff', '#fdfe00ff', '#fcfe00ff', '#fbfd00ff', '#fafd00ff', '#f9fc00ff', '#f8fc00ff', '#f7fb00ff', '#f6fb00ff', '#f5fa00ff', '#f4fa00ff', '#f3f900ff', '#f2f900ff', '#f1f800ff', '#f0f800ff', '#eff700ff', '#eef700ff', '#edf600ff', '#ebf600ff', '#eaf500ff', '#e9f500ff', '#e8f400ff', '#e7f300ff', '#e6f300ff', '#e5f200ff', '#e4f200ff', '#e3f100ff', '#e2f100ff', '#e1f000ff', '#e0f000ff', '#dfef00ff', '#deef00ff', '#ddee00ff', '#dcee00ff', '#dbed00ff', '#daed00ff', '#d9ec00ff', '#d8ec00ff', '#d7eb00ff', '#d6eb00ff', '#d5ea00ff', '#d4ea00ff', '#d3e900ff', '#d2e900ff', '#d1e800ff', '#d0e800ff', '#cfe700ff', '#cee700ff', '#cde600ff', '#cce600ff', '#cbe500ff', '#cae500ff', '#c9e400ff', '#c8e400ff', '#c7e300ff', '#c6e300ff', '#c5e200ff', '#c3e200ff', '#c2e100ff', '#c1e100ff', '#c0e000ff', '#bfe000ff', '#bedf00ff', '#bddf00ff', '#bcde00ff', '#bbde00ff', '#badd00ff', '#b9dc00ff', '#b8dc00ff', '#b7db00ff', '#b6db00ff', '#b5da00ff', '#b4da00ff', '#b3d900ff', '#b2d900ff', '#b1d800ff', '#b0d800ff', '#afd700ff', '#aed700ff', '#add600ff', '#acd600ff', '#abd500ff', '#aad500ff', '#a9d400ff', '#a8d400ff', '#a7d300ff', '#a6d300ff', '#a5d200ff', '#a4d200ff', '#a3d100ff', '#a2d100ff', '#a1d000ff', '#a0d000ff', '#9fcf00ff', '#9ecf00ff', '#9cce00ff', '#9bce00ff', '#9acd00ff', '#99cd00ff', '#98cc00ff', '#97cc00ff', '#96cb00ff', '#95cb00ff', '#94ca00ff', '#93ca00ff', '#92c900ff', '#91c900ff', '#90c800ff', '#8fc800ff', '#8ec700ff', '#8dc700ff', '#8cc600ff', '#8bc500ff', '#8ac500ff', '#89c400ff', '#88c400ff', '#87c300ff', '#86c300ff', '#85c200ff', '#84c200ff', '#83c100ff', '#82c100ff', '#81c000ff', '#80c000ff', '#7fbf00ff', '#7ebf00ff', '#7dbe00ff', '#7cbe00ff', '#7bbd00ff', '#7abd00ff', '#79bc00ff', '#78bc00ff', '#77bb00ff', '#75bb00ff', '#74ba00ff', '#73ba00ff', '#72b900ff', '#71b900ff', '#70b800ff', '#6fb800ff', '#6eb700ff', '#6db700ff', '#6cb600ff', '#6bb600ff', '#6ab500ff', '#69b500ff', '#68b400ff', '#67b400ff', '#66b300ff', '#65b300ff', '#64b200ff', '#63b200ff', '#62b100ff', '#61b100ff', '#60b000ff', '#5fb000ff', '#5eaf00ff', '#5daf00ff', '#5cae00ff', '#5bad00ff', '#5aad00ff', '#59ac00ff', '#58ac00ff', '#57ab00ff', '#56ab00ff', '#55aa00ff', '#54aa00ff', '#53a900ff', '#52a900ff', '#51a800ff', '#50a800ff', '#4fa700ff', '#4da700ff', '#4ca600ff', '#4ba600ff', '#4aa500ff', '#49a500ff', '#48a400ff', '#47a400ff', '#46a300ff', '#45a300ff', '#44a200ff', '#43a200ff', '#42a100ff', '#41a100ff', '#40a000ff', '#3fa000ff', '#3e9f00ff', '#3d9f00ff', '#3c9e00ff', '#3b9e00ff', '#3a9d00ff', '#399d00ff', '#389c00ff', '#379c00ff', '#369b00ff', '#359b00ff', '#349a00ff', '#339a00ff', '#329900ff', '#319900ff', '#309800ff', '#2f9800ff', '#2e9700ff', '#2d9600ff', '#2c9600ff', '#2b9500ff', '#2a9500ff', '#299400ff', '#289400ff', '#269300ff', '#259300ff', '#249200ff', '#239200ff', '#229100ff', '#219100ff', '#209000ff', '#1f9000ff', '#1e8f00ff', '#1d8f00ff', '#1c8e00ff', '#1b8e00ff', '#1a8d00ff', '#198d00ff', '#188c00ff', '#178c00ff', '#168b00ff', '#158b00ff', '#148a00ff', '#138a00ff', '#128900ff', '#118900ff', '#108800ff', '#0f8800ff', '#0e8700ff', '#0d8700ff', '#0c8600ff', '#0b8600ff', '#0a8500ff', '#098500ff', '#088400ff', '#078400ff', '#068300ff', '#058300ff', '#048200ff', '#038200ff', '#028100ff', '#018100ff', '#008000ff']);
+    
+
+    color_map_1bcceda9c673f6676a2697e9b8af957f.x = d3.scale.linear()
+              .domain([-1.0, 1.0])
+              .range([0, 450 - 50]);
+
+    color_map_1bcceda9c673f6676a2697e9b8af957f.legend = L.control({position: 'topright'});
+    color_map_1bcceda9c673f6676a2697e9b8af957f.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_1bcceda9c673f6676a2697e9b8af957f.legend.addTo(map_acb469344997af21ebfb330874b802cf);
+
+    color_map_1bcceda9c673f6676a2697e9b8af957f.xAxis = d3.svg.axis()
+        .scale(color_map_1bcceda9c673f6676a2697e9b8af957f.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([-1.0, 0.0, 1.0]);
+
+    color_map_1bcceda9c673f6676a2697e9b8af957f.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_1bcceda9c673f6676a2697e9b8af957f.g = color_map_1bcceda9c673f6676a2697e9b8af957f.svg.append("g")
+        .attr("class", "key")
+        .attr("fill", "black")
+        .attr("transform", "translate(25,16)");
+
+    color_map_1bcceda9c673f6676a2697e9b8af957f.g.selectAll("rect")
+        .data(color_map_1bcceda9c673f6676a2697e9b8af957f.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_1bcceda9c673f6676a2697e9b8af957f.x(color_map_1bcceda9c673f6676a2697e9b8af957f.color.domain()[i - 1]) : color_map_1bcceda9c673f6676a2697e9b8af957f.x.range()[0],
+            x1: i < color_map_1bcceda9c673f6676a2697e9b8af957f.color.domain().length ? color_map_1bcceda9c673f6676a2697e9b8af957f.x(color_map_1bcceda9c673f6676a2697e9b8af957f.color.domain()[i]) : color_map_1bcceda9c673f6676a2697e9b8af957f.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_1bcceda9c673f6676a2697e9b8af957f.g.call(color_map_1bcceda9c673f6676a2697e9b8af957f.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .attr("fill", "black")
+        .text("NDWI Values (Pollution Levels)");
+    
+            var layer_control_a0b0002751428784fdf609e67365deb3_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_83774e2c1c9b666e782ca7420a26671a,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_a0b0002751428784fdf609e67365deb3 = L.control.layers(
+                layer_control_a0b0002751428784fdf609e67365deb3_layers.base_layers,
+                layer_control_a0b0002751428784fdf609e67365deb3_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_acb469344997af21ebfb330874b802cf);
+
+        
+</script>
+</html>
