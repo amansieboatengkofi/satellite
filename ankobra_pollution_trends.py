@@ -68,6 +68,27 @@ def calculate_ndwi_sentinel(image):
     water_mask = ndwi.gt(-0.3)  # Include water even if polluted
     return image.addBands(ndwi.updateMask(water_mask))
 
+def generate_satellite_image_url(bounds, river_geometry, api_key):
+    """Generates a Google Maps Static API URL for a high-resolution satellite image."""
+    bbox = ee.Geometry.Rectangle(bounds)
+    river_section = river_geometry.intersection(bbox)
+
+    try:
+        coordinates = river_section.coordinates().getInfo()
+        if coordinates and isinstance(coordinates[0], list):
+            lon, lat = coordinates[0][0][0], coordinates[0][1][1]
+            print(f"Using river intersection point for center: lat={lat}, lon={lon}")
+        else:
+            raise ValueError("No valid river coordinates found.")
+    except Exception as e:
+        print(f"Warning: Using bounding box center due to error: {e}")
+        lon = (bounds[0] + bounds[2]) / 2
+        lat = (bounds[1] + bounds[3]) / 2
+        print(f"Using bounding box center as fallback: lat={lat}, lon={lon}")
+
+    # Construct a valid Google Maps Static API URL
+    return f"https://maps.googleapis.com/maps/api/staticmap?center={lat},{lon}&zoom=17&size=2400x1800&maptype=satellite&key={api_key}"
+
 # Rivers to process
 relation_ids = {
     'Ankobra River': 3328713,
@@ -79,7 +100,7 @@ ankobra_coordinates = gdf_to_ee_geometry(ankobra_geometry).coordinates().getInfo
 ankobra_center = ankobra_coordinates[len(ankobra_coordinates) // 2]  # Approximate center of the river
 
 # Map initialization, centered and zoomed into the Ankobra River
-my_map = folium.Map(location=[ankobra_center[1], ankobra_center[0]], zoom_start=10)
+my_map = folium.Map(location=[ankobra_center[1], ankobra_center[0]], zoom_start=11)
 
 # Dynamic date range
 end_date = datetime.now()
@@ -93,11 +114,13 @@ alerts = []
 ndwi_vis_params = {'min': -1, 'max': 1, 'palette': ['red', 'yellow', 'green']}
 colormap = LinearColormap(['red', 'yellow', 'green'], vmin=-1, vmax=1)
 
+google_maps_api_key = "AIzaSyBaraoG9hMuLfTdTqMBvwHcWzjvDeDBNYo"
+
 for river_name, relation_id in relation_ids.items():
     print(f"Processing {river_name}...")
     try:
         river_lines = fetch_river_by_relation_id(relation_id)
-        ee_geometry = gdf_to_ee_geometry(river_lines).buffer(500)
+        ee_geometry = gdf_to_ee_geometry(river_lines).buffer(1)#Aman using very little buffer around river
 
         # Generate clipped grid
         grid_cells = generate_clipped_grid(ee_geometry, grid_size)
@@ -156,18 +179,22 @@ for river_name, relation_id in relation_ids.items():
                 prev_data.append(current_entry)
                 historical_data[section_name] = {'history': prev_data}
 
+                # Generate the satellite image URL using a point on the river
+                image_url = generate_satellite_image_url(bounds, ee_geometry, google_maps_api_key)
+
                 popup_html = f"""
                 <b>{section_name}</b><br>
                 NDWI: {mean_ndwi:.2f}<br>
+                <img src="{image_url}" style="width: 100%; height: 300px;" alt="Satellite Image of River Section"><br>
                 <button onclick="showHistory('{section_name}')">View Trend</button>
-                <canvas id="chart-{section_name}" style="width: 100%; height: 300px;"></canvas>
+                <canvas id="chart-{section_name}" style="width: 100%; height: 400px; display: none;"></canvas>
                 """
 
                 folium.Rectangle(
                     bounds=[[bounds[1], bounds[0]], [bounds[3], bounds[2]]],
                     color=colormap(mean_ndwi),
                     fill=True,
-                    fill_opacity=0.4,
+                    fill_opacity=0.01, #Aman changing opacity
                     popup=popup_html
                 ).add_to(my_map)
 
@@ -184,12 +211,14 @@ my_map.save("ankobra_river_monitoring_grid.html")
 with open("ankobra_river_monitoring_grid.html", "r+") as file:
     content = file.read()
     global_js = """
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
     <script>
     function showHistory(section) {
         const data = JSON.parse(document.getElementById('historical-data').textContent);
         const trend = data[section]['history'];
         const chartElement = document.getElementById('chart-' + section);
+
+        chartElement.style.display = 'block';
 
         const ctx = chartElement.getContext('2d');
         new Chart(ctx, {
@@ -216,8 +245,8 @@ with open("ankobra_river_monitoring_grid.html", "r+") as file:
     custom_css = """
     <style>
     .leaflet-popup-content-wrapper {
-        width: 400px !important;
-        height: 500px !important;
+        width: 500px !important;
+        height: 800px !important;
     }
     .leaflet-popup-content {
         overflow: auto;
@@ -233,4 +262,3 @@ with open("ankobra_river_monitoring_grid.html", "r+") as file:
 
 print("\n".join(alerts) if alerts else "No significant pollution changes detected.")
 print("Map saved to 'ankobra_river_monitoring_grid.html'.")
-
