@@ -1,4 +1,5 @@
 import requests
+import json  # Add this import
 import geopandas as gpd
 import ee
 import folium
@@ -6,6 +7,51 @@ from datetime import datetime, timedelta
 
 # Initialize Google Earth Engine
 ee.Initialize(project='ee-amansieboatengkofi')
+
+
+custom_images = [
+      {"lat": 5.423506, "lon": -1.621584, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.423506%2CLongitude%3D-1.621584.png?alt=media&token=6507e895-8ac4-4793-a35b-52a3d7fcf249"},
+      {"lat": 6.198368, "lon": -1.198020, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.198368%2CLongitude%3D-1.198020.png?alt=media&token=f88d785c-4eae-4dc1-98ff-2906864e4b35"},
+      {"lat": 6.184267, "lon": -1.190211, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.184267%2CLongitude%3D-1.190211.png?alt=media&token=60131a2e-b896-46b0-b8fe-0324af2e5ff6"},
+      {"lat": 6.185782, "lon": -1.190941, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.185782%2CLongitude%3D-1.190941.png?alt=media&token=d1d690a4-42b5-414c-a4a4-c25b55e13a1c"},
+      {"lat": 6.174689, "lon": -1.179459, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.174689%2CLongitude%3D-1.179459.png?alt=media&token=0bcd6cd8-ae8a-4bb8-bff5-af8842bcffb2"},
+      {"lat": 6.128309, "lon": -1.199346, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.128309%2CLongitude%3D-1.199346.png?alt=media&token=c65e4cb3-820c-4227-8d9a-a44bfd753865"},
+      {"lat": 6.077230, "lon": -1.195935, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.077230%2CLongitude%3D-1.195935.png?alt=media&token=d7b282c1-9a6d-4dd1-b33b-ae21972c586e"},
+      {"lat": 6.075950, "lon": -1.204497, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.075950%2CLongitude%3D-1.204497.png?alt=media&token=839f9985-9a49-4f61-a180-dd2162c7714f"},
+      {"lat": 6.076035, "lon": -1.204350, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.076035%2CLongitude%3D-1.204350.png?alt=media&token=0deb66e7-253d-4bb6-ac42-473e6ca462f5"},
+      {"lat": 6.067500, "lon": -1.211119, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.067500%2CLongitude%3D-1.211119.png?alt=media&token=821535dc-0012-43da-ba1f-f927b91544ef"},
+      {"lat": 6.067500, "lon": -1.211139, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.067500%2CLongitude%3D-1.211139.png?alt=media&token=b1f729a3-3247-47bc-a255-73d30bf92e14"},
+      {"lat": 6.044967, "lon": -1.222119, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.044967%2CLongitude%3D-1.222119.png?alt=media&token=52b45913-3518-4e17-a573-aafec75c9c1c"},
+      {"lat": 6.046333, "lon": -1.219370, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.046333%2CLongitude%3D-1.219370.png?alt=media&token=ad9e5e36-9078-4080-8507-68f46a7107b5"},
+      {"lat": 6.044285, "lon": -1.223493, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude6.044285%2CLongitude%3D-1.223493.png?alt=media&token=bc454664-7510-4f4c-87a2-56338ecfdb5a"},
+      {"lat": 6.040188, "lon": -1.231016, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.040188%2CLongitude%3D-1.231016.png?alt=media&token=6479ab13-6eb0-4f2b-9eca-8379247a9f82"},
+      {"lat": 6.040188, "lon": -1.231055, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D6.040188%2CLongitude%3D-1.231055.png?alt=media&token=697cc8ca-00a5-455c-9c40-a3f6be3bfc2d"},
+      {"lat": 5.881747, "lon": -1.284612, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.881747%2CLongitude%3D-1.284612.png?alt=media&token=6b12e5a0-0c7d-4c85-abe4-ff5cdeb79833"},
+      {"lat": 5.884479, "lon": -1.286671, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.884479%2CLongitude%3D-1.286671.png?alt=media&token=201dc998-1aa5-4eb1-b055-6654fe057586"},
+      {"lat": 5.909068, "lon": -1.345756, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.909068%2CLongitude%3D-1.345756.png?alt=media&token=d215eb52-5031-4249-92ef-a43e82cb5402"},
+      {"lat": 5.910434, "lon": -1.345413, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.910434%2CLongitude%3D-1.345413.png?alt=media&token=5d53b6cf-b669-44c9-8a2f-772c48b9e5a6"},
+      {"lat": 5.897457, "lon": -1.453234, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.897457%2CLongitude%3D-1.453234.png?alt=media&token=395fe3a8-812e-4615-b538-ee92e135998c"},
+      {"lat": 5.861939, "lon": -1.494268, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.861939%2CLongitude%3D-1.494268.png?alt=media&token=47395fc8-b7d4-49a0-b70f-d00f334d7d72"},
+      {"lat": 5.861598, "lon": -1.499079, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.861598%2CLongitude%3D-1.499079.png?alt=media&token=9da31dac-9199-43c8-ac73-b326cdb90cea"},
+      {"lat": 5.863305, "lon": -1.500453, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.863305%2CLongitude%3D-1.500453.png?alt=media&token=d882b48c-8412-407d-b159-d248266ae9eb"},
+      {"lat": 5.816172, "lon": -1.547505, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.816172%2CLongitude%3D-1.547505.png?alt=media&token=b1bd4bb1-5354-40d0-85a3-dac995f96ddd"},
+      {"lat": 5.816514, "lon": -1.548002, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.816514%2CLongitude%3D-1.548002.png?alt=media&token=314385ee-3a49-42c8-9786-f68251dff85d"},
+      {"lat": 5.692772, "lon": -1.593698, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.692772%2CLongitude%3D-1.593698.png?alt=media&token=92445f01-b0e6-4dd9-9181-a820a3f0501f"},
+      {"lat": 5.691576, "lon": -1.593011, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.691576%2CLongitude%3D-1.593011.png?alt=media&token=7053725c-7500-49a4-8691-54c9879e8340"},
+      {"lat": 5.690979, "lon": -1.590262, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.690979%2CLongitude%3D-1.590262.png?alt=media&token=9b172528-3f89-4f71-b013-0aed15da9271"},
+      {"lat": 5.690125, "lon": -1.588630, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.690125%2CLongitude%3D-1.588630.png?alt=media&token=5bf3b08e-70f6-4685-a545-8a9a03cc4ee7"},
+      {"lat": 5.682438, "lon": -1.582581, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.682438%2CLongitude%3D-1.582581.png?alt=media&token=454fa150-5071-4e1e-b3f4-5b5a50f15543"},
+      {"lat": 5.680730, "lon": -1.581979, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.680730%2CLongitude%3D-1.581979.png?alt=media&token=f4a4e6f7-0108-4c9d-bee4-c921f59ac259"},
+      {"lat": 5.663349, "lon": -1.547697, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.663349%2CLongitude%3D-1.547697.png?alt=media&token=aa24e89d-ddd7-480e-b38f-d79415222ae4"},
+      {"lat": 5.663434, "lon": -1.547740, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.663434%2CLongitude%3D-1.547740.png?alt=media&token=4d97d868-9414-424a-88de-d75da452a9f8"},
+      {"lat": 5.436836, "lon": -1.620282, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.436836%2CLongitude%3D-1.620282.png?alt=media&token=3e00e50a-96f7-4845-b945-065e69b9d5d6"},
+      {"lat": 5.436921, "lon": -1.619423, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.436921%2CLongitude%3D-1.619423.png?alt=media&token=f92c98b5-f7a1-40ab-9e63-5e8c70516bc7"},
+      {"lat": 5.436750, "lon": -1.618135, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.436750%2CLongitude%3D-1.618135.png?alt=media&token=a8bcb5f6-920b-4a80-b3e0-88021a86bb4e"},
+      {"lat": 5.274384, "lon": -1.591764, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.274384%2CLongitude%3D-1.591764.png?alt=media&token=a19258fa-5b11-49d5-a38a-b075b6c3c191"},
+      {"lat": 5.155658, "lon": -1.648020, "url": "https://firebasestorage.googleapis.com/v0/b/borgapiano.appspot.com/o/Latitude%3D5.155658%2CLongitude%3D-1.648020.png?alt=media&token=de0d97b4-50f7-402f-ab59-efb2eeb47189"},
+   
+]
+
 
 # Function to fetch river geometry using Overpass API and relation ID
 def fetch_river_by_relation_id(relation_id):
@@ -42,6 +88,14 @@ def gdf_to_ee_geometry(gdf):
     geom = gdf.geometry.unary_union
     return ee.Geometry(geom.__geo_interface__)
 
+
+def find_custom_image(lat, lon, threshold=0.001):  # Approx 100m in lat/lon
+    for entry in custom_images:
+        if abs(entry["lat"] - lat) <= threshold and abs(entry["lon"] - lon) <= threshold:
+            return entry["url"]
+    return None
+
+
 # NDWI calculation
 def calculate_ndwi_sentinel(image):
     green = image.select('B3')
@@ -57,8 +111,8 @@ relation_ids = {
 }
 
 # Dynamic dates
-end_date = datetime.utcnow()-  timedelta(days=1)
-start_date = end_date - timedelta(days=5)
+end_date = datetime.utcnow()-  timedelta(days=30)
+start_date = end_date - timedelta(days=15)
 
 start_date_str = start_date.strftime('%Y-%m-%d')
 end_date_str = end_date.strftime('%Y-%m-%d')
@@ -96,7 +150,7 @@ for river_name, relation_id in relation_ids.items():
     sentinel_median = sentinel.median().select('NDWI').clip(buffer_1km)
 
     # Create NDWI masks
-    dirty_water_mask = sentinel_median.gt(-0.2).And(sentinel_median.lte(0.1))
+    dirty_water_mask = sentinel_median.gt(-0.3).And(sentinel_median.lte(0.1))
     dirty_water_vector = dirty_water_mask.updateMask(dirty_water_mask).reduceToVectors(
         geometryType='polygon',
         reducer=ee.Reducer.countEvery(),
@@ -160,11 +214,26 @@ for river_name, relation_id in relation_ids.items():
                 var lat = e.latlng.lat.toFixed(6);
                 var lon = e.latlng.lng.toFixed(6);
 
-                // Construct Google Maps Static API URL
-                const imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${{lat}},${{lon}}&zoom=17&size=2400x1800&maptype=satellite&key={google_maps_api_key}`;
-                const googleMapsLink = `https://www.google.com/maps/@${{lat}},${{lon}},16z`;
+                // Check if there's a custom image for this location
+                var customImages = {json.dumps(custom_images)};
+                var customImageUrl = null;
+                for (var i = 0; i < customImages.length; i++) {{
+                    var entry = customImages[i];
+                    if (Math.abs(entry.lat - lat) <= 0.001 && Math.abs(entry.lon - lon) <= 0.001) {{
+                        customImageUrl = entry.url;
+                        break;
+                    }}
+                }}
 
-                // Create popup content with zoomable satellite image, description, and Google Maps link
+                var imageUrl;
+                var googleMapsLink = `https://www.google.com/maps/@${{lat}},${{lon}},16z`;
+
+                if (customImageUrl) {{
+                    imageUrl = customImageUrl;  // Use custom image
+                }} else {{
+                    imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${{lat}},${{lon}}&zoom=17&size=2400x1800&maptype=satellite&key={google_maps_api_key}`;
+                }}
+
                 const popupContent = `
                     <b>Coordinates:</b><br>
                     Latitude: ${{lat}}, Longitude: ${{lon}}<br><br>
@@ -180,7 +249,6 @@ for river_name, relation_id in relation_ids.items():
                     </a>
                 `;
 
-                // Display popup with zoomable content
                 const popup = L.popup({{ maxWidth: 400 }})
                     .setLatLng(e.latlng)
                     .setContent(popupContent)
@@ -189,6 +257,7 @@ for river_name, relation_id in relation_ids.items():
         }}
     }});
     """
+
 
     river_map.get_root().script.add_child(folium.Element(click_js))
 
