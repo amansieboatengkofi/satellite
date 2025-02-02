@@ -479,7 +479,7 @@ for river_name, relation_id in relation_ids.items():
                 const popupContent = `
                     <b>Coordinates:</b><br>
                     Latitude: ${{lat}}, Longitude: ${{lon}}<br><br>
-                    <div style="width:308px; overflow:auto;">
+                    <div style="width:462px; overflow:auto;">
                         <img src="${{imageUrl}}" alt="Satellite Image" style="width:100%;height:auto; cursor: zoom-in;" 
                             onclick="this.style.transform='scale(2)'; this.style.cursor='zoom-out';" 
                             ondblclick="this.style.transform='scale(1)'; this.style.cursor='zoom-in';">
@@ -491,7 +491,7 @@ for river_name, relation_id in relation_ids.items():
                     </a>
                 `;
 
-                const popup = L.popup({{ maxWidth: 400 }})
+                const popup = L.popup({{ maxWidth: 600 }})
                     .setLatLng(e.latlng)
                     .setContent(popupContent)
                     .openOn(map);
