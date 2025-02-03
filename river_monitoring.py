@@ -172,6 +172,23 @@ exclusion_zones = [
     (6.135520, -1.205747, 100),
     (6.169228, -1.190377, 200),
     
+    (5.004933, -1.625462, 100),
+    (5.004933, -1.632586, 100),
+    (5.053156, -1.604176, 100),
+    (5.071452, -1.621599, 100),
+
+    (5.074786, -1.623573, 100),
+    (5.111718, -1.623917, 100),
+    (5.128218, -1.610184, 150),
+    (5.124114, -1.624346, 100),
+    (5.125482, -1.623917, 100),
+    (5.130098, -1.653357, 100),
+    (5.137194, -1.650181, 100),
+    (5.142579, -1.661425, 100),
+    (5.142665, -1.655889, 100),
+    (5.143648, -1.655803, 100),
+    (5.047000, -1.632997, 100)
+    
 
 
 
@@ -406,20 +423,45 @@ for river_name, relation_id in relation_ids.items():
     # river_map = folium.Map(location=[center_lat, center_lon], zoom_start=14)
 
 
-    # Calculate a smaller section of the river for initial view (1/6th of the river bounds)
-    bounds = gdf.total_bounds  # [minx, miny, maxx, maxy]
+    # # Calculate a smaller section of the river for initial view (1/6th of the river bounds)
+    #-----------------
+    # bounds = gdf.total_bounds  # [minx, miny, maxx, maxy]
+    # min_lon, min_lat, max_lon, max_lat = bounds
+    # section_bounds = [
+    #     [min_lat, min_lon],
+    #     [min_lat + (max_lat - min_lat) / 6, min_lon + (max_lon - min_lon) / 6]
+    # ]
+    # center_lat = min_lat + (max_lat - min_lat) / 12  # Center of the sixth section
+    # center_lon = min_lon + (max_lon - min_lon) / 12
+
+    # # Create a map centered on the one-sixth section
+    # river_map = folium.Map(location=[center_lat, center_lon], zoom_start=18)
+    # river_map.fit_bounds(section_bounds)  # Fit map to the smaller section
+    #------------------
+    # Calculate the total bounds of the river geometry [minx, miny, maxx, maxy]
+    bounds = gdf.total_bounds
     min_lon, min_lat, max_lon, max_lat = bounds
+
+    # Calculate the middle sixth of the river’s bounding box.
+    # This picks the vertical and horizontal section from 2/6 to 3/6 of the total range.
     section_bounds = [
-        [min_lat, min_lon],
-        [min_lat + (max_lat - min_lat) / 6, min_lon + (max_lon - min_lon) / 6]
+        [min_lat + 3 * (max_lat - min_lat) / 7, min_lon + (max_lon - min_lon) / 12 ], #Aman modifying these values for pra river. see above sectional values block for default lat long values
+        [min_lat + 4 * (max_lat - min_lat) / 7, min_lon +   (max_lon - min_lon) / 5] #Aman modifying these values for pra river. see above sectional values block for default lat long values
     ]
-    center_lat = min_lat + (max_lat - min_lat) / 12  # Center of the sixth section
-    center_lon = min_lon + (max_lon - min_lon) / 12
 
-    # Create a map centered on the one-sixth section
+    # Calculate the center of this section.
+    center_lat = min_lat + 3.5 * (max_lat - min_lat) / 7
+    center_lon = min_lon + 3.5 * (max_lon - min_lon) / 7
+
+    # Shift the center to the left by subtracting, e.g., 10% of the total width.
+    # center_lon -= (max_lon - min_lon) * 0.1
+    center_lon = min_lon #Aman modifying these values for pra river. see above sectional values block for default lat long values
+    center_lon = min_lon +  (max_lon - min_lon) / 12
+
+
+    # Create a map centered on the adjusted center and fit the section bounds.
     river_map = folium.Map(location=[center_lat, center_lon], zoom_start=18)
-    river_map.fit_bounds(section_bounds)  # Fit map to the smaller section
-
+    river_map.fit_bounds(section_bounds)
 
     # Add NDWI visualization
     ndwi_map_id = sentinel_median.getMapId(ndwi_vis_params)
