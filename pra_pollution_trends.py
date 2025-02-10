@@ -1,4 +1,3 @@
-# pollution tracking for pra
 import requests
 import json
 import ee
@@ -7,12 +6,16 @@ from shapely.geometry import LineString, MultiLineString
 from shapely.ops import linemerge
 from branca.colormap import LinearColormap
 from datetime import datetime, timedelta
+import time
+import numpy as np
+import rasterio
+from rasterio.io import MemoryFile
 
 # Initialize Google Earth Engine
 ee.Initialize(project='ee-amansieboatengkofi')
 
 # Historical NDWI data storage
-HISTORICAL_DATA_FILE = "pra_ndwi_historical_data.json"
+HISTORICAL_DATA_FILE = "pra_river_ndwi_historical_data.json"
 try:
     with open(HISTORICAL_DATA_FILE, 'r') as file:
         historical_data = json.load(file)
@@ -23,7 +26,7 @@ def save_historical_data(data):
     with open(HISTORICAL_DATA_FILE, 'w') as file:
         json.dump(data, file, indent=4)
 
-# Fetch river geometry
+# Fetch river geometry using Overpass API
 def fetch_river_by_relation_id(relation_id):
     overpass_url = "http://overpass-api.de/api/interpreter"
     query = f"[out:json]; relation({relation_id}); (._;>;); out geom;"
@@ -40,7 +43,7 @@ def gdf_to_ee_geometry(lines):
         merged = max(merged.geoms, key=lambda g: g.length)
     return ee.Geometry.LineString(list(merged.coords))
 
-def generate_clipped_grid(geometry, grid_size=0.005):
+def generate_clipped_grid(geometry, grid_size=0.04):
     bbox = geometry.bounds().coordinates().getInfo()[0]
     xmin, ymin = bbox[0][0], bbox[0][1]
     xmax, ymax = bbox[2][0], bbox[2][1]
@@ -61,15 +64,7 @@ def generate_clipped_grid(geometry, grid_size=0.005):
         x += grid_size
     return grid
 
-def calculate_ndwi_sentinel(image):
-    green = image.select('B3')  # Green band
-    nir = image.select('B8')    # Near-Infrared band
-    ndwi = green.subtract(nir).divide(green.add(nir)).rename('NDWI')
-    water_mask = ndwi.gt(-0.3)  # Include water even if polluted
-    return image.addBands(ndwi.updateMask(water_mask))
-
 def generate_satellite_image_url(bounds, river_geometry, api_key):
-    """Generates a Google Maps Static API URL for a high-resolution satellite image."""
     bbox = ee.Geometry.Rectangle(bounds)
     river_section = river_geometry.intersection(bbox)
 
@@ -77,44 +72,155 @@ def generate_satellite_image_url(bounds, river_geometry, api_key):
         coordinates = river_section.coordinates().getInfo()
         if coordinates and isinstance(coordinates[0], list):
             lon, lat = coordinates[0][0][0], coordinates[0][1][1]
-            print(f"Using river intersection point for center: lat={lat}, lon={lon}")
         else:
             raise ValueError("No valid river coordinates found.")
-    except Exception as e:
-        print(f"Warning: Using bounding box center due to error: {e}")
+    except Exception:
         lon = (bounds[0] + bounds[2]) / 2
         lat = (bounds[1] + bounds[3]) / 2
-        print(f"Using bounding box center as fallback: lat={lat}, lon={lon}")
 
-    # Construct a valid Google Maps Static API URL
-    return f"https://maps.googleapis.com/maps/api/staticmap?center={lat},{lon}&zoom=17&size=2400x1800&maptype=satellite&key={api_key}"
+    return f"https://maps.googleapis.com/maps/api/staticmap?center={lat},{lon}&zoom=17&size=400x400&maptype=satellite&key={api_key}"
 
-# Rivers to process
+def update_historical_data(section_name, date, mean_ndwi):
+    section_history = historical_data.get(section_name, {}).get('history', [])
+    # Keep only the last 30 days of history
+    section_history = [entry for entry in section_history
+                       if (datetime.now() - datetime.strptime(entry['date'], '%Y-%m-%d')).days <= 30]
+    # Add the new entry if not already present
+    if not any(entry['date'] == date for entry in section_history):
+        section_history.append({'date': date, 'ndwi': mean_ndwi})
+    historical_data[section_name] = {'history': section_history}
+
+# --- Planet Labs NDWI computation functions ---
+def get_ndwi_planet(start_date, end_date, cell_geometry, planet_api_key):
+    """
+    For the given date window [start_date, end_date] (YYYY-MM-DD strings) and
+    cell_geometry (an ee.Geometry), search Planet Labs for a PSScene image with low cloud cover
+    that intersects the cell. Then download the 4-band analytic asset (basic_analytic_4b),
+    compute NDWI = (Green - NIR) / (Green + NIR) over only the water pixels and return the mean NDWI.
+    """
+    # Convert ee.Geometry to GeoJSON dictionary
+    try:
+        geometry_geojson = cell_geometry.getInfo()
+    except Exception as e:
+        print("Error converting ee.Geometry to GeoJSON:", e)
+        return None
+
+    # Debug: print the GeoJSON geometry
+    print("DEBUG: Requesting imagery for grid cell geometry:")
+    print(json.dumps(geometry_geojson, indent=2))
+
+    # Convert dates to full ISO 8601 format.
+    start_datetime = f"{start_date}T00:00:00.000Z"
+    end_datetime = f"{end_date}T23:59:59.999Z"
+
+    search_payload = {
+       "item_types": ["PSScene"],
+       "filter": {
+         "type": "AndFilter",
+         "config": [
+             {"type": "GeometryFilter", "field_name": "geometry", "config": geometry_geojson},
+             {"type": "DateRangeFilter", "field_name": "acquired",
+              "config": {"gte": start_datetime, "lte": end_datetime}},
+             {"type": "RangeFilter", "field_name": "cloud_cover", "config": {"lte": 0.2}},
+             {"type": "PermissionFilter", "config": ["assets:download"]}
+         ]
+       }
+    }
+
+    #print('Planet search payload:', json.dumps(search_payload, indent=2))
+    search_url = "https://api.planet.com/data/v1/quick-search"
+    response = requests.post(search_url, auth=(planet_api_key, ''), json=search_payload)
+    if response.status_code != 200:
+         print(f"Planet search error: {response.status_code}")
+         return None
+    results = response.json().get("features", [])
+    if not results:
+         # No image available for this day and cell.
+         return None
+    # Pick the first available image
+    feature = results[0]
+    item_id = feature["id"]
+    item_type = feature["properties"]["item_type"]
+
+    # Get the available assets for the image
+    assets_url = f"https://api.planet.com/data/v1/item-types/{item_type}/items/{item_id}/assets"
+    assets_response = requests.get(assets_url, auth=(planet_api_key, ''))
+    if assets_response.status_code != 200:
+         print(f"Error fetching asset info: {assets_response.status_code}")
+         return None
+    assets = assets_response.json()
+    if "basic_analytic_4b" not in assets:
+         print("basic_analytic_4b asset not available for this item.")
+         return None
+    analytic_asset = assets["basic_analytic_4b"]
+    if analytic_asset["status"] != "active":
+         activate_url = analytic_asset["_links"]["activate"]
+         act_response = requests.post(activate_url, auth=(planet_api_key, ''))
+         if act_response.status_code != 200:
+             print("Error activating asset.")
+             return None
+         time.sleep(5)  # Wait for activation (in production, poll until active)
+         assets_response = requests.get(assets_url, auth=(planet_api_key, ''))
+         assets = assets_response.json()
+         analytic_asset = assets.get("basic_analytic_4b", {})
+         if analytic_asset.get("status") != "active":
+             print("Asset still not active.")
+             return None
+
+    image_url = analytic_asset["location"]
+    img_response = requests.get(image_url)
+    if img_response.status_code != 200:
+         print("Error downloading analytic image.")
+         return None
+    try:
+        with MemoryFile(img_response.content) as memfile:
+            with memfile.open() as dataset:
+                # For PSScene, bands are typically:
+                # Band 1: Blue, Band 2: Green, Band 3: Red, Band 4: NIR
+                green = dataset.read(2).astype('float32')
+                nir = dataset.read(4).astype('float32')
+                # Calculate NDWI per pixel
+                ndwi = (green - nir) / (green + nir + 1e-10)
+                # Create a water mask. Here we assume pixels with NDWI > 0 are water.
+                water_mask = ndwi > -0.3
+                if np.sum(water_mask) == 0:
+                    # No water pixels found.
+                    return None
+                # Compute the mean NDWI only over water pixels
+                mean_ndwi = float(np.nanmean(ndwi[water_mask]))
+                return mean_ndwi
+    except Exception as e:
+        print("Error processing TIFF image:", e)
+        return None
+
+# --- End Planet Labs functions ---
+
+# Define the rivers to process (update relation id for Pra River)
 relation_ids = {
     'Pra River': 5250354,
 }
 
 # Fetch Pra River geometry for map centering
-pra_geometry = fetch_river_by_relation_id(relation_ids['Pra River'])
-pra_coordinates = gdf_to_ee_geometry(pra_geometry).coordinates().getInfo()
+pra_geometry_lines = fetch_river_by_relation_id(relation_ids['Pra River'])
+pra_coordinates = gdf_to_ee_geometry(pra_geometry_lines).coordinates().getInfo()
 pra_center = pra_coordinates[len(pra_coordinates) // 2]  # Approximate center of the river
 
-# Map initialization, centered and zoomed into the Pra River
+# Initialize the folium map
 my_map = folium.Map(location=[pra_center[1], pra_center[0]], zoom_start=10)
 
-# Dynamic date range
-end_date = datetime.now()
-start_date = end_date - timedelta(days=10)
-start_date, end_date = start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d')
+# Define grid_size before using it
+grid_size = 0.04  # Adjust the grid size as needed
 
-grid_size = 0.04  # 5 km grid size
-alerts = []
+# NDWI Visualization Parameters:
+ndwi_vis_params = {'min': -1, 'max': 1, 'palette': ['black', 'yellow', 'blue']}
+colormap = LinearColormap(['black', 'yellow', 'blue'], vmin=-1, vmax=1)
 
-# NDWI Visualization Parameters
-ndwi_vis_params = {'min': -1, 'max': 1, 'palette': ['red', 'yellow', 'green']}
-colormap = LinearColormap(['red', 'yellow', 'green'], vmin=-1, vmax=1)
-
+# Your API keys: Google Maps API key and Planet Labs API key
 google_maps_api_key = "AIzaSyBaraoG9hMuLfTdTqMBvwHcWzjvDeDBNYo"
+planet_api_key = "PLAKf375b8911e104a0f997f32e438d070e3"  # Replace with your actual Planet Labs API key
+
+# Threshold for a dramatic drop in NDWI
+DRAMATIC_DROP_THRESHOLD = 0.05
 
 for river_name, relation_id in relation_ids.items():
     print(f"Processing {river_name}...")
@@ -122,104 +228,85 @@ for river_name, relation_id in relation_ids.items():
         river_lines = fetch_river_by_relation_id(relation_id)
         ee_geometry = gdf_to_ee_geometry(river_lines).buffer(1)
 
-        # Generate clipped grid
+        # Generate a grid covering the river area
         grid_cells = generate_clipped_grid(ee_geometry, grid_size)
 
-        # Create a FeatureCollection from the grid cells
-        grid_features = [ee.Feature(cell_data["geometry"], {
-            'bounds': cell_data["bounds"],
-            'section_name': f"{river_name} - Grid {idx+1}"
-        }) for idx, cell_data in enumerate(grid_cells)]
-        grid_fc = ee.FeatureCollection(grid_features)
+        # Process each grid cell individually
+        for idx, cell in enumerate(grid_cells):
+            cell_geometry = cell["geometry"]
+            bounds = cell["bounds"]
+            section_name = f"{river_name} - Grid {idx + 1}"
 
-        # Prepare the Sentinel-2 NDWI image
-        sentinel = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') \
-            .filterDate(start_date, end_date) \
-            .filterBounds(ee_geometry) \
-            .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) \
-            .map(calculate_ndwi_sentinel)
+            # Update historical data for the last 30 days for this grid cell.
+            for day_offset in range(30, -1, -1):
+                current_date = (datetime.now() - timedelta(days=day_offset)).strftime('%Y-%m-%d')
+                next_date = (datetime.now() - timedelta(days=day_offset - 1)).strftime('%Y-%m-%d')
 
-        # Print acquisition dates of the images
-        image_dates = sentinel.aggregate_array('system:time_start').getInfo()
-        if image_dates:
-            print(f"Dates of images for {river_name}:")
-            for date_ms in image_dates:
-                image_date = datetime.utcfromtimestamp(date_ms / 1000).strftime('%Y-%m-%d')
-                print(f" - {image_date}")
-        else:
-            print(f"No valid images found for {river_name} in the specified time range.")
+                ndwi_mean_val = get_ndwi_planet(current_date, next_date, cell_geometry, planet_api_key)
+                if ndwi_mean_val is None:
+                    continue  # No water pixels or unable to compute NDWI for this day
 
-        # Check if the collection is empty
-        if sentinel.size().getInfo() == 0:
-            print(f"No valid Sentinel-2 images found for {river_name} in the specified time range.")
-            continue
+                update_historical_data(section_name, current_date, ndwi_mean_val)
 
-        ndwi_image = sentinel.median().select('NDWI')
+            # Retrieve and sort the historical data for this grid cell
+            history = historical_data.get(section_name, {}).get('history', [])
+            if not history:
+                continue
 
-        def compute_mean_ndwi(feature):
-            ndwi_mean = ndwi_image.reduceRegion(
-                reducer=ee.Reducer.mean(),
-                geometry=feature.geometry(),
-                scale=30
-            )
-            return feature.set({'mean_ndwi': ndwi_mean.get('NDWI')})
+            history_sorted = sorted(history, key=lambda x: x['date'])
+            latest_entry = history_sorted[-1]
+            current_ndwi = latest_entry['ndwi']
 
-        mean_ndwi_fc = grid_fc.map(compute_mean_ndwi)
-        mean_ndwi_list = mean_ndwi_fc.getInfo()['features']
+            # Set color based on current NDWI and any dramatic drop
+            rectangle_color = colormap(current_ndwi)
+            if len(history_sorted) >= 2:
+                previous_entry = history_sorted[-2]
+                previous_ndwi = previous_entry['ndwi']
+                if (previous_ndwi - current_ndwi) >= DRAMATIC_DROP_THRESHOLD:
+                    rectangle_color = 'red'
 
-        for feature in mean_ndwi_list:
-            properties = feature['properties']
-            section_name = properties['section_name']
-            mean_ndwi = properties.get('mean_ndwi', None)
-            bounds = properties['bounds']
+            image_url = generate_satellite_image_url(bounds, ee_geometry, google_maps_api_key)
 
-            if mean_ndwi is not None:
-                prev_data = historical_data.get(section_name, {}).get('history', [])
-                current_entry = {'date': datetime.now().strftime('%Y-%m-%d'), 'ndwi': mean_ndwi}
-                prev_data.append(current_entry)
-                historical_data[section_name] = {'history': prev_data}
-
-                # Generate the satellite image URL using a point on the river
-                image_url = generate_satellite_image_url(bounds, ee_geometry, google_maps_api_key)
-
-                popup_html = f"""
+            popup_html = f"""
                 <b>{section_name}</b><br>
-                NDWI: {mean_ndwi:.2f}<br>
-                <img src="{image_url}" style="width: 100%; height: 300px;" alt="Satellite Image of River Section"><br>
+                Longitude: {bounds[0]} to {bounds[2]}<br>
+                Latitude: {bounds[1]} to {bounds[3]}<br>
+                NDWI (water pixels only): {current_ndwi:.2f}<br>
+                <img src='{image_url}' style='width: 100%; height: 300px;' alt='Satellite Image'><br>
                 <button onclick="showHistory('{section_name}')">View Trend</button>
                 <canvas id="chart-{section_name}" style="width: 100%; height: 400px; display: none;"></canvas>
-                """
+            """
 
-                folium.Rectangle(
-                    bounds=[[bounds[1], bounds[0]], [bounds[3], bounds[2]]],
-                    color=colormap(mean_ndwi),
-                    fill=True,
-                    fill_opacity=0.01, #Aman changing opacity
-                    popup=popup_html
-                ).add_to(my_map)
+            folium.Rectangle(
+                bounds=[[bounds[1], bounds[0]], [bounds[3], bounds[2]]],
+                color=rectangle_color,
+                fill=True,
+                fill_opacity=0.2,
+                popup=popup_html
+            ).add_to(my_map)
 
     except Exception as e:
         print(f"Error processing {river_name}: {e}")
 
+# Save the updated historical data
 save_historical_data(historical_data)
-colormap.caption = "NDWI Values (Pollution Levels)"
+
+colormap.caption = "NDWI Values: Blue (Clean ~1), Yellow (Dirty ~0), Black (Polluted ~-1)"
 colormap.add_to(my_map)
 folium.LayerControl().add_to(my_map)
 my_map.save("pra_river_monitoring_grid.html")
 
-# Inject global JavaScript and CSS for popup size into the saved HTML
+# Inject global JavaScript and CSS for plotting NDWI trends
 with open("pra_river_monitoring_grid.html", "r+") as file:
     content = file.read()
     global_js = """
-    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
     function showHistory(section) {
         const data = JSON.parse(document.getElementById('historical-data').textContent);
-        const trend = data[section]['history'];
+        const trend = data[section]['history'].slice().sort((a, b) => new Date(a.date) - new Date(b.date));
         const chartElement = document.getElementById('chart-' + section);
-
         chartElement.style.display = 'block';
-
         const ctx = chartElement.getContext('2d');
         new Chart(ctx, {
             type: 'line',
@@ -260,5 +347,5 @@ with open("pra_river_monitoring_grid.html", "r+") as file:
     file.write(content)
     file.truncate()
 
-print("\n".join(alerts) if alerts else "No significant pollution changes detected.")
 print("Map saved to 'pra_river_monitoring_grid.html'.")
+
