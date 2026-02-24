@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+function showHistory(section, safeId) {
+    try {
+      const dataEl = document.getElementById('historical-data');
+      if (!dataEl) { alert('Historical data not found'); return; }
+      const data = JSON.parse(dataEl.textContent);
+      if (!data[section] || !data[section]['history'] || data[section]['history'].length === 0) {
+        alert('No history for ' + section);
+        return;
+      }
+      const trend = data[section]['history'].slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+      const chartElement = document.getElementById('chart-' + safeId);
+      chartElement.style.display = 'block';
+      const ctx = chartElement.getContext('2d');
+      if (chartElement._chartInstance) {
+        chartElement._chartInstance.destroy();
+      }
+      chartElement._chartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: trend.map(entry => entry.date),
+              datasets: [{
+                  label: 'NDWI Trend',
+                  data: trend.map(entry => entry.ndwi),
+                  borderColor: 'blue',
+                  pointRadius: 2,
+                  fill: false,
+                  tension: 0.25
+              }]
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                  x: { title: { display: true, text: 'Date' } },
+                  y: { title: { display: true, text: 'NDWI' }, suggestedMin: -1, suggestedMax: 1 }
+              },
+              plugins: { legend: { display: true } }
+          }
+      });
+    } catch (e) {
+      console.error(e);
+      alert('Error rendering chart for ' + section);
+    }
+}
+
+function showPicture(safeId, url) {
+    try {
+        const img = document.getElementById('pic-' + safeId);
+        const wrap = document.getElementById('pic-wrap-' + safeId);
+        if (!img || !wrap) return;
+        if (!img.src) {
+            img.src = url;
+        }
+        wrap.style.display = 'block';
+    } catch (e) {
+        console.error(e);
+        alert('Error showing picture');
+    }
+}
+</script>
+
+
+<style>
+.leaflet-popup-content-wrapper {
+    width: 1024px !important;
+    max-width: 95vw !important;
+}
+.leaflet-popup-content {
+    overflow: auto;
+}
+</style>
+
+<script id='historical-data' type='application/json'>{"Birim River - Grid 1": {"history": [{"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.13166143000125885}, {"date": "2026-01-29", "ndwi": -0.13166143000125885}, {"date": "2026-02-02", "ndwi": -0.17755910754203796}, {"date": "2026-02-03", "ndwi": -0.17755910754203796}, {"date": "2026-02-06", "ndwi": -0.19773229956626892}, {"date": "2026-02-07", "ndwi": -0.19773229956626892}, {"date": "2026-02-10", "ndwi": -0.15383370220661163}, {"date": "2026-02-11", "ndwi": -0.15383370220661163}]}, "Birim River - Grid 2": {"history": [{"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.19773229956626892}, {"date": "2026-02-07", "ndwi": -0.19773229956626892}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}, {"date": "2026-02-11", "ndwi": -0.1762763410806656}]}, "Birim River - Grid 3": {"history": [{"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.19773229956626892}, {"date": "2026-02-07", "ndwi": -0.19773229956626892}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}, {"date": "2026-02-11", "ndwi": -0.1762763410806656}]}, "Birim River - Grid 4": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.19773229956626892}, {"date": "2026-02-07", "ndwi": -0.19773229956626892}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}, {"date": "2026-02-11", "ndwi": -0.1762763410806656}]}, "Birim River - Grid 5": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.19773229956626892}, {"date": "2026-02-07", "ndwi": -0.19773229956626892}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}, {"date": "2026-02-11", "ndwi": -0.1762763410806656}]}, "Birim River - Grid 6": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.19773229956626892}, {"date": "2026-02-07", "ndwi": -0.19773229956626892}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}, {"date": "2026-02-11", "ndwi": -0.1762763410806656}]}, "Birim River - Grid 7": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.19773229956626892}, {"date": "2026-02-07", "ndwi": -0.19773229956626892}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}, {"date": "2026-02-11", "ndwi": -0.1762763410806656}]}, "Birim River - Grid 8": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.19773229956626892}, {"date": "2026-02-07", "ndwi": -0.19773229956626892}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}]}, "Birim River - Grid 9": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}]}, "Birim River - Grid 10": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}, {"date": "2026-02-11", "ndwi": -0.15049222111701965}, {"date": "2026-02-12", "ndwi": -0.15049222111701965}]}, "Birim River - Grid 11": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.17331577837467194}, {"date": "2026-02-07", "ndwi": -0.17331577837467194}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}, {"date": "2026-02-11", "ndwi": -0.15049222111701965}, {"date": "2026-02-12", "ndwi": -0.15049222111701965}]}, "Birim River - Grid 12": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-27", "ndwi": -0.1630241721868515}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.17331577837467194}, {"date": "2026-02-07", "ndwi": -0.17331577837467194}, {"date": "2026-02-10", "ndwi": -0.1762763410806656}, {"date": "2026-02-11", "ndwi": -0.15049222111701965}, {"date": "2026-02-12", "ndwi": -0.15049222111701965}, {"date": "2026-02-20", "ndwi": -0.13283640146255493}, {"date": "2026-02-21", "ndwi": -0.13283640146255493}]}, "Birim River - Grid 13": {"history": [{"date": "2026-01-25", "ndwi": -0.19677995145320892}, {"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.17331577837467194}, {"date": "2026-02-07", "ndwi": -0.17331577837467194}, {"date": "2026-02-11", "ndwi": -0.15049222111701965}, {"date": "2026-02-12", "ndwi": -0.15049222111701965}, {"date": "2026-02-20", "ndwi": -0.13283640146255493}, {"date": "2026-02-21", "ndwi": -0.13283640146255493}]}, "Birim River - Grid 14": {"history": [{"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.17331577837467194}, {"date": "2026-02-07", "ndwi": -0.17331577837467194}, {"date": "2026-02-10", "ndwi": -0.17263850569725037}, {"date": "2026-02-15", "ndwi": -0.09877490997314453}, {"date": "2026-02-16", "ndwi": -0.09877490997314453}, {"date": "2026-02-20", "ndwi": -0.13283640146255493}, {"date": "2026-02-21", "ndwi": -0.13283640146255493}]}, "Birim River - Grid 15": {"history": [{"date": "2026-01-28", "ndwi": -0.1679885983467102}, {"date": "2026-01-29", "ndwi": -0.1679885983467102}, {"date": "2026-02-06", "ndwi": -0.17331577837467194}, {"date": "2026-02-07", "ndwi": -0.17331577837467194}, {"date": "2026-02-10", "ndwi": -0.17263850569725037}, {"date": "2026-02-11", "ndwi": -0.14704006910324097}, {"date": "2026-02-12", "ndwi": -0.14704006910324097}, {"date": "2026-02-15", "ndwi": -0.09877490997314453}, {"date": "2026-02-16", "ndwi": -0.09877490997314453}, {"date": "2026-02-20", "ndwi": -0.13283640146255493}, {"date": "2026-02-21", "ndwi": -0.13283640146255493}, {"date": "2026-02-22", "ndwi": -0.1347619593143463}, {"date": "2026-02-23", "ndwi": -0.1347619593143463}]}, "Birim River - Grid 16": {"history": [{"date": "2026-01-25", "ndwi": -0.21755129098892212}, {"date": "2026-01-26", "ndwi": -0.21755129098892212}, {"date": "2026-02-04", "ndwi": -0.19924478232860565}, {"date": "2026-02-05", "ndwi": -0.19924478232860565}, {"date": "2026-02-11", "ndwi": -0.14704006910324097}, {"date": "2026-02-12", "ndwi": -0.14704006910324097}, {"date": "2026-02-20", "ndwi": -0.13283640146255493}, {"date": "2026-02-21", "ndwi": -0.13283640146255493}]}, "Birim River - Grid 17": {"history": [{"date": "2026-01-25", "ndwi": -0.21755129098892212}, {"date": "2026-01-26", "ndwi": -0.21755129098892212}, {"date": "2026-01-28", "ndwi": -0.16677996516227722}, {"date": "2026-01-29", "ndwi": -0.16677996516227722}, {"date": "2026-02-04", "ndwi": -0.19924478232860565}, {"date": "2026-02-05", "ndwi": -0.19924478232860565}, {"date": "2026-02-06", "ndwi": -0.15922139585018158}, {"date": "2026-02-07", "ndwi": -0.15922139585018158}, {"date": "2026-02-11", "ndwi": -0.14704006910324097}, {"date": "2026-02-12", "ndwi": -0.14704006910324097}, {"date": "2026-02-20", "ndwi": -0.13283640146255493}]}, "Birim River - Grid 18": {"history": [{"date": "2026-01-25", "ndwi": -0.21755129098892212}, {"date": "2026-01-26", "ndwi": -0.21755129098892212}, {"date": "2026-02-06", "ndwi": -0.15922139585018158}, {"date": "2026-02-07", "ndwi": -0.15922139585018158}, {"date": "2026-02-11", "ndwi": -0.14704006910324097}, {"date": "2026-02-12", "ndwi": -0.14704006910324097}, {"date": "2026-02-20", "ndwi": -0.13283640146255493}, {"date": "2026-02-22", "ndwi": -0.13690659403800964}, {"date": "2026-02-23", "ndwi": -0.13690659403800964}]}}</script>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ffc5924d9c7134a198e81cf10a955801 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_ffc5924d9c7134a198e81cf10a955801" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_ffc5924d9c7134a198e81cf10a955801 = L.map(
+                "map_ffc5924d9c7134a198e81cf10a955801",
+                {
+                    center: [5.9365895, -1.0065471],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_9f357ef186e94b29845a0e45bb93e06a = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_9f357ef186e94b29845a0e45bb93e06a.addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+            var rectangle_8d1f9942bb2de613a086797f53175868 = L.rectangle(
+                [[5.95333883502702, -1.2216620430610976], [5.9933388350270205, -1.1816620430610976]],
+                {"bubblingMouseEvents": true, "color": "#d8d800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d8d800ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_d9d411145d9cb11630e8b2f48192b586 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_73af534d84164aa78e777faca78667b4 = $(`<div id="html_73af534d84164aa78e777faca78667b4" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 1</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 1</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_1', 'https://maps.googleapis.com/maps/api/staticmap?center=5.97333883502702,-1.2016620430610976&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 1', 'Birim_River___Grid_1')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_1" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_1" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.2216620430610976 to -1.1816620430610976</div>                         <div><b>Latitude:</b> 5.95333883502702 to 5.9933388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.15</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_1" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_d9d411145d9cb11630e8b2f48192b586.setContent(html_73af534d84164aa78e777faca78667b4);
+            
+        
+
+        rectangle_8d1f9942bb2de613a086797f53175868.bindPopup(popup_d9d411145d9cb11630e8b2f48192b586)
+        ;
+
+        
+    
+    
+            var rectangle_01a6fb2d052dc7c773c21008f3d4e70d = L.rectangle(
+                [[5.91333883502702, -1.1816620430610976], [5.95333883502702, -1.1416620430610975]],
+                {"bubblingMouseEvents": true, "color": "#d2d200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d2d200ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_33d50816f709838f9e15a366e983c1e0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b28675e36171b137ba765475c9ebb394 = $(`<div id="html_b28675e36171b137ba765475c9ebb394" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 2</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 2</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_2', 'https://maps.googleapis.com/maps/api/staticmap?center=5.933338835027021,-1.1616620430610975&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 2', 'Birim_River___Grid_2')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_2" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_2" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.1816620430610976 to -1.1416620430610975</div>                         <div><b>Latitude:</b> 5.91333883502702 to 5.95333883502702</div>                         <div><b>NDWI (water pixels only):</b> -0.18</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_2" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_33d50816f709838f9e15a366e983c1e0.setContent(html_b28675e36171b137ba765475c9ebb394);
+            
+        
+
+        rectangle_01a6fb2d052dc7c773c21008f3d4e70d.bindPopup(popup_33d50816f709838f9e15a366e983c1e0)
+        ;
+
+        
+    
+    
+            var rectangle_7fce8679443c2bcad93b214ac1bb8e6e = L.rectangle(
+                [[5.95333883502702, -1.1816620430610976], [5.9933388350270205, -1.1416620430610975]],
+                {"bubblingMouseEvents": true, "color": "#d2d200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d2d200ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_2855e2e6bd20dffdc5b10fbaaf121e81 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_05ed9fa7d4448044712371794c2786f3 = $(`<div id="html_05ed9fa7d4448044712371794c2786f3" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 3</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 3</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_3', 'https://maps.googleapis.com/maps/api/staticmap?center=5.97333883502702,-1.1616620430610975&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 3', 'Birim_River___Grid_3')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_3" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_3" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.1816620430610976 to -1.1416620430610975</div>                         <div><b>Latitude:</b> 5.95333883502702 to 5.9933388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.18</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_3" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_2855e2e6bd20dffdc5b10fbaaf121e81.setContent(html_05ed9fa7d4448044712371794c2786f3);
+            
+        
+
+        rectangle_7fce8679443c2bcad93b214ac1bb8e6e.bindPopup(popup_2855e2e6bd20dffdc5b10fbaaf121e81)
+        ;
+
+        
+    
+    
+            var rectangle_9e2de4a80392a993f8f21ab70543cc1e = L.rectangle(
+                [[5.91333883502702, -1.1416620430610975], [5.95333883502702, -1.1016620430610975]],
+                {"bubblingMouseEvents": true, "color": "#d2d200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d2d200ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_585af1600a2eca95426033984414ce5a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_263da5b81aa4bf4aebdb94964fffcf2b = $(`<div id="html_263da5b81aa4bf4aebdb94964fffcf2b" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 4</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 4</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_4', 'https://maps.googleapis.com/maps/api/staticmap?center=5.933338835027021,-1.1216620430610975&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 4', 'Birim_River___Grid_4')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_4" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_4" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.1416620430610975 to -1.1016620430610975</div>                         <div><b>Latitude:</b> 5.91333883502702 to 5.95333883502702</div>                         <div><b>NDWI (water pixels only):</b> -0.18</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_4" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_585af1600a2eca95426033984414ce5a.setContent(html_263da5b81aa4bf4aebdb94964fffcf2b);
+            
+        
+
+        rectangle_9e2de4a80392a993f8f21ab70543cc1e.bindPopup(popup_585af1600a2eca95426033984414ce5a)
+        ;
+
+        
+    
+    
+            var rectangle_1567c17bd3be1ae67025690a51826672 = L.rectangle(
+                [[5.95333883502702, -1.1416620430610975], [5.9933388350270205, -1.1016620430610975]],
+                {"bubblingMouseEvents": true, "color": "#d2d200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d2d200ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_96d07fc9e88b3e15db613af8889af8c0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d7d3b4844b7a6d3da70888ef44dadebf = $(`<div id="html_d7d3b4844b7a6d3da70888ef44dadebf" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 5</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 5</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_5', 'https://maps.googleapis.com/maps/api/staticmap?center=5.97333883502702,-1.1216620430610975&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 5', 'Birim_River___Grid_5')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_5" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_5" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.1416620430610975 to -1.1016620430610975</div>                         <div><b>Latitude:</b> 5.95333883502702 to 5.9933388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.18</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_5" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_96d07fc9e88b3e15db613af8889af8c0.setContent(html_d7d3b4844b7a6d3da70888ef44dadebf);
+            
+        
+
+        rectangle_1567c17bd3be1ae67025690a51826672.bindPopup(popup_96d07fc9e88b3e15db613af8889af8c0)
+        ;
+
+        
+    
+    
+            var rectangle_0372a3a2f48471ee284fa856340fa18d = L.rectangle(
+                [[5.91333883502702, -1.1016620430610975], [5.95333883502702, -1.0616620430610975]],
+                {"bubblingMouseEvents": true, "color": "#d2d200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d2d200ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_ef479337ff86d12c94ce4f8e66ab26b9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_444cbe7908e247491fc726918c916f1d = $(`<div id="html_444cbe7908e247491fc726918c916f1d" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 6</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 6</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_6', 'https://maps.googleapis.com/maps/api/staticmap?center=5.933338835027021,-1.0816620430610975&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 6', 'Birim_River___Grid_6')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_6" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_6" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.1016620430610975 to -1.0616620430610975</div>                         <div><b>Latitude:</b> 5.91333883502702 to 5.95333883502702</div>                         <div><b>NDWI (water pixels only):</b> -0.18</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_6" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_ef479337ff86d12c94ce4f8e66ab26b9.setContent(html_444cbe7908e247491fc726918c916f1d);
+            
+        
+
+        rectangle_0372a3a2f48471ee284fa856340fa18d.bindPopup(popup_ef479337ff86d12c94ce4f8e66ab26b9)
+        ;
+
+        
+    
+    
+            var rectangle_436220b82b3109067edee780b90c03a5 = L.rectangle(
+                [[5.95333883502702, -1.1016620430610975], [5.9933388350270205, -1.0616620430610975]],
+                {"bubblingMouseEvents": true, "color": "#d2d200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d2d200ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_75e323ce08c635d91ed10b7d853973f4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2a8e79ffdb4baef7c2aabf3aa09d8243 = $(`<div id="html_2a8e79ffdb4baef7c2aabf3aa09d8243" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 7</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 7</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_7', 'https://maps.googleapis.com/maps/api/staticmap?center=5.97333883502702,-1.0816620430610975&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 7', 'Birim_River___Grid_7')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_7" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_7" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.1016620430610975 to -1.0616620430610975</div>                         <div><b>Latitude:</b> 5.95333883502702 to 5.9933388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.18</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_7" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_75e323ce08c635d91ed10b7d853973f4.setContent(html_2a8e79ffdb4baef7c2aabf3aa09d8243);
+            
+        
+
+        rectangle_436220b82b3109067edee780b90c03a5.bindPopup(popup_75e323ce08c635d91ed10b7d853973f4)
+        ;
+
+        
+    
+    
+            var rectangle_5930103df02abbb64aa4df9b6a122e4e = L.rectangle(
+                [[5.91333883502702, -1.0616620430610975], [5.95333883502702, -1.0216620430610974]],
+                {"bubblingMouseEvents": true, "color": "#d2d200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d2d200ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_579e411caad9a0e1c47d7e45d0973250 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ce4223434682a8dbd90f6c73d471b8db = $(`<div id="html_ce4223434682a8dbd90f6c73d471b8db" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 8</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 8</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_8', 'https://maps.googleapis.com/maps/api/staticmap?center=5.933338835027021,-1.0416620430610974&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 8', 'Birim_River___Grid_8')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_8" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_8" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.0616620430610975 to -1.0216620430610974</div>                         <div><b>Latitude:</b> 5.91333883502702 to 5.95333883502702</div>                         <div><b>NDWI (water pixels only):</b> -0.18</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_8" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_579e411caad9a0e1c47d7e45d0973250.setContent(html_ce4223434682a8dbd90f6c73d471b8db);
+            
+        
+
+        rectangle_5930103df02abbb64aa4df9b6a122e4e.bindPopup(popup_579e411caad9a0e1c47d7e45d0973250)
+        ;
+
+        
+    
+    
+            var rectangle_b9c3f922aded3d7459eb66e50b54acf8 = L.rectangle(
+                [[5.91333883502702, -1.0216620430610974], [5.95333883502702, -0.9816620430610974]],
+                {"bubblingMouseEvents": true, "color": "#d2d200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d2d200ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_4b7556b9c82514d66a0ee2eb137520a9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9f8f490aba2f5bc3172d21edd3c41b4b = $(`<div id="html_9f8f490aba2f5bc3172d21edd3c41b4b" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 9</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 9</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_9', 'https://maps.googleapis.com/maps/api/staticmap?center=5.933338835027021,-1.0016620430610974&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 9', 'Birim_River___Grid_9')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_9" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_9" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.0216620430610974 to -0.9816620430610974</div>                         <div><b>Latitude:</b> 5.91333883502702 to 5.95333883502702</div>                         <div><b>NDWI (water pixels only):</b> -0.18</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_9" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_4b7556b9c82514d66a0ee2eb137520a9.setContent(html_9f8f490aba2f5bc3172d21edd3c41b4b);
+            
+        
+
+        rectangle_b9c3f922aded3d7459eb66e50b54acf8.bindPopup(popup_4b7556b9c82514d66a0ee2eb137520a9)
+        ;
+
+        
+    
+    
+            var rectangle_dc4229e24a3fda95e0c3f20e345b58a0 = L.rectangle(
+                [[5.95333883502702, -1.0216620430610974], [5.9933388350270205, -0.9816620430610974]],
+                {"bubblingMouseEvents": true, "color": "#d9d900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d9d900ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_e90934800d290e2734b65a5e4a18e381 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_61246133bd861c7b4f937956bbf57670 = $(`<div id="html_61246133bd861c7b4f937956bbf57670" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 10</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 10</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_10', 'https://maps.googleapis.com/maps/api/staticmap?center=5.97333883502702,-1.0016620430610974&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 10', 'Birim_River___Grid_10')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_10" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_10" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -1.0216620430610974 to -0.9816620430610974</div>                         <div><b>Latitude:</b> 5.95333883502702 to 5.9933388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.15</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_10" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_e90934800d290e2734b65a5e4a18e381.setContent(html_61246133bd861c7b4f937956bbf57670);
+            
+        
+
+        rectangle_dc4229e24a3fda95e0c3f20e345b58a0.bindPopup(popup_e90934800d290e2734b65a5e4a18e381)
+        ;
+
+        
+    
+    
+            var rectangle_b1cc8ab0061615f1ec9d4d58a1bdd0de = L.rectangle(
+                [[5.91333883502702, -0.9816620430610974], [5.95333883502702, -0.9416620430610974]],
+                {"bubblingMouseEvents": true, "color": "#d9d900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d9d900ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_b172858ea707ec8a58d7a39e0a621be4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e86c942e97503d7dc39131363d257c6c = $(`<div id="html_e86c942e97503d7dc39131363d257c6c" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 11</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 11</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_11', 'https://maps.googleapis.com/maps/api/staticmap?center=5.933338835027021,-0.9616620430610974&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 11', 'Birim_River___Grid_11')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_11" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_11" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -0.9816620430610974 to -0.9416620430610974</div>                         <div><b>Latitude:</b> 5.91333883502702 to 5.95333883502702</div>                         <div><b>NDWI (water pixels only):</b> -0.15</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_11" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_b172858ea707ec8a58d7a39e0a621be4.setContent(html_e86c942e97503d7dc39131363d257c6c);
+            
+        
+
+        rectangle_b1cc8ab0061615f1ec9d4d58a1bdd0de.bindPopup(popup_b172858ea707ec8a58d7a39e0a621be4)
+        ;
+
+        
+    
+    
+            var rectangle_1e83929d124a4f367464f6285478b99c = L.rectangle(
+                [[5.95333883502702, -0.9816620430610974], [5.9933388350270205, -0.9416620430610974]],
+                {"bubblingMouseEvents": true, "color": "#dddd00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dddd00ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_a1e9fd3a846e4f907e2ef26db56d920b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c29b37a461e53c09326a7e9707618a84 = $(`<div id="html_c29b37a461e53c09326a7e9707618a84" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 12</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 12</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_12', 'https://maps.googleapis.com/maps/api/staticmap?center=5.97333883502702,-0.9616620430610974&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 12', 'Birim_River___Grid_12')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_12" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_12" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -0.9816620430610974 to -0.9416620430610974</div>                         <div><b>Latitude:</b> 5.95333883502702 to 5.9933388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.13</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_12" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_a1e9fd3a846e4f907e2ef26db56d920b.setContent(html_c29b37a461e53c09326a7e9707618a84);
+            
+        
+
+        rectangle_1e83929d124a4f367464f6285478b99c.bindPopup(popup_a1e9fd3a846e4f907e2ef26db56d920b)
+        ;
+
+        
+    
+    
+            var rectangle_22bf3329fd44ebc89af73aee0955d564 = L.rectangle(
+                [[5.95333883502702, -0.9416620430610974], [5.9933388350270205, -0.9016620430610973]],
+                {"bubblingMouseEvents": true, "color": "#dddd00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dddd00ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_ed44b13f3d8dc75288e4d4bf4dfcce11 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d55750293f72066f71f5d2baf46f127a = $(`<div id="html_d55750293f72066f71f5d2baf46f127a" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 13</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 13</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_13', 'https://maps.googleapis.com/maps/api/staticmap?center=5.97333883502702,-0.9216620430610973&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 13', 'Birim_River___Grid_13')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_13" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_13" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -0.9416620430610974 to -0.9016620430610973</div>                         <div><b>Latitude:</b> 5.95333883502702 to 5.9933388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.13</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_13" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_ed44b13f3d8dc75288e4d4bf4dfcce11.setContent(html_d55750293f72066f71f5d2baf46f127a);
+            
+        
+
+        rectangle_22bf3329fd44ebc89af73aee0955d564.bindPopup(popup_ed44b13f3d8dc75288e4d4bf4dfcce11)
+        ;
+
+        
+    
+    
+            var rectangle_69876b95296535fcfe4159f3f3bb48f0 = L.rectangle(
+                [[5.9933388350270205, -0.9416620430610974], [6.0333388350270205, -0.9016620430610973]],
+                {"bubblingMouseEvents": true, "color": "#dddd00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dddd00ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_746c62a7dcb5f2e3dab82b0d7e7c56fa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f144c7e9b97bccfead6c945c3085765 = $(`<div id="html_5f144c7e9b97bccfead6c945c3085765" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 14</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 14</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_14', 'https://maps.googleapis.com/maps/api/staticmap?center=6.013338835027021,-0.9216620430610973&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 14', 'Birim_River___Grid_14')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_14" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_14" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -0.9416620430610974 to -0.9016620430610973</div>                         <div><b>Latitude:</b> 5.9933388350270205 to 6.0333388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.13</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_14" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_746c62a7dcb5f2e3dab82b0d7e7c56fa.setContent(html_5f144c7e9b97bccfead6c945c3085765);
+            
+        
+
+        rectangle_69876b95296535fcfe4159f3f3bb48f0.bindPopup(popup_746c62a7dcb5f2e3dab82b0d7e7c56fa)
+        ;
+
+        
+    
+    
+            var rectangle_f9d3961843a4c96ed70d18529e66ed12 = L.rectangle(
+                [[5.9933388350270205, -0.9016620430610973], [6.0333388350270205, -0.8616620430610973]],
+                {"bubblingMouseEvents": true, "color": "#dddd00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dddd00ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_94fc7ec849f98a4c357d07ac4ab081d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_93e7529cbbd35345139f5b02977d1e57 = $(`<div id="html_93e7529cbbd35345139f5b02977d1e57" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 15</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 15</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_15', 'https://maps.googleapis.com/maps/api/staticmap?center=6.013338835027021,-0.8816620430610973&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 15', 'Birim_River___Grid_15')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_15" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_15" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -0.9016620430610973 to -0.8616620430610973</div>                         <div><b>Latitude:</b> 5.9933388350270205 to 6.0333388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.13</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_15" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_94fc7ec849f98a4c357d07ac4ab081d5.setContent(html_93e7529cbbd35345139f5b02977d1e57);
+            
+        
+
+        rectangle_f9d3961843a4c96ed70d18529e66ed12.bindPopup(popup_94fc7ec849f98a4c357d07ac4ab081d5)
+        ;
+
+        
+    
+    
+            var rectangle_bd0f7a88a2b42f4a27e1279c06059dd4 = L.rectangle(
+                [[5.9933388350270205, -0.8616620430610973], [6.0333388350270205, -0.8216620430610972]],
+                {"bubblingMouseEvents": true, "color": "#dddd00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dddd00ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_e8b095187c55df1d35e389a549909dcb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_48ab6cb9053621c7adadd31f78fc6ec0 = $(`<div id="html_48ab6cb9053621c7adadd31f78fc6ec0" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 16</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 16</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_16', 'https://maps.googleapis.com/maps/api/staticmap?center=6.013338835027021,-0.8416620430610973&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 16', 'Birim_River___Grid_16')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_16" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_16" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -0.8616620430610973 to -0.8216620430610972</div>                         <div><b>Latitude:</b> 5.9933388350270205 to 6.0333388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.13</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_16" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_e8b095187c55df1d35e389a549909dcb.setContent(html_48ab6cb9053621c7adadd31f78fc6ec0);
+            
+        
+
+        rectangle_bd0f7a88a2b42f4a27e1279c06059dd4.bindPopup(popup_e8b095187c55df1d35e389a549909dcb)
+        ;
+
+        
+    
+    
+            var rectangle_1dd47df2d59db3e6b34df3b42a75f6ad = L.rectangle(
+                [[6.0333388350270205, -0.8616620430610973], [6.0733388350270205, -0.8216620430610972]],
+                {"bubblingMouseEvents": true, "color": "#dddd00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dddd00ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_bc3c56304a3319883f650baa3f5e9894 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8996ca8001ceafa9534a9c257d62c465 = $(`<div id="html_8996ca8001ceafa9534a9c257d62c465" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 17</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 17</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_17', 'https://maps.googleapis.com/maps/api/staticmap?center=6.05333883502702,-0.8416620430610973&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 17', 'Birim_River___Grid_17')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_17" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_17" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -0.8616620430610973 to -0.8216620430610972</div>                         <div><b>Latitude:</b> 6.0333388350270205 to 6.0733388350270205</div>                         <div><b>NDWI (water pixels only):</b> -0.13</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_17" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_bc3c56304a3319883f650baa3f5e9894.setContent(html_8996ca8001ceafa9534a9c257d62c465);
+            
+        
+
+        rectangle_1dd47df2d59db3e6b34df3b42a75f6ad.bindPopup(popup_bc3c56304a3319883f650baa3f5e9894)
+        ;
+
+        
+    
+    
+            var rectangle_ecaafe3d9a534096b9746c042319b207 = L.rectangle(
+                [[6.0733388350270205, -0.8616620430610973], [6.113338835027021, -0.8216620430610972]],
+                {"bubblingMouseEvents": true, "color": "#dcdc00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dcdc00ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+        
+    
+        var popup_167fea706263043450962c21bac8ef65 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_72f935d592185779c9e212519d7af3c2 = $(`<div id="html_72f935d592185779c9e212519d7af3c2" style="width: 100.0%; height: 100.0%;">                 <div style="width:100%;max-width:980px;">                     <div style="font-weight:600; margin-bottom:8px;">Birim River - Grid 18</div>                      <div style="margin-bottom:12px;">                         <div style='padding:8px; font-style:italic;'>No Planet story configured for <b>Birim River - Grid 18</b>.</div>                     </div>                      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">                         <button onclick="showPicture('Birim_River___Grid_18', 'https://maps.googleapis.com/maps/api/staticmap?center=6.093338835027021,-0.8416620430610973&zoom=17&size=640x640&scale=2&maptype=satellite&key=AIzaSyBaraoG9hMuLfTdTqMBvwHcWcWzjvDeDBNYo')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Picture                         </button>                         <button onclick="showHistory('Birim River - Grid 18', 'Birim_River___Grid_18')"                                 style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;">                             View Trend                         </button>                     </div>                      <div id="pic-wrap-Birim_River___Grid_18" style="margin:8px 0; display:none;">                         <img id="pic-Birim_River___Grid_18" alt="Satellite Image"                              style="width:100%;max-height:300px;object-fit:cover;border-radius:6px;" />                     </div>                      <div style="margin:6px 0 10px 0;">                         <div><b>Longitude:</b> -0.8616620430610973 to -0.8216620430610972</div>                         <div><b>Latitude:</b> 6.0733388350270205 to 6.113338835027021</div>                         <div><b>NDWI (water pixels only):</b> -0.14</div>                     </div>                      <div style="margin-top:10px;">                         <canvas id="chart-Birim_River___Grid_18" style="width:100%; height:400px; display:none;"></canvas>                     </div>                 </div>             </div>`)[0];
+                popup_167fea706263043450962c21bac8ef65.setContent(html_72f935d592185779c9e212519d7af3c2);
+            
+        
+
+        rectangle_ecaafe3d9a534096b9746c042319b207.bindPopup(popup_167fea706263043450962c21bac8ef65)
+        ;
+
+        
+    
+    
+    var color_map_df46a12c9f42c84a537fd043f952b313 = {};
+
+    
+    color_map_df46a12c9f42c84a537fd043f952b313.color = d3.scale.threshold()
+              .domain([-1.0, -0.9959919839679359, -0.9919839679358717, -0.9879759519038076, -0.9839679358717435, -0.9799599198396793, -0.9759519038076152, -0.9719438877755511, -0.9679358717434869, -0.9639278557114228, -0.9599198396793587, -0.9559118236472945, -0.9519038076152304, -0.9478957915831663, -0.9438877755511021, -0.9398797595190381, -0.935871743486974, -0.9318637274549099, -0.9278557114228457, -0.9238476953907816, -0.9198396793587175, -0.9158316633266533, -0.9118236472945892, -0.9078156312625251, -0.9038076152304609, -0.8997995991983968, -0.8957915831663327, -0.8917835671342685, -0.8877755511022044, -0.8837675350701403, -0.8797595190380761, -0.875751503006012, -0.8717434869739479, -0.8677354709418837, -0.8637274549098196, -0.8597194388777555, -0.8557114228456913, -0.8517034068136272, -0.8476953907815631, -0.8436873747494991, -0.8396793587174349, -0.8356713426853708, -0.8316633266533067, -0.8276553106212425, -0.8236472945891784, -0.8196392785571143, -0.8156312625250501, -0.811623246492986, -0.8076152304609219, -0.8036072144288577, -0.7995991983967936, -0.7955911823647295, -0.7915831663326653, -0.7875751503006012, -0.7835671342685371, -0.779559118236473, -0.7755511022044088, -0.7715430861723447, -0.7675350701402806, -0.7635270541082164, -0.7595190380761523, -0.7555110220440882, -0.751503006012024, -0.7474949899799599, -0.7434869739478958, -0.7394789579158316, -0.7354709418837675, -0.7314629258517034, -0.7274549098196392, -0.7234468937875751, -0.719438877755511, -0.7154308617234468, -0.7114228456913827, -0.7074148296593186, -0.7034068136272544, -0.6993987975951903, -0.6953907815631262, -0.6913827655310621, -0.687374749498998, -0.6833667334669339, -0.6793587174348698, -0.6753507014028056, -0.6713426853707415, -0.6673346693386774, -0.6633266533066132, -0.6593186372745491, -0.655310621242485, -0.6513026052104208, -0.6472945891783567, -0.6432865731462926, -0.6392785571142284, -0.6352705410821644, -0.6312625250501003, -0.6272545090180361, -0.623246492985972, -0.6192384769539079, -0.6152304609218437, -0.6112224448897796, -0.6072144288577155, -0.6032064128256514, -0.5991983967935872, -0.5951903807615231, -0.591182364729459, -0.5871743486973948, -0.5831663326653307, -0.5791583166332666, -0.5751503006012024, -0.5711422845691383, -0.5671342685370742, -0.56312625250501, -0.5591182364729459, -0.5551102204408818, -0.5511022044088176, -0.5470941883767535, -0.5430861723446894, -0.5390781563126252, -0.5350701402805611, -0.531062124248497, -0.5270541082164328, -0.5230460921843687, -0.5190380761523046, -0.5150300601202404, -0.5110220440881763, -0.5070140280561122, -0.503006012024048, -0.498997995991984, -0.4949899799599199, -0.49098196392785576, -0.4869739478957916, -0.4829659318637275, -0.47895791583166336, -0.47494989979959923, -0.4709418837675351, -0.46693386773547096, -0.46292585170340683, -0.4589178356713427, -0.45490981963927857, -0.45090180360721444, -0.4468937875751503, -0.44288577154308617, -0.43887775551102204, -0.4348697394789579, -0.4308617234468938, -0.42685370741482964, -0.4228456913827655, -0.4188376753507014, -0.41482965931863724, -0.4108216432865731, -0.406813627254509, -0.40280561122244485, -0.3987975951903807, -0.3947895791583166, -0.39078156312625245, -0.38677354709418843, -0.3827655310621243, -0.37875751503006017, -0.37474949899799603, -0.3707414829659319, -0.36673346693386777, -0.36272545090180364, -0.3587174348697395, -0.35470941883767537, -0.35070140280561124, -0.3466933867735471, -0.342685370741483, -0.33867735470941884, -0.3346693386773547, -0.3306613226452906, -0.32665330661322645, -0.3226452905811623, -0.3186372745490982, -0.31462925851703405, -0.3106212424849699, -0.3066132264529058, -0.30260521042084165, -0.2985971943887775, -0.2945891783567134, -0.29058116232464926, -0.2865731462925851, -0.282565130260521, -0.27855711422845686, -0.27454909819639284, -0.2705410821643287, -0.2665330661322646, -0.26252505010020044, -0.2585170340681363, -0.2545090180360722, -0.25050100200400804, -0.2464929859719439, -0.24248496993987978, -0.23847695390781565, -0.23446893787575152, -0.23046092184368738, -0.22645290581162325, -0.22244488977955912, -0.218436873747495, -0.21442885771543085, -0.21042084168336672, -0.2064128256513026, -0.20240480961923846, -0.19839679358717432, -0.1943887775551102, -0.19038076152304606, -0.18637274549098193, -0.1823647294589178, -0.17835671342685366, -0.17434869739478953, -0.1703406813627254, -0.16633266533066138, -0.16232464929859725, -0.1583166332665331, -0.15430861723446898, -0.15030060120240485, -0.14629258517034072, -0.14228456913827658, -0.13827655310621245, -0.13426853707414832, -0.1302605210420842, -0.12625250501002006, -0.12224448897795592, -0.11823647294589179, -0.11422845691382766, -0.11022044088176353, -0.1062124248496994, -0.10220440881763526, -0.09819639278557113, -0.094188376753507, -0.09018036072144286, -0.08617234468937873, -0.0821643286573146, -0.07815631262525047, -0.07414829659318634, -0.0701402805611222, -0.06613226452905807, -0.06212424849699394, -0.05811623246492981, -0.054108216432865786, -0.05010020040080165, -0.04609218436873752, -0.04208416833667339, -0.038076152304609256, -0.034068136272545124, -0.030060120240480992, -0.02605210420841686, -0.022044088176352727, -0.018036072144288595, -0.014028056112224463, -0.01002004008016033, -0.006012024048096198, -0.002004008016032066, 0.002004008016031955, 0.006012024048096087, 0.01002004008016022, 0.014028056112224352, 0.018036072144288484, 0.022044088176352616, 0.02605210420841675, 0.03006012024048088, 0.03406813627254501, 0.038076152304609145, 0.04208416833667328, 0.04609218436873741, 0.05010020040080154, 0.054108216432865675, 0.05811623246492981, 0.06212424849699394, 0.06613226452905807, 0.0701402805611222, 0.07414829659318634, 0.07815631262525047, 0.0821643286573146, 0.08617234468937873, 0.09018036072144286, 0.094188376753507, 0.09819639278557113, 0.10220440881763526, 0.1062124248496994, 0.11022044088176353, 0.11422845691382766, 0.11823647294589179, 0.12224448897795592, 0.12625250501002006, 0.1302605210420842, 0.13426853707414832, 0.13827655310621245, 0.14228456913827658, 0.14629258517034072, 0.15030060120240485, 0.15430861723446898, 0.1583166332665331, 0.16232464929859725, 0.16633266533066138, 0.1703406813627255, 0.17434869739478964, 0.17835671342685377, 0.1823647294589179, 0.18637274549098204, 0.19038076152304617, 0.1943887775551103, 0.19839679358717444, 0.20240480961923857, 0.2064128256513027, 0.21042084168336683, 0.21442885771543096, 0.2184368737474951, 0.222444889779559, 0.22645290581162314, 0.23046092184368727, 0.2344689378757514, 0.23847695390781554, 0.24248496993987967, 0.2464929859719438, 0.25050100200400793, 0.25450901803607207, 0.2585170340681362, 0.26252505010020033, 0.26653306613226446, 0.2705410821643286, 0.2745490981963927, 0.27855711422845686, 0.282565130260521, 0.2865731462925851, 0.29058116232464926, 0.2945891783567134, 0.2985971943887775, 0.30260521042084165, 0.3066132264529058, 0.3106212424849699, 0.31462925851703405, 0.3186372745490982, 0.3226452905811623, 0.32665330661322645, 0.3306613226452906, 0.3346693386773547, 0.33867735470941884, 0.342685370741483, 0.3466933867735471, 0.35070140280561124, 0.35470941883767537, 0.3587174348697395, 0.36272545090180364, 0.36673346693386777, 0.3707414829659319, 0.37474949899799603, 0.37875751503006017, 0.3827655310621243, 0.38677354709418843, 0.39078156312625256, 0.3947895791583167, 0.3987975951903808, 0.40280561122244496, 0.4068136272545091, 0.4108216432865732, 0.41482965931863736, 0.4188376753507015, 0.4228456913827656, 0.42685370741482975, 0.4308617234468939, 0.434869739478958, 0.43887775551102215, 0.4428857715430863, 0.4468937875751502, 0.4509018036072143, 0.45490981963927846, 0.4589178356713426, 0.4629258517034067, 0.46693386773547085, 0.470941883767535, 0.4749498997995991, 0.47895791583166325, 0.4829659318637274, 0.4869739478957915, 0.49098196392785565, 0.4949899799599198, 0.4989979959919839, 0.503006012024048, 0.5070140280561122, 0.5110220440881763, 0.5150300601202404, 0.5190380761523046, 0.5230460921843687, 0.5270541082164328, 0.531062124248497, 0.5350701402805611, 0.5390781563126252, 0.5430861723446894, 0.5470941883767535, 0.5511022044088176, 0.5551102204408818, 0.5591182364729459, 0.56312625250501, 0.5671342685370742, 0.5711422845691383, 0.5751503006012024, 0.5791583166332666, 0.5831663326653307, 0.5871743486973948, 0.591182364729459, 0.5951903807615231, 0.5991983967935872, 0.6032064128256514, 0.6072144288577155, 0.6112224448897796, 0.6152304609218437, 0.6192384769539079, 0.623246492985972, 0.6272545090180361, 0.6312625250501003, 0.6352705410821644, 0.6392785571142285, 0.6432865731462927, 0.6472945891783568, 0.6513026052104209, 0.6553106212424851, 0.6593186372745492, 0.6633266533066133, 0.6673346693386772, 0.6713426853707414, 0.6753507014028055, 0.6793587174348696, 0.6833667334669338, 0.6873747494989979, 0.691382765531062, 0.6953907815631262, 0.6993987975951903, 0.7034068136272544, 0.7074148296593186, 0.7114228456913827, 0.7154308617234468, 0.719438877755511, 0.7234468937875751, 0.7274549098196392, 0.7314629258517034, 0.7354709418837675, 0.7394789579158316, 0.7434869739478958, 0.7474949899799599, 0.751503006012024, 0.7555110220440882, 0.7595190380761523, 0.7635270541082164, 0.7675350701402806, 0.7715430861723447, 0.7755511022044088, 0.779559118236473, 0.7835671342685371, 0.7875751503006012, 0.7915831663326653, 0.7955911823647295, 0.7995991983967936, 0.8036072144288577, 0.8076152304609219, 0.811623246492986, 0.8156312625250501, 0.8196392785571143, 0.8236472945891784, 0.8276553106212425, 0.8316633266533067, 0.8356713426853708, 0.8396793587174349, 0.8436873747494991, 0.8476953907815632, 0.8517034068136273, 0.8557114228456915, 0.8597194388777556, 0.8637274549098197, 0.8677354709418839, 0.871743486973948, 0.8757515030060121, 0.8797595190380763, 0.8837675350701404, 0.8877755511022045, 0.8917835671342684, 0.8957915831663326, 0.8997995991983967, 0.9038076152304608, 0.907815631262525, 0.9118236472945891, 0.9158316633266532, 0.9198396793587174, 0.9238476953907815, 0.9278557114228456, 0.9318637274549098, 0.9358717434869739, 0.939879759519038, 0.9438877755511021, 0.9478957915831663, 0.9519038076152304, 0.9559118236472945, 0.9599198396793587, 0.9639278557114228, 0.9679358717434869, 0.9719438877755511, 0.9759519038076152, 0.9799599198396793, 0.9839679358717435, 0.9879759519038076, 0.9919839679358717, 0.9959919839679359, 1.0])
+              .range(['#000000ff', '#010100ff', '#020200ff', '#030300ff', '#040400ff', '#050500ff', '#060600ff', '#070700ff', '#080800ff', '#090900ff', '#0a0a00ff', '#0b0b00ff', '#0c0c00ff', '#0d0d00ff', '#0e0e00ff', '#0f0f00ff', '#101000ff', '#111100ff', '#121200ff', '#131300ff', '#141400ff', '#151500ff', '#161600ff', '#171700ff', '#181800ff', '#191900ff', '#1a1a00ff', '#1b1b00ff', '#1c1c00ff', '#1d1d00ff', '#1e1e00ff', '#1f1f00ff', '#202000ff', '#212100ff', '#222200ff', '#232300ff', '#242400ff', '#252500ff', '#262600ff', '#282800ff', '#292900ff', '#2a2a00ff', '#2b2b00ff', '#2c2c00ff', '#2d2d00ff', '#2e2e00ff', '#2f2f00ff', '#303000ff', '#313100ff', '#323200ff', '#333300ff', '#343400ff', '#353500ff', '#363600ff', '#373700ff', '#383800ff', '#393900ff', '#3a3a00ff', '#3b3b00ff', '#3c3c00ff', '#3d3d00ff', '#3e3e00ff', '#3f3f00ff', '#404000ff', '#414100ff', '#424200ff', '#434300ff', '#444400ff', '#454500ff', '#464600ff', '#474700ff', '#484800ff', '#494900ff', '#4a4a00ff', '#4b4b00ff', '#4c4c00ff', '#4d4d00ff', '#4f4f00ff', '#505000ff', '#515100ff', '#525200ff', '#535300ff', '#545400ff', '#555500ff', '#565600ff', '#575700ff', '#585800ff', '#595900ff', '#5a5a00ff', '#5b5b00ff', '#5c5c00ff', '#5d5d00ff', '#5e5e00ff', '#5f5f00ff', '#606000ff', '#616100ff', '#626200ff', '#636300ff', '#646400ff', '#656500ff', '#666600ff', '#676700ff', '#686800ff', '#696900ff', '#6a6a00ff', '#6b6b00ff', '#6c6c00ff', '#6d6d00ff', '#6e6e00ff', '#6f6f00ff', '#707000ff', '#717100ff', '#727200ff', '#737300ff', '#747400ff', '#757500ff', '#777700ff', '#787800ff', '#797900ff', '#7a7a00ff', '#7b7b00ff', '#7c7c00ff', '#7d7d00ff', '#7e7e00ff', '#7f7f00ff', '#808000ff', '#818100ff', '#828200ff', '#838300ff', '#848400ff', '#858500ff', '#868600ff', '#878700ff', '#888800ff', '#898900ff', '#8a8a00ff', '#8b8b00ff', '#8c8c00ff', '#8d8d00ff', '#8e8e00ff', '#8f8f00ff', '#909000ff', '#919100ff', '#929200ff', '#939300ff', '#949400ff', '#959500ff', '#969600ff', '#979700ff', '#989800ff', '#999900ff', '#9a9a00ff', '#9b9b00ff', '#9c9c00ff', '#9e9e00ff', '#9f9f00ff', '#a0a000ff', '#a1a100ff', '#a2a200ff', '#a3a300ff', '#a4a400ff', '#a5a500ff', '#a6a600ff', '#a7a700ff', '#a8a800ff', '#a9a900ff', '#aaaa00ff', '#abab00ff', '#acac00ff', '#adad00ff', '#aeae00ff', '#afaf00ff', '#b0b000ff', '#b1b100ff', '#b2b200ff', '#b3b300ff', '#b4b400ff', '#b5b500ff', '#b6b600ff', '#b7b700ff', '#b8b800ff', '#b9b900ff', '#baba00ff', '#bbbb00ff', '#bcbc00ff', '#bdbd00ff', '#bebe00ff', '#bfbf00ff', '#c0c000ff', '#c1c100ff', '#c2c200ff', '#c3c300ff', '#c5c500ff', '#c6c600ff', '#c7c700ff', '#c8c800ff', '#c9c900ff', '#caca00ff', '#cbcb00ff', '#cccc00ff', '#cdcd00ff', '#cece00ff', '#cfcf00ff', '#d0d000ff', '#d1d100ff', '#d2d200ff', '#d3d300ff', '#d4d400ff', '#d5d500ff', '#d6d600ff', '#d7d700ff', '#d8d800ff', '#d9d900ff', '#dada00ff', '#dbdb00ff', '#dcdc00ff', '#dddd00ff', '#dede00ff', '#dfdf00ff', '#e0e000ff', '#e1e100ff', '#e2e200ff', '#e3e300ff', '#e4e400ff', '#e5e500ff', '#e6e600ff', '#e7e700ff', '#e8e800ff', '#e9e900ff', '#eaea00ff', '#ebeb00ff', '#eded00ff', '#eeee00ff', '#efef00ff', '#f0f000ff', '#f1f100ff', '#f2f200ff', '#f3f300ff', '#f4f400ff', '#f5f500ff', '#f6f600ff', '#f7f700ff', '#f8f800ff', '#f9f900ff', '#fafa00ff', '#fbfb00ff', '#fcfc00ff', '#fdfd00ff', '#fefe00ff', '#ffff00ff', '#ffff00ff', '#fefe01ff', '#fdfd02ff', '#fcfc03ff', '#fbfb04ff', '#fafa05ff', '#f9f906ff', '#f8f807ff', '#f7f708ff', '#f6f609ff', '#f5f50aff', '#f4f40bff', '#f3f30cff', '#f2f20dff', '#f1f10eff', '#f0f00fff', '#efef10ff', '#eeee11ff', '#eded12ff', '#ebeb14ff', '#eaea15ff', '#e9e916ff', '#e8e817ff', '#e7e718ff', '#e6e619ff', '#e5e51aff', '#e4e41bff', '#e3e31cff', '#e2e21dff', '#e1e11eff', '#e0e01fff', '#dfdf20ff', '#dede21ff', '#dddd22ff', '#dcdc23ff', '#dbdb24ff', '#dada25ff', '#d9d926ff', '#d8d827ff', '#d7d728ff', '#d6d629ff', '#d5d52aff', '#d4d42bff', '#d3d32cff', '#d2d22dff', '#d1d12eff', '#d0d02fff', '#cfcf30ff', '#cece31ff', '#cdcd32ff', '#cccc33ff', '#cbcb34ff', '#caca35ff', '#c9c936ff', '#c8c837ff', '#c7c738ff', '#c6c639ff', '#c5c53aff', '#c3c33cff', '#c2c23dff', '#c1c13eff', '#c0c03fff', '#bfbf40ff', '#bebe41ff', '#bdbd42ff', '#bcbc43ff', '#bbbb44ff', '#baba45ff', '#b9b946ff', '#b8b847ff', '#b7b748ff', '#b6b649ff', '#b5b54aff', '#b4b44bff', '#b3b34cff', '#b2b24dff', '#b1b14eff', '#b0b04fff', '#afaf50ff', '#aeae51ff', '#adad52ff', '#acac53ff', '#abab54ff', '#aaaa55ff', '#a9a956ff', '#a8a857ff', '#a7a758ff', '#a6a659ff', '#a5a55aff', '#a4a45bff', '#a3a35cff', '#a2a25dff', '#a1a15eff', '#a0a05fff', '#9f9f60ff', '#9e9e61ff', '#9c9c63ff', '#9b9b64ff', '#9a9a65ff', '#999966ff', '#989867ff', '#979768ff', '#969669ff', '#95956aff', '#94946bff', '#93936cff', '#92926dff', '#91916eff', '#90906fff', '#8f8f70ff', '#8e8e71ff', '#8d8d72ff', '#8c8c73ff', '#8b8b74ff', '#8a8a75ff', '#898976ff', '#888877ff', '#878778ff', '#868679ff', '#85857aff', '#84847bff', '#83837cff', '#82827dff', '#81817eff', '#80807fff', '#7f7f80ff', '#7e7e81ff', '#7d7d82ff', '#7c7c83ff', '#7b7b84ff', '#7a7a85ff', '#797986ff', '#787887ff', '#777788ff', '#75758aff', '#74748bff', '#73738cff', '#72728dff', '#71718eff', '#70708fff', '#6f6f90ff', '#6e6e91ff', '#6d6d92ff', '#6c6c93ff', '#6b6b94ff', '#6a6a95ff', '#696996ff', '#686897ff', '#676798ff', '#666699ff', '#65659aff', '#64649bff', '#63639cff', '#62629dff', '#61619eff', '#60609fff', '#5f5fa0ff', '#5e5ea1ff', '#5d5da2ff', '#5c5ca3ff', '#5b5ba4ff', '#5a5aa5ff', '#5959a6ff', '#5858a7ff', '#5757a8ff', '#5656a9ff', '#5555aaff', '#5454abff', '#5353acff', '#5252adff', '#5151aeff', '#5050afff', '#4f4fb0ff', '#4d4db2ff', '#4c4cb3ff', '#4b4bb4ff', '#4a4ab5ff', '#4949b6ff', '#4848b7ff', '#4747b8ff', '#4646b9ff', '#4545baff', '#4444bbff', '#4343bcff', '#4242bdff', '#4141beff', '#4040bfff', '#3f3fc0ff', '#3e3ec1ff', '#3d3dc2ff', '#3c3cc3ff', '#3b3bc4ff', '#3a3ac5ff', '#3939c6ff', '#3838c7ff', '#3737c8ff', '#3636c9ff', '#3535caff', '#3434cbff', '#3333ccff', '#3232cdff', '#3131ceff', '#3030cfff', '#2f2fd0ff', '#2e2ed1ff', '#2d2dd2ff', '#2c2cd3ff', '#2b2bd4ff', '#2a2ad5ff', '#2929d6ff', '#2828d7ff', '#2626d9ff', '#2525daff', '#2424dbff', '#2323dcff', '#2222ddff', '#2121deff', '#2020dfff', '#1f1fe0ff', '#1e1ee1ff', '#1d1de2ff', '#1c1ce3ff', '#1b1be4ff', '#1a1ae5ff', '#1919e6ff', '#1818e7ff', '#1717e8ff', '#1616e9ff', '#1515eaff', '#1414ebff', '#1313ecff', '#1212edff', '#1111eeff', '#1010efff', '#0f0ff0ff', '#0e0ef1ff', '#0d0df2ff', '#0c0cf3ff', '#0b0bf4ff', '#0a0af5ff', '#0909f6ff', '#0808f7ff', '#0707f8ff', '#0606f9ff', '#0505faff', '#0404fbff', '#0303fcff', '#0202fdff', '#0101feff', '#0000ffff']);
+    
+
+    color_map_df46a12c9f42c84a537fd043f952b313.x = d3.scale.linear()
+              .domain([-1.0, 1.0])
+              .range([0, 450 - 50]);
+
+    color_map_df46a12c9f42c84a537fd043f952b313.legend = L.control({position: 'topright'});
+    color_map_df46a12c9f42c84a537fd043f952b313.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_df46a12c9f42c84a537fd043f952b313.legend.addTo(map_ffc5924d9c7134a198e81cf10a955801);
+
+    color_map_df46a12c9f42c84a537fd043f952b313.xAxis = d3.svg.axis()
+        .scale(color_map_df46a12c9f42c84a537fd043f952b313.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([-1.0, 0.0, 1.0]);
+
+    color_map_df46a12c9f42c84a537fd043f952b313.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_df46a12c9f42c84a537fd043f952b313.g = color_map_df46a12c9f42c84a537fd043f952b313.svg.append("g")
+        .attr("class", "key")
+        .attr("fill", "black")
+        .attr("transform", "translate(25,16)");
+
+    color_map_df46a12c9f42c84a537fd043f952b313.g.selectAll("rect")
+        .data(color_map_df46a12c9f42c84a537fd043f952b313.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_df46a12c9f42c84a537fd043f952b313.x(color_map_df46a12c9f42c84a537fd043f952b313.color.domain()[i - 1]) : color_map_df46a12c9f42c84a537fd043f952b313.x.range()[0],
+            x1: i < color_map_df46a12c9f42c84a537fd043f952b313.color.domain().length ? color_map_df46a12c9f42c84a537fd043f952b313.x(color_map_df46a12c9f42c84a537fd043f952b313.color.domain()[i]) : color_map_df46a12c9f42c84a537fd043f952b313.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_df46a12c9f42c84a537fd043f952b313.g.call(color_map_df46a12c9f42c84a537fd043f952b313.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .attr("fill", "black")
+        .text("NDWI Values: Blue (Clean ~1), Yellow (Dirty ~0), Black (Polluted ~-1)");
+    
+            var layer_control_8e169fc9aa4b73f63de229e1c20cd7f6_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_9f357ef186e94b29845a0e45bb93e06a,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_8e169fc9aa4b73f63de229e1c20cd7f6 = L.control.layers(
+                layer_control_8e169fc9aa4b73f63de229e1c20cd7f6_layers.base_layers,
+                layer_control_8e169fc9aa4b73f63de229e1c20cd7f6_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_ffc5924d9c7134a198e81cf10a955801);
+
+        
+</script>
+</html>
+
